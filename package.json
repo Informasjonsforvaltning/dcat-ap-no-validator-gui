@@ -1,0 +1,45 @@
+{
+  "name": "dcat-ap-no-validator",
+  "version": "1.0.0",
+  "description": "Application for validating DCAT-AP-NO data.",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com:Informasjonsforvaltning/dcat-ap-no-validator.git"
+  },
+  "contributors": [
+    {
+      "name": "Alexander Zakharov (azaxarov)",
+      "email": "alexander.zakharov@capgemini.com"
+    },
+    {
+      "name": "German Poljakov (chlenix)",
+      "email": "german.poljakov@capgemini.com"
+    }
+  ],
+  "license": "Apache-2.0",
+  "private": true,
+  "engines": {
+    "node": ">= 14.15.0"
+  },
+  "scripts": {
+    "commit": "git-cz"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "commitizen": "^4.2.2",
+    "cz-conventional-changelog": "^3.3.0"
+  },
+  "dependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
+  "optionalDependencies": {
+    "fsevents": "^2.2.1"
+  }
+}
