@@ -1,0 +1,11 @@
+dist
+coverage
+node_modules
+
+.gitignore
+.dockerignore
+.eslintignore
+.huskyrc
+.lintstagedrc
+
+package-lock.json

@@ -1,0 +1,46 @@
+import React, { memo, FC, Suspense, lazy } from 'react';
+import { compose } from 'redux';
+import {
+  BrowserRouter,
+  Router as BaseRouter,
+  Route,
+  Redirect,
+  Switch
+} from 'react-router-dom';
+import type { History } from 'history';
+
+import Root from '../../../components/root';
+
+import { Path } from '../../../types/enums';
+
+const routes = {
+  validate: lazy(() => import('./validate'))
+};
+
+interface Props {
+  history?: History;
+}
+
+const Router: FC<Props> = ({ history }) => {
+  const AppRouter: FC = ({ children }) =>
+    history ? (
+      <BaseRouter history={history}>{children}</BaseRouter>
+    ) : (
+      <BrowserRouter>{children}</BrowserRouter>
+    );
+
+  return (
+    <AppRouter>
+      <Root>
+        <Suspense fallback={null}>
+          <Switch>
+            <Route path={Path.VALIDATE} component={routes.validate} />
+            <Redirect to={Path.VALIDATE} />
+          </Switch>
+        </Suspense>
+      </Root>
+    </AppRouter>
+  );
+};
+
+export default compose<FC>(memo)(Router);

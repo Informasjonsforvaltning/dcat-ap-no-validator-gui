@@ -1,0 +1,7 @@
+{
+  "hooks": {
+    "pre-commit": "lint-staged && npm run test:coverage",
+    "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+    "pre-push": "npm audit"
+  }
+}
