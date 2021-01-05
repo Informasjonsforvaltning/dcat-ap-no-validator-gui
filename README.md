@@ -20,7 +20,7 @@ Application for validating DCAT-AP-NO data.
 - Build a Docker container using the following command:
   - `docker build -t dcat-ap-no-validator .`
 - Run the container using the following comand:
-  - `docker run -d -p 8080:8080 -e ENV -e GRAPHQL_ENDPOINT -e TRANSLATIONS_DOCUMENT dcat-ap-no-validator`
+  - `docker run -d -p 8001:8080 -e ENV -e GRAPHQL_ENDPOINT -e TRANSLATIONS_DOCUMENT dcat-ap-no-validator`
 
 #### Running application using Docker Compose
 
