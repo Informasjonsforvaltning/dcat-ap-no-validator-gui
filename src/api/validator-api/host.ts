@@ -1,6 +1,6 @@
 import axios from 'axios';
 import cleanDeep from 'clean-deep';
-import { getConfig } from '../../config';
+import { getConfig } from '../../../config';
 
 interface Props {
   path: string;
@@ -20,5 +20,5 @@ export const validatorApi = ({ path, method, data }: Props) =>
 export const validatorApiPost = (path: string, body: any) =>
   validatorApi({ path, method: 'POST', data: body });
 
-export const validatorApiGet = (path: string, body: any) =>
+export const validatorApiGet = (path: string) =>
   validatorApi({ path, method: 'GET' });
