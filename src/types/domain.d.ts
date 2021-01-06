@@ -1,3 +1,11 @@
+import type { RdfResourceType, RdfVersion } from './enums';
+
+export interface RdfResource {
+  resource: any;
+  type: ResourceType;
+  version: RdfVersion
+}
+
 export interface ValidationReport {}
 
 export interface DropdownMenuItem {
