@@ -1,5 +1,6 @@
 .DS_Store
 .vscode
+.vs
 .idea
 .env
 .envrc
@@ -9,4 +10,3 @@ npm-debug.log
 dist
 coverage
 node_modules
-

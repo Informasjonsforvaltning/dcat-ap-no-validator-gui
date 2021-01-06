@@ -1,6 +1,5 @@
 import axios from 'axios';
-import cleanDeep from 'clean-deep';
-import { getConfig } from '../../../config';
+import env from '../../env';
 
 interface Props {
   path: string;
@@ -8,13 +7,16 @@ interface Props {
   data?: any;
 }
 
+const { VALIDATOR_API_HOST } = env;
+
 export const validatorApi = ({ path, method, data }: Props) =>
-  axios({
-    url: `${getConfig().validateApi.host}${path}`,
+  
+axios({
+    url: `${VALIDATOR_API_HOST}${path}`,
     method,
     data
   })
-    .then(response => cleanDeep(response.data))
+    .then(response => response.data)
     .catch(() => null);
 
 export const validatorApiPost = (path: string, body: any) =>
