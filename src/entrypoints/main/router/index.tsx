@@ -9,6 +9,10 @@ import {
 } from 'react-router-dom';
 import type { History } from 'history';
 
+import Footer from '@fellesdatakatalog/internal-footer';
+import Header from '../../../components/header';
+import BreadcrumbHeader from '../../../components/breadcrumb-header';
+
 import Root from '../../../components/root';
 
 import { Path } from '../../../types/enums';
@@ -31,6 +35,8 @@ const Router: FC<Props> = ({ history }) => {
 
   return (
     <AppRouter>
+      <Header />
+      <BreadcrumbHeader />
       <Root>
         <Suspense fallback={null}>
           <Switch>
@@ -39,6 +45,7 @@ const Router: FC<Props> = ({ history }) => {
           </Switch>
         </Suspense>
       </Root>
+      <Footer />
     </AppRouter>
   );
 };

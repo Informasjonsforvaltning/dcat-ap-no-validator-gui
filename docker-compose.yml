@@ -7,5 +7,7 @@ services:
       - 8001:8080
     environment:
       - ENV=development
-      - GRAPHQL_ENDPOINT=http://0.0.0.0:8000
+      - GRAPHQL_ENDPOINT=http://127.0.0.1:8000
       - TRANSLATIONS_DOCUMENT=dcat_ap_no_validator_web
+      - FDK_REGISTRATION_BASE_URI=https://registrering.fellesdatakatalog.digdir.no/
+      - ADMIN_GUI_BASE_URI=https://admin.fellesdatakatalog.digdir.no/

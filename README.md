@@ -34,6 +34,8 @@ Application for validating DCAT-AP-NO data.
   - `production`
 - `GRAPHQL_ENDPOINT` - GraphQL API endpoint
 - `TRANSLATIONS_DOCUMENT` - name of the translations document
+- `FDK_REGISTRATION_BASE_URI` - Base URI of the FDK registration application
+- `ADMIN_GUI_BASE_URI` - Base URI of the FDK administration application
 
 ## Contributing
 

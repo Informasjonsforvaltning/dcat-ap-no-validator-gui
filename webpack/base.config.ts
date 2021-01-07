@@ -66,7 +66,8 @@ const configuration: Configuration = {
               jsx: true
             }
           }
-        ]
+        ],
+        include: [resolve(__dirname, '..', 'src', 'images')]
       },
       {
         test: /\.(png|jpg|gif)$/,
@@ -80,6 +81,11 @@ const configuration: Configuration = {
             }
           }
         ]
+      },
+      {
+        test: /\.(woff|woff2|ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'file-loader',
+        exclude: [resolve(__dirname, '..', 'src', 'images')]
       }
     ]
   },
