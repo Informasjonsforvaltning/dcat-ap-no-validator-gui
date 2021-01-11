@@ -56,7 +56,7 @@
     "@apollo/client": "^3.3.6",
     "@fellesdatakatalog/breadcrumbs": "^0.1.0",
     "@fellesdatakatalog/dropdown-menu": "^0.1.1",
-    "@fellesdatakatalog/internal-footer": "0.3.1",
+    "@fellesdatakatalog/internal-footer": "^0.3.4",
     "@fellesdatakatalog/link": "^0.2.3",
     "@fellesdatakatalog/theme": "^0.4.2",
     "axios": "^0.21.1",
