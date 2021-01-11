@@ -1,10 +1,10 @@
 {
-  "name": "dcat-ap-no-validator",
+  "name": "dcat-ap-no-validator-gui",
   "version": "1.0.0",
   "description": "Application for validating DCAT-AP-NO data.",
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com:Informasjonsforvaltning/dcat-ap-no-validator.git"
+    "url": "ssh://git@github.com:Informasjonsforvaltning/dcat-ap-no-validator-gui.git"
   },
   "contributors": [
     {
