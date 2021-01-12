@@ -17,6 +17,10 @@ import Root from '../../../components/root';
 
 import { Path } from '../../../types/enums';
 
+import env from '../../../env';
+
+const { ROUTE_BASE_NAME } = env;
+
 const routes = {
   validate: lazy(() => import('./validate'))
 };
@@ -40,7 +44,11 @@ const Router: FC<Props> = ({ history }) => {
       <Root>
         <Suspense fallback={null}>
           <Switch>
-            <Route path={Path.VALIDATE} component={routes.validate} />
+            <Route
+              basename={ROUTE_BASE_NAME}
+              path={Path.VALIDATE}
+              component={routes.validate}
+            />
             <Redirect to={Path.VALIDATE} />
           </Switch>
         </Suspense>

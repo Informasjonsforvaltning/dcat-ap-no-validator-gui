@@ -7,7 +7,8 @@ const configuration: Configuration = merge(baseConfig, {
   mode: 'production',
   target: ['web', 'es5'],
   output: {
-    filename: '[name].[contenthash].js'
+    filename: '[name].[contenthash].js',
+    publicPath: '/validator/'
   },
   optimization: {
     splitChunks: {
