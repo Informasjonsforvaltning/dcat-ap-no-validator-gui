@@ -55,7 +55,7 @@ jobs:
         uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
-          author_name: 'Application: dataset-catalogue-gui | Environment: staging'
+          author_name: 'Application: dcat-ap-no-validator-gui | Environment: staging'
           fields: commit,author,workflow
         env:
           GITHUB_TOKEN: ${{ github.token }}

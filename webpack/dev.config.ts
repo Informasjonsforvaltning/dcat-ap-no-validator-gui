@@ -23,7 +23,7 @@ const configuration: Configuration = mergeWithCustomize<Configuration>({
     hot: true,
     before: app => app.get('/config.js', (_, res) => res.status(204).send()),
     historyApiFallback: {
-      rewrites: [{ from: /./, to: '/index.html' }]
+      rewrites: [{ from: /./, to: '/validator/index.html' }]
     }
   },
   module: {

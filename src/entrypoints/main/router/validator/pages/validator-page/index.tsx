@@ -5,10 +5,10 @@ import SC from './styled';
 
 interface Props {}
 
-const ValidatePage: FC<Props> = () => (
-  <SC.ValidatePage>
+const ValidatorPage: FC<Props> = () => (
+  <SC.ValidatorPage>
     <SC.Title>Valideringsverktøy</SC.Title>
-  </SC.ValidatePage>
+  </SC.ValidatorPage>
 );
 
-export default compose<FC>(memo)(ValidatePage);
+export default compose<FC>(memo)(ValidatorPage);

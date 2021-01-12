@@ -9,7 +9,7 @@ const configuration: Configuration = {
   },
   output: {
     path: resolve(__dirname, '../dist'),
-    publicPath: '/'
+    publicPath: '/validator/'
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx']
@@ -95,7 +95,7 @@ const configuration: Configuration = {
       template: './src/entrypoints/main/index.html',
       filename: 'index.html',
       favicon: './src/images/favicon.ico',
-      base: '/',
+      base: '/validator/',
       chunks: ['main']
     })
   ]
