@@ -23,16 +23,5 @@ export const validatorApi = ({ path, method, headers, data }: Props) =>
 export const validatorApiPost = (path: string, body: any) =>
   validatorApi({ path, method: 'POST', data: body });
 
-export const validatorApiMultipartPost = (path: string, body: FormData) =>
-  validatorApi({
-    path,
-    method: 'POST',
-    headers: {
-      Accept: 'multipart/mixed',
-      'Content-Type': 'multipart/form-data'
-    },
-    data: body
-  });
-
 export const validatorApiGet = (path: string) =>
   validatorApi({ path, method: 'GET' });

@@ -1,10 +1,10 @@
-import { RdfValidationRequest, RdfFile, RdfUrl } from '../../types';
-import { validatorApiMultipartPost } from './host';
+import { ValidationRequest, RdfFile, RdfUrl } from '../../types';
+import { validatorApi } from './host';
 
 const convertRdfResourceToFormData = ({
   resource,
   version
-}: RdfValidationRequest): FormData => {
+}: ValidationRequest): FormData => {
   const formData = new FormData();
   if ((resource as RdfFile).file) {
     formData.append('file', (resource as RdfFile).file);
@@ -15,8 +15,13 @@ const convertRdfResourceToFormData = ({
   return formData;
 };
 
-export const validateRdf = (request: RdfValidationRequest) =>
-  validatorApiMultipartPost(
-    '/validator',
-    convertRdfResourceToFormData(request)
-  );
+export const validateRdf = (request: ValidationRequest) =>
+  validatorApi({
+    path: '/validator',
+    method: 'POST',
+    headers: {
+      Accept: 'application/ld+json',
+      'Content-Type': 'multipart/form-data'
+    },
+    data: convertRdfResourceToFormData(request)
+  });

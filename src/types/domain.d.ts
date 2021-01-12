@@ -10,7 +10,7 @@ export interface RdfUrl {
 
 export type RdfResource = RdfFile | RdfUrl;
 
-export interface RdfValidationRequest {
+export interface ValidationRequest {
   resource: RdfResource;
   version: RdfVersion;
 }
