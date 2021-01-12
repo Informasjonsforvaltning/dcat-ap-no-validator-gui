@@ -34,7 +34,7 @@ const Router: FC<Props> = ({ history }) => {
     history ? (
       <BaseRouter history={history}>{children}</BaseRouter>
     ) : (
-      <BrowserRouter>{children}</BrowserRouter>
+      <BrowserRouter basename={ROUTE_BASE_NAME}>{children}</BrowserRouter>
     );
 
   return (
@@ -44,11 +44,7 @@ const Router: FC<Props> = ({ history }) => {
       <Root>
         <Suspense fallback={null}>
           <Switch>
-            <Route
-              basename={ROUTE_BASE_NAME}
-              path={Path.VALIDATE}
-              component={routes.validate}
-            />
+            <Route path={Path.VALIDATE} component={routes.validate} />
             <Redirect to={Path.VALIDATE} />
           </Switch>
         </Suspense>
