@@ -10,8 +10,6 @@ interface Props {
 
 const { VALIDATOR_API_HOST } = env;
 
-const mapMultipartMixedResponse = () => ({});
-
 export const validatorApi = ({ path, method, headers, data }: Props) =>
   axios({
     url: `${VALIDATOR_API_HOST}${path}`,

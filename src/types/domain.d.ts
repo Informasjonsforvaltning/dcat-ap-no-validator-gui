@@ -15,7 +15,20 @@ export interface RdfValidationRequest {
   version: RdfVersion;
 }
 
-export interface ValidationReport {}
+export interface ValidationReport {
+  conforms: boolean;
+  result: [ValidationResult?];
+}
+
+export interface ValidationResult {
+  resultSeverity: any;
+  focusNode: any;
+  resultPath: any;
+  value: string;
+  resultMessage: string;
+  sourceConstraintComponent: any;
+  sourceShape: any;
+}
 
 export interface DropdownMenuItem {
   label: string;
