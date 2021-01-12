@@ -1,9 +1,18 @@
-import type { RdfResourceType, RdfVersion } from './enums';
+import type { RdfVersion } from './enums';
 
-export interface RdfResource {
-  resource: any;
-  type: ResourceType;
-  version: RdfVersion
+export interface RdfFile {
+  file: File;
+}
+
+export interface RdfUrl {
+  url: string;
+}
+
+export type RdfResource = RdfFile | RdfUrl;
+
+export interface RdfValidationRequest {
+  resource: RdfResource;
+  version: RdfVersion;
 }
 
 export interface ValidationReport {}

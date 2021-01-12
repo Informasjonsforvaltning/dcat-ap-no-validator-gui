@@ -1,17 +1,22 @@
-import { RdfResource } from '../../types';
-import { RdfResourceType } from '../../types/enums';
-import { validatorApiPost } from './host';
+import { RdfValidationRequest, RdfFile, RdfUrl } from '../../types';
+import { validatorApiMultipartPost } from './host';
 
-const convertRdfResourceToFormData = ( {resource, type, version} :RdfResource ): FormData => {
+const convertRdfResourceToFormData = ({
+  resource,
+  version
+}: RdfValidationRequest): FormData => {
   const formData = new FormData();
-  if(type === RdfResourceType.FILE) {
-    formData.append('file', resource);
+  if ((resource as RdfFile).file) {
+    formData.append('file', (resource as RdfFile).file);
   } else {
-    formData.append('url', resource);
+    formData.append('url', (resource as RdfUrl).url);
   }
   formData.append('version', version.toString());
   return formData;
-}
+};
 
-export const validateRdfFile = (resource:RdfResource) =>
-  validatorApiPost('/validator', convertRdfResourceToFormData(resource)).then(r => r.data);
+export const validateRdf = (request: RdfValidationRequest) =>
+  validatorApiMultipartPost(
+    '/validator',
+    convertRdfResourceToFormData(request)
+  );
