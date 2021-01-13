@@ -23,7 +23,7 @@ const configuration: Configuration = mergeWithCustomize<Configuration>({
     hot: true,
     before: app => app.get('/config.js', (_, res) => res.status(204).send()),
     historyApiFallback: {
-      rewrites: [{ from: /./, to: '/index.html' }]
+      rewrites: [{ from: /./, to: '/validator/index.html' }]
     }
   },
   module: {
@@ -60,8 +60,7 @@ const configuration: Configuration = mergeWithCustomize<Configuration>({
               jsx: true
             }
           }
-        ],
-        include: [resolve(__dirname, '..', 'src', 'images')]
+        ]
       },
       {
         test: /\.(png|jpg|gif)$/,
@@ -97,11 +96,6 @@ const configuration: Configuration = mergeWithCustomize<Configuration>({
         use: ['source-map-loader'],
         enforce: 'pre',
         exclude: /node_modules/
-      },
-      {
-        test: /\.(woff|woff2|ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'file-loader',
-        exclude: [resolve(__dirname, '..', 'src', 'images')]
       }
     ]
   },

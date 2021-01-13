@@ -17,10 +17,6 @@ import Root from '../../../components/root';
 
 import { Path } from '../../../types/enums';
 
-import env from '../../../env';
-
-const { ROUTE_BASE_NAME } = env;
-
 const routes = {
   validate: lazy(() => import('./validate'))
 };
@@ -34,7 +30,7 @@ const Router: FC<Props> = ({ history }) => {
     history ? (
       <BaseRouter history={history}>{children}</BaseRouter>
     ) : (
-      <BrowserRouter basename={ROUTE_BASE_NAME}>{children}</BrowserRouter>
+      <BrowserRouter>{children}</BrowserRouter>
     );
 
   return (
