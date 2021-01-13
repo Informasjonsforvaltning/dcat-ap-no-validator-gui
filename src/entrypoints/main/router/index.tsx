@@ -18,7 +18,7 @@ import Root from '../../../components/root';
 import { Path } from '../../../types/enums';
 
 const routes = {
-  validate: lazy(() => import('./validate'))
+  validator: lazy(() => import('./validator'))
 };
 
 interface Props {
@@ -40,8 +40,8 @@ const Router: FC<Props> = ({ history }) => {
       <Root>
         <Suspense fallback={null}>
           <Switch>
-            <Route path={Path.VALIDATE} component={routes.validate} />
-            <Redirect to={Path.VALIDATE} />
+            <Route path={Path.VALIDATOR} component={routes.validator} />
+            <Redirect to={Path.VALIDATOR} />
           </Switch>
         </Suspense>
       </Root>

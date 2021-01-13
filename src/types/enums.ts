@@ -4,5 +4,5 @@ export enum Environment {
 }
 
 export enum Path {
-  VALIDATE = '/validate'
+  VALIDATOR = '/validator'
 }

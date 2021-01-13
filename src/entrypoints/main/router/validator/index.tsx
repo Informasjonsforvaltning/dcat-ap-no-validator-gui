@@ -3,16 +3,16 @@ import { compose } from 'redux';
 import { Redirect, Route, Switch, RouteComponentProps } from 'react-router-dom';
 
 const pages = {
-  validate: lazy(() => import('./pages/validate-page'))
+  validator: lazy(() => import('./pages/validator-page'))
 };
 
-const ValidateRouter: FC<RouteComponentProps> = ({ match: { url } }) => (
+const ValidatorRouter: FC<RouteComponentProps> = ({ match: { url } }) => (
   <Suspense fallback={null}>
     <Switch>
-      <Route exact path={url} component={pages.validate} />
+      <Route exact path={url} component={pages.validator} />
       <Redirect to={url} />
     </Switch>
   </Suspense>
 );
 
-export default compose<FC>(memo)(ValidateRouter);
+export default compose<FC>(memo)(ValidatorRouter);
