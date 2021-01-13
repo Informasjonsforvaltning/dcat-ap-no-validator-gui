@@ -1,13 +1,16 @@
-import { ValidationReport } from '../../../types';
+import { ValidationReport, ValidationRequest } from '../../../types';
 import {
   VALIDATE_RDF_REQUESTED,
   VALIDATE_RDF_SUCCEEDED,
   VALIDATE_RDF_FAILED
 } from './action-types';
 
-export function validateRdfRequested() {
+export function validateRdfRequested(request: ValidationRequest) {
   return {
-    type: VALIDATE_RDF_REQUESTED
+    type: VALIDATE_RDF_REQUESTED,
+    payload: {
+      request
+    }
   };
 }
 
