@@ -15,6 +15,7 @@ const ValidatorPage = styled.article`
 const Title = styled.h1`
   font-size: ${theme.fontSize('FS48')};
   font-weight: ${theme.fontWeight('FW700')};
+  margin-bottom: ${theme.spacing('S56')};
 
   @media (max-width: 1020px) {
     & {
@@ -23,7 +24,12 @@ const Title = styled.h1`
   }
 `;
 
+const ValidationResult = styled.div`
+  margin-top: ${theme.spacing('S24')};
+`;
+
 export default {
   ValidatorPage,
+  ValidationResult,
   Title
 };

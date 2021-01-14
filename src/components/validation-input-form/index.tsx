@@ -8,13 +8,15 @@ import SC from './styled';
 
 interface ExternalProps {
   isLoading: boolean;
-  onValidate: () => void;
+  onValidate: (file: File | null) => void;
 }
 
 interface Props extends ExternalProps {}
 
 const ValidationInputForm: FC<Props> = ({ isLoading, onValidate }) => {
   const [inputFile, setInputFile] = useState<File | null>(null);
+
+  const onClickValidate = () => onValidate(inputFile);
 
   const {
     getRootProps,
@@ -74,7 +76,7 @@ const ValidationInputForm: FC<Props> = ({ isLoading, onValidate }) => {
           value={inputFile?.name}
           disabled={!!inputFile}
         />
-        <SC.Button onClick={onValidate} disabled={!inputFile}>
+        <SC.Button onClick={onClickValidate} disabled={!inputFile}>
           {inputFile && isLoading ? (
             <SC.Spinner />
           ) : (

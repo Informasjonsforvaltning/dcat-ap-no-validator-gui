@@ -16,3 +16,27 @@ export const validateEnv = (
 
   return env;
 };
+
+const readFileAsDataURL = async (file: File) => {
+  const fileContent: string = await new Promise(resolve => {
+    const fileReader = new FileReader();
+    fileReader.onload = () => resolve(fileReader.result as string);
+    fileReader.readAsText(file);
+  });
+
+  return fileContent;
+};
+
+export const fixFileContentType = async (file: File) => {
+  const fileContent = await readFileAsDataURL(file);
+  try {
+    JSON.parse(fileContent);
+    return new File([fileContent], file.name, {
+      type: 'application/ld+json'
+    });
+  } catch (e) {
+    return new File([fileContent], file.name, {
+      type: 'text/turtle'
+    });
+  }
+};
