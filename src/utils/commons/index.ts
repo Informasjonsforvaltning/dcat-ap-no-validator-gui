@@ -18,7 +18,7 @@ export const validateEnv = (
   return env;
 };
 
-const readFileAsDataURL = async (file: File) => {
+const readFileAsText = async (file: File) => {
   const fileContent: string = await new Promise(resolve => {
     const fileReader = new FileReader();
     fileReader.onload = () => resolve(fileReader.result as string);
@@ -29,7 +29,7 @@ const readFileAsDataURL = async (file: File) => {
 };
 
 export const fixFileContentType = async (file: File) => {
-  const fileContent = await readFileAsDataURL(file);
+  const fileContent = await readFileAsText(file);
   try {
     JSON.parse(fileContent);
     return new File([fileContent], file.name, {

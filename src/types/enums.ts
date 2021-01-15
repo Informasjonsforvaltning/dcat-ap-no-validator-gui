@@ -12,7 +12,7 @@ export enum RdfResourceType {
   URL = 'url'
 }
 
-export enum RdfVersion {
+export enum DcatVersion {
   V1 = 1,
   V2 = 2
 }

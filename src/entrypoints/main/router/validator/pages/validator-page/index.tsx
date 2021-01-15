@@ -2,7 +2,7 @@ import React, { memo, FC } from 'react';
 import { compose } from 'redux';
 import ValidationInputForm from '../../../../../../components/validation-input-form';
 
-import { RdfVersion } from '../../../../../../types/enums';
+import { DcatVersion } from '../../../../../../types/enums';
 import withValidator, {
   Props as ValidatorProps
 } from '../../../../../../components/with-validator';
@@ -23,7 +23,7 @@ const ValidatorPage: FC<Props> = ({
         resource: {
           file: inputFile
         },
-        version: RdfVersion.V2
+        version: DcatVersion.V2
       });
     }
   };

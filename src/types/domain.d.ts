@@ -1,4 +1,4 @@
-import type { RdfVersion } from './enums';
+import type { DcatVersion } from './enums';
 
 export interface RdfFile {
   file: File;
@@ -12,7 +12,7 @@ export type RdfResource = RdfFile | RdfUrl;
 
 export interface ValidationRequest {
   resource: RdfResource;
-  version: RdfVersion;
+  version: DcatVersion;
 }
 
 export interface ValidationReport {
