@@ -29,9 +29,6 @@ const ValidatorPage: FC<Props> = ({
     }
   };
 
-  // eslint-disable-next-line no-console
-  console.log(isValidating, errorOccured);
-
   return (
     <SC.ValidatorPage>
       <SC.Title>Valideringsverktøy</SC.Title>
