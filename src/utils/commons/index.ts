@@ -1,4 +1,4 @@
-import type { EnvironmentVariables } from '../../types';
+import type { EnvironmentVariables, ValidationError } from '../../types';
 
 function assertIsDefined<T>(
   key: string,
@@ -40,3 +40,25 @@ export const fixFileContentType = async (file: File) => {
     });
   }
 };
+
+export const InvalidRequestException = (message: string): ValidationError => ({
+  message,
+  name: 'InvalidRequestException'
+});
+
+export const UnsupportedContentTypeException = (
+  message: string
+): ValidationError => ({
+  message,
+  name: 'UnsupportedContentTypeException'
+});
+
+export const InternalServerException = (message: string): ValidationError => ({
+  message,
+  name: 'InternalServerException'
+});
+
+export const UnknownException = (message: string): ValidationError => ({
+  message,
+  name: 'UnknownException'
+});

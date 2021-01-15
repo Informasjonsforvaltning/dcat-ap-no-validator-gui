@@ -13,8 +13,8 @@ interface Props extends ValidatorProps {}
 
 const ValidatorPage: FC<Props> = ({
   validationReport,
+  validationError,
   isValidating,
-  errorOccured,
   validatorActions: { validateRdfRequested: validateRdf }
 }) => {
   const onValidate = (inputFile: File | null) => {
@@ -33,9 +33,12 @@ const ValidatorPage: FC<Props> = ({
       <SC.Title>Valideringsverktøy</SC.Title>
       <ValidationInputForm isLoading={isValidating} onValidate={onValidate} />
       <SC.ValidationResult>
-        {errorOccured ? <div>OOPS SOMETHING WENT WRONG!</div> : ''}
+        {validationError ? <div>Error: {validationError.message}</div> : ''}
         {validationReport ? (
-          <div>RDF IS {validationReport.conforms ? 'VALID' : 'NOT VALID'}</div>
+          <div>
+            RDF resource is{' '}
+            <strong>{validationReport.conforms ? 'valid' : 'not valid'}</strong>
+          </div>
         ) : (
           ''
         )}

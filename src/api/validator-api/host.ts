@@ -15,7 +15,8 @@ export const validatorApi = ({ path, method, headers, data }: Props) =>
     url: `${VALIDATOR_API_HOST}${path}`,
     method,
     headers,
-    data
+    data,
+    validateStatus: () => true
   })
     .then(response => response.data)
     .catch(() => null);

@@ -22,18 +22,18 @@ export default function reducer(
     case VALIDATE_RDF_REQUESTED:
       return state
         .set('validationReport', fromJS(null))
-        .set('isValidating', true)
-        .set('errorOccured', false);
+        .set('validationError', fromJS(null))
+        .set('isValidating', true);
     case VALIDATE_RDF_SUCCEEDED:
       return state
         .set('validationReport', fromJS(action.payload.validationReport))
-        .set('isValidating', false)
-        .set('errorOccured', false);
+        .set('validationError', fromJS(null))
+        .set('isValidating', false);
     case VALIDATE_RDF_FAILED:
       return state
         .set('validationReport', fromJS(null))
-        .set('isValidating', false)
-        .set('errorOccured', true);
+        .set('validationError', fromJS(action.payload))
+        .set('isValidating', false);
     default:
       return state;
   }

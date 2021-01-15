@@ -32,6 +32,7 @@ const sh = RDF.Namespace('http://www.w3.org/ns/shacl#');
 
 const parseGraph = (s: string) => {
   const store = RDF.graph();
+
   RDF.parse(s, store, 'http://localhost', 'text/turtle');
   return store;
 };
@@ -54,5 +55,6 @@ export const validateRdf = (request: ValidationRequest) =>
         Accept: 'text/turtle'
       },
       data: formData
-    }).then((s: string) => mapToValidationReport(s))
+      // eslint-disable-next-line no-console
+    }).catch(e => console.log('Error', e))
   );
