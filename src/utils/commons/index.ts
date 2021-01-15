@@ -1,4 +1,5 @@
-import type { EnvironmentVariables, ValidationError } from '../../types';
+/* eslint-disable max-classes-per-file */
+import type { EnvironmentVariables } from '../../types';
 
 function assertIsDefined<T>(
   key: string,
@@ -41,24 +42,28 @@ export const fixFileContentType = async (file: File) => {
   }
 };
 
-export const InvalidRequestException = (message: string): ValidationError => ({
-  message,
-  name: 'InvalidRequestException'
-});
+export class HttpError extends Error {
+  constructor(public code: number, message?: string) {
+    super(message);
 
-export const UnsupportedContentTypeException = (
-  message: string
-): ValidationError => ({
-  message,
-  name: 'UnsupportedContentTypeException'
-});
+    // Maintains proper stack trace for where our error was thrown (only available on V8)
+    if (Error.captureStackTrace) {
+      Error.captureStackTrace(this, HttpError);
+    }
 
-export const InternalServerException = (message: string): ValidationError => ({
-  message,
-  name: 'InternalServerException'
-});
+    this.name = 'HttpError';
+  }
+}
 
-export const UnknownException = (message: string): ValidationError => ({
-  message,
-  name: 'UnknownException'
-});
+export class ApiError extends Error {
+  constructor(message?: string) {
+    super(message);
+
+    // Maintains proper stack trace for where our error was thrown (only available on V8)
+    if (Error.captureStackTrace) {
+      Error.captureStackTrace(this, ApiError);
+    }
+
+    this.name = 'ApiError';
+  }
+}

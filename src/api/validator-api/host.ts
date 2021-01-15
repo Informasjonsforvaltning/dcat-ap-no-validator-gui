@@ -1,5 +1,7 @@
+/* eslint-disable no-console */
 import axios from 'axios';
 import env from '../../env';
+import { ApiError, HttpError } from '../../utils/commons';
 
 interface Props {
   path: string;
@@ -15,11 +17,15 @@ export const validatorApi = ({ path, method, headers, data }: Props) =>
     url: `${VALIDATOR_API_HOST}${path}`,
     method,
     headers,
-    data,
-    validateStatus: () => true
-  })
-    .then(response => response.data)
-    .catch(() => null);
+    data
+  }).catch(error => {
+    if (error.response) {
+      const { status, data: errorData } = error.response;
+      throw new HttpError(status, errorData.detail);
+    }
+
+    throw new ApiError('API call failed');
+  });
 
 export const validatorApiPost = (path: string, body: any) =>
   validatorApi({ path, method: 'POST', data: body });

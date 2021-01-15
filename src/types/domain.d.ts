@@ -44,5 +44,4 @@ export interface DropdownLinkItem extends DropdownMenuItem {
 
 export interface ValidationError {
   message: string;
-  name: string;
 }

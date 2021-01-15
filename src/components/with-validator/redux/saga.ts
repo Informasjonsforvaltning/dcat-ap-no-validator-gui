@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 
 import { VALIDATE_RDF_REQUESTED } from './action-types';
@@ -7,6 +9,7 @@ import {
   mapToValidationReport,
   validateRdf
 } from '../../../api/validator-api/validator';
+import { ApiError, HttpError } from '../../../utils/commons';
 
 function* validateRdfRequested({
   payload: { request }
@@ -14,36 +17,26 @@ function* validateRdfRequested({
   try {
     const result = yield call(validateRdf, request);
     if (result) {
-      // if (res) {
-      //   // eslint-disable-next-line no-console
-      //   console.log(res.status);
-      //   if (res.status === 200) {
-      //     return mapToValidationReport(res.data);
-      //   }
-      //   if (res.status === 400) {
-      //     throw InvalidRequestException(res.data.detail);
-      //   }
-      //   if (res.status === 415) {
-      //     throw UnsupportedContentTypeException(res.data.detail);
-      //   }
-      //   if (res.status === 500) {
-      //     throw InternalServerException(res.data.detail);
-      //   }
-      // }
-      // eslint-disable-next-line no-console
-      console.log(JSON.stringify(result));
       yield put(
         actions.validateRdfSucceeded(mapToValidationReport(result.data))
       );
     } else {
-      yield put(
-        actions.validateRdfFailed('UnknownException', 'No validation report')
-      );
+      yield put(actions.validateRdfFailed('Validation report is undefined.'));
     }
   } catch (e) {
-    // eslint-disable-next-line no-console
-    console.log('validate failed', e);
-    yield put(actions.validateRdfFailed(e.name, e.message));
+    if (e instanceof HttpError) {
+      if (e.code === 400 || e.code === 415) {
+        yield put(actions.validateRdfFailed(e.message));
+      } else if (e.code === 500) {
+        yield put(
+          actions.validateRdfFailed(
+            'Oops, something went wrong. Try again later.'
+          )
+        );
+      }
+    } else if (e instanceof ApiError) {
+      yield put(actions.validateRdfFailed(e.message));
+    }
   }
 }
 

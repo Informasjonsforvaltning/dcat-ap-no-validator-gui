@@ -23,11 +23,10 @@ export function validateRdfSucceeded(validationReport: ValidationReport) {
   };
 }
 
-export function validateRdfFailed(type: string, message: string) {
+export function validateRdfFailed(message: string) {
   return {
     type: VALIDATE_RDF_FAILED,
     payload: {
-      type,
       message
     }
   };

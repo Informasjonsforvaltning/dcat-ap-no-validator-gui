@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import {
   ValidationRequest,
   RdfFile,
@@ -55,6 +56,5 @@ export const validateRdf = (request: ValidationRequest) =>
         Accept: 'text/turtle'
       },
       data: formData
-      // eslint-disable-next-line no-console
-    }).catch(e => console.log('Error', e))
+    })
   );
