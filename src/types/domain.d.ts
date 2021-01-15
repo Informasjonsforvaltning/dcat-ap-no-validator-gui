@@ -17,7 +17,7 @@ export interface ValidationRequest {
 
 export interface ValidationReport {
   conforms: boolean;
-  result: [ValidationResult?];
+  result?: ValidationResult[];
 }
 
 export interface ValidationResult {
