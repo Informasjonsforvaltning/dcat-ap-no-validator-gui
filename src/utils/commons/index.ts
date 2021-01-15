@@ -18,15 +18,12 @@ export const validateEnv = (
   return env;
 };
 
-const readFileAsText = async (file: File) => {
-  const fileContent: string = await new Promise(resolve => {
+const readFileAsText = async (file: File) =>
+  new Promise<string>(resolve => {
     const fileReader = new FileReader();
     fileReader.onload = () => resolve(fileReader.result as string);
     fileReader.readAsText(file);
   });
-
-  return fileContent;
-};
 
 export const fixFileContentType = async (file: File) => {
   const fileContent = await readFileAsText(file);
