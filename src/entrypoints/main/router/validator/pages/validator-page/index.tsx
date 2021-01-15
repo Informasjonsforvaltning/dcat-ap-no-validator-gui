@@ -17,7 +17,6 @@ const ValidatorPage: FC<Props> = ({
   errorOccured,
   validatorActions: { validateRdfRequested: validateRdf }
 }) => {
-  const isLoading = false;
   const onValidate = (inputFile: File | null) => {
     if (inputFile) {
       validateRdf({
@@ -32,9 +31,8 @@ const ValidatorPage: FC<Props> = ({
   return (
     <SC.ValidatorPage>
       <SC.Title>Valideringsverktøy</SC.Title>
-      <ValidationInputForm isLoading={isLoading} onValidate={onValidate} />
+      <ValidationInputForm isLoading={isValidating} onValidate={onValidate} />
       <SC.ValidationResult>
-        {isValidating ? <div>VALIDATING...</div> : ''}
         {errorOccured ? <div>OOPS SOMETHING WENT WRONG!</div> : ''}
         {validationReport ? (
           <div>RDF IS {validationReport.conforms ? 'VALID' : 'NOT VALID'}</div>
