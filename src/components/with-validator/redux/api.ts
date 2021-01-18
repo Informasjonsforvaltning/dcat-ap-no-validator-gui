@@ -1,12 +1,15 @@
-/* eslint-disable no-console */
+import axios from 'axios';
+import * as RDF from 'rdflib';
 import {
   ValidationRequest,
   RdfFile,
   RdfUrl,
   ValidationReport
-} from '../../types';
-import { fixFileContentType } from '../../utils/commons';
-import { validatorApi } from './host';
+} from '../../../types';
+import { fixFileContentType } from '../../../utils/commons';
+import env from '../../../env';
+
+const { VALIDATOR_API_HOST } = env;
 
 const mapRdfResourceToFormData = async ({
   resource,
@@ -26,9 +29,6 @@ const mapRdfResourceToFormData = async ({
   return formData;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const RDF = require('rdflib');
-
 const sh = RDF.Namespace('http://www.w3.org/ns/shacl#');
 
 const parseGraph = (s: string) => {
@@ -40,7 +40,7 @@ const parseGraph = (s: string) => {
 
 export const mapToValidationReport = (response: string): ValidationReport => {
   const store = parseGraph(response);
-  const conforms = !!store.any(null, sh('conforms'), true);
+  const conforms = !!store.any(null, sh('conforms'), RDF.term(true));
   return {
     conforms,
     result: []
@@ -49,12 +49,12 @@ export const mapToValidationReport = (response: string): ValidationReport => {
 
 export const validateRdf = (request: ValidationRequest) =>
   mapRdfResourceToFormData(request).then(formData =>
-    validatorApi({
-      path: '/validator',
+    axios({
+      url: `${VALIDATOR_API_HOST}/validator`,
       method: 'POST',
       headers: {
         Accept: 'text/turtle'
       },
       data: formData
-    })
+    }).catch(error => error)
   );

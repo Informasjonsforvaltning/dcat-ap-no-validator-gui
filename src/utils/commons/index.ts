@@ -1,4 +1,3 @@
-/* eslint-disable max-classes-per-file */
 import type { EnvironmentVariables } from '../../types';
 
 function assertIsDefined<T>(
@@ -38,29 +37,3 @@ export const fixFileContentType = async (file: File) => {
     });
   }
 };
-
-export class HttpError extends Error {
-  constructor(public code: number, message?: string) {
-    super(message);
-
-    // Maintains proper stack trace for where our error was thrown (only available on V8)
-    if (Error.captureStackTrace) {
-      Error.captureStackTrace(this, HttpError);
-    }
-
-    this.name = 'HttpError';
-  }
-}
-
-export class ApiError extends Error {
-  constructor(message?: string) {
-    super(message);
-
-    // Maintains proper stack trace for where our error was thrown (only available on V8)
-    if (Error.captureStackTrace) {
-      Error.captureStackTrace(this, ApiError);
-    }
-
-    this.name = 'ApiError';
-  }
-}
