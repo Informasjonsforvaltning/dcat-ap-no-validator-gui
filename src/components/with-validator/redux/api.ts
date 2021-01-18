@@ -1,5 +1,5 @@
 import axios from 'axios';
-import * as RDF from 'rdflib';
+import { Namespace, graph, parse, term } from 'rdflib';
 import {
   ValidationRequest,
   RdfFile,
@@ -29,18 +29,16 @@ const mapRdfResourceToFormData = async ({
   return formData;
 };
 
-const sh = RDF.Namespace('http://www.w3.org/ns/shacl#');
-
+const sh = Namespace('http://www.w3.org/ns/shacl#');
 const parseGraph = (s: string) => {
-  const store = RDF.graph();
-
-  RDF.parse(s, store, 'http://localhost', 'text/turtle');
+  const store = graph();
+  parse(s, store, 'http://localhost', 'text/turtle');
   return store;
 };
 
 export const mapToValidationReport = (response: string): ValidationReport => {
   const store = parseGraph(response);
-  const conforms = !!store.any(null, sh('conforms'), RDF.term(true));
+  const conforms = !!store.any(null, sh('conforms'), term(true));
   return {
     conforms,
     result: []
