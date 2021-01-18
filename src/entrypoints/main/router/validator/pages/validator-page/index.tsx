@@ -17,11 +17,18 @@ const ValidatorPage: FC<Props> = ({
   isValidating,
   validatorActions: { validateRdfRequested: validateRdf }
 }) => {
-  const onValidate = (inputFile: File | null) => {
-    if (inputFile) {
+  const onValidate = (inputFile: File | string) => {
+    if (inputFile instanceof File) {
       validateRdf({
         resource: {
           file: inputFile
+        },
+        version: DcatVersion.V2
+      });
+    } else {
+      validateRdf({
+        resource: {
+          url: inputFile
         },
         version: DcatVersion.V2
       });

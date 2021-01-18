@@ -8,13 +8,13 @@ import SC from './styled';
 
 interface ExternalProps {
   isLoading: boolean;
-  onValidate: (file: File | null) => void;
+  onValidate: (file: File | string) => void;
 }
 
 interface Props extends ExternalProps {}
 
 const ValidationInputForm: FC<Props> = ({ isLoading, onValidate }) => {
-  const [inputFile, setInputFile] = useState<File | null>(null);
+  const [inputFile, setInputFile] = useState<File | string>('');
 
   const onClickValidate = () => onValidate(inputFile);
 
@@ -73,7 +73,7 @@ const ValidationInputForm: FC<Props> = ({ isLoading, onValidate }) => {
         <input
           type='text'
           placeholder='Last inn fil via lenke'
-          value={inputFile?.name}
+          value={inputFile instanceof File ? inputFile?.name : inputFile}
           disabled={!!inputFile}
         />
         <SC.Button onClick={onClickValidate} disabled={!inputFile}>
