@@ -1,11 +1,6 @@
 import axios from 'axios';
 import { Namespace, graph, parse, term } from 'rdflib';
-import {
-  ValidationRequest,
-  RdfFile,
-  RdfUrl,
-  ValidationReport
-} from '../../../types';
+import { ValidationRequest, ValidationReport } from '../../../types';
 import { fixFileContentType } from '../../../utils/commons';
 import env from '../../../env';
 
@@ -16,13 +11,10 @@ const mapRdfResourceToFormData = async ({
   version
 }: ValidationRequest): Promise<FormData> => {
   const formData = new FormData();
-  if ((resource as RdfFile).file) {
-    formData.append(
-      'file',
-      await fixFileContentType((resource as RdfFile).file)
-    );
+  if (resource instanceof File) {
+    formData.append('file', await fixFileContentType(resource));
   } else {
-    formData.append('url', (resource as RdfUrl).url);
+    formData.append('url', resource);
   }
   formData.append('version', version.toString());
 

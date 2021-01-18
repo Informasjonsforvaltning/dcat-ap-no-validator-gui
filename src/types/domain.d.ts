@@ -1,17 +1,7 @@
-import type { DcatVersion } from './enums';
-
-export interface RdfFile {
-  file: File;
-}
-
-export interface RdfUrl {
-  url: string;
-}
-
-export type RdfResource = RdfFile | RdfUrl;
+import type { DcatVersion, Severity } from './enums';
 
 export interface ValidationRequest {
-  resource: RdfResource;
+  resource: File | url;
   version: DcatVersion;
 }
 
@@ -21,7 +11,7 @@ export interface ValidationReport {
 }
 
 export interface ValidationResult {
-  resultSeverity: any;
+  resultSeverity: Severity;
   focusNode: any;
   resultPath: any;
   value: string;
