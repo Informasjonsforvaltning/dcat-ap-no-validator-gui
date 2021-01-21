@@ -20,7 +20,7 @@ Application for validating DCAT-AP-NO data.
 - Build a Docker container using the following command:
   - `docker build -t dcat-ap-no-validator-gui .`
 - Run the container using the following comand:
-  - `docker run -d -p 8001:8080 -e ENV -e GRAPHQL_ENDPOINT -e VALIDATOR_API_HOST -e FDK_REGISTRATION_BASE_URI -e ADMIN_GUI_BASE_URI dcat-ap-no-validator-gui`
+  - `docker run -d -p 8001:8080 -e ENV -e GRAPHQL_ENDPOINT -e VALIDATOR_API_HOST -e FDK_BASE_URI -e FDK_REGISTRATION_BASE_URI -e ADMIN_GUI_BASE_URI dcat-ap-no-validator-gui`
 
 #### Running application using Docker Compose
 
@@ -34,6 +34,7 @@ Application for validating DCAT-AP-NO data.
   - `production`
 - `GRAPHQL_ENDPOINT` - GraphQL API endpoint
 - `VALIDATOR_API_HOST` - Host of the validator API service
+- `FDK_BASE_URI` - FDK Base URI
 - `FDK_REGISTRATION_BASE_URI` - Base URI of the FDK registration application
 - `ADMIN_GUI_BASE_URI` - Base URI of the FDK administration application
 
