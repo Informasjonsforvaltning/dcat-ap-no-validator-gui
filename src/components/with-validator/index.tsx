@@ -7,7 +7,7 @@ import * as actions from './redux/actions';
 
 export interface Props {
   validationReport: ValidationReport | null;
-  validationError: ValidationError;
+  validationError: ValidationError | null;
   validatorActions: typeof actions;
   isValidating: boolean;
 }
