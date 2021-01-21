@@ -21,7 +21,8 @@ const configuration: Configuration = mergeWithCustomize<Configuration>({
     host: '0.0.0.0',
     port: 8001,
     hot: true,
-    before: app => app.get('/config.js', (_, res) => res.status(204).send()),
+    before: app =>
+      app.get('/validator/config.js', (_, res) => res.status(204).send()),
     historyApiFallback: {
       rewrites: [{ from: /./, to: '/validator/index.html' }]
     }
