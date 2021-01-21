@@ -1,15 +1,22 @@
 import React, { memo, FC, useState, ChangeEventHandler } from 'react';
 import { compose } from 'redux';
 import { useDropzone } from 'react-dropzone';
+
 import Translation from '../translation';
+
 import SC from './styled';
+
+import type { ValidationRequest } from '../../types';
+import { DcatVersion } from '../../types/enums';
 
 interface ExternalProps {
   url?: string;
   isLoading: boolean;
-  onValidate: (file: File | string) => void;
+  onValidate: (request: ValidationRequest) => void;
 }
+
 interface Props extends ExternalProps {}
+
 const ValidationInputForm: FC<Props> = ({
   url: externalUrl,
   isLoading,
@@ -20,7 +27,7 @@ const ValidationInputForm: FC<Props> = ({
 
   const validateInput = () => {
     if (inputFile || inputUrl) {
-      onValidate(inputFile || inputUrl);
+      onValidate({ resource: inputFile || inputUrl, version: DcatVersion.V2 });
     }
   };
 
