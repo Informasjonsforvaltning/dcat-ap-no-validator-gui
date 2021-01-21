@@ -2,14 +2,17 @@ import React, { memo, FC, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { compose } from 'redux';
 import Alert, { Severity } from '@fellesdatakatalog/alert';
-import ValidationInputForm from '../../../../../../components/validation-input-form';
 
-import { DcatVersion } from '../../../../../../types/enums';
 import withValidator, {
   Props as ValidatorProps
 } from '../../../../../../components/with-validator';
 
+import ValidationInputForm from '../../../../../../components/validation-input-form';
+import ValidationReport from '../../../../../../components/validation-report';
+
 import SC from './styled';
+
+import { DcatVersion } from '../../../../../../types/enums';
 
 interface Props extends ValidatorProps {}
 
@@ -43,19 +46,10 @@ const ValidatorPage: FC<Props> = ({
         isLoading={isValidating}
         onValidate={onValidate}
       />
-      <SC.ValidationResult>
-        {validationError && (
-          <Alert severity={Severity.ERROR}>{validationError.message}</Alert>
-        )}
-        {validationReport ? (
-          <div>
-            RDF resource is{' '}
-            <strong>{validationReport.conforms ? 'valid' : 'not valid'}</strong>
-          </div>
-        ) : (
-          ''
-        )}
-      </SC.ValidationResult>
+      {validationError && (
+        <Alert severity={Severity.ERROR}>{validationError.message}</Alert>
+      )}
+      {validationReport && <ValidationReport report={validationReport} />}
     </SC.ValidatorPage>
   );
 };

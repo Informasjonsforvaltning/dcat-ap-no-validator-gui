@@ -24,12 +24,7 @@ const Title = styled.h1`
   }
 `;
 
-const ValidationResult = styled.div`
-  margin-top: ${theme.spacing('S24')};
-`;
-
 export default {
   ValidatorPage,
-  ValidationResult,
   Title
 };
