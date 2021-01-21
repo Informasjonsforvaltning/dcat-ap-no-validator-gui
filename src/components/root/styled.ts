@@ -8,6 +8,7 @@ const Root = styled.main`
   height: auto;
   width: 1140px;
   margin: 0 auto;
+  padding-bottom: ${theme.spacing('S48')};
 
   @media (max-width: 1204px) {
     & {

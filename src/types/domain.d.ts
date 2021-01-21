@@ -1,37 +1,32 @@
-import type { DcatVersion, Severity } from './enums';
+import type { DcatVersion } from './enums';
 
 export interface ValidationRequest {
-  resource: File | url;
+  resource: File | string;
   version: DcatVersion;
 }
 
 export interface ValidationReport {
   conforms: boolean;
-  result?: ValidationResult[];
+  results?: ValidationResult[];
 }
 
 export interface ValidationResult {
-  resultSeverity: Severity;
-  focusNode: any;
-  resultPath: any;
-  value: string;
+  entityId: string;
+  entityType: string;
+  focusNode: string;
   resultMessage: string;
-  sourceConstraintComponent: any;
-  sourceShape: any;
+  resultPath: string;
+  resultSeverity: string;
+  sourceConstraintComponent?: string;
+  sourceShape?: any;
+  value?: string;
 }
 
-export interface DropdownMenuItem {
-  label: string;
+export interface GroupedValidationResults {
+  entityId: string;
+  entityType: string;
+  entries: Record<string, ValidationResult[]>;
 }
-
-export interface DropdownButtonItem extends DropdownMenuItem {
-  onClick: () => void;
-}
-
-export interface DropdownLinkItem extends DropdownMenuItem {
-  url: string;
-}
-
 export interface ValidationError {
   message: string;
 }
