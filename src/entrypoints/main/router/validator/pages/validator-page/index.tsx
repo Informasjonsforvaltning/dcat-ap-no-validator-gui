@@ -12,9 +12,14 @@ import ValidationReport from '../../../../../../components/validation-report';
 
 import SC from './styled';
 
+import type { ValidationRequest } from '../../../../../../types';
 import { DcatVersion } from '../../../../../../types/enums';
 
 interface Props extends ValidatorProps {}
+
+interface RouteParams {
+  resource: string;
+}
 
 const ValidatorPage: FC<Props> = ({
   validationReport,
@@ -22,19 +27,15 @@ const ValidatorPage: FC<Props> = ({
   isValidating,
   validatorActions: { validateRdfRequested: validateRdf }
 }) => {
-  const onValidate = (inputFile: File | string) => {
-    validateRdf({
-      resource: inputFile,
-      version: DcatVersion.V2
-    });
-  };
+  const { resource } = useParams<RouteParams>();
 
-  const { resource }: { resource: string } = useParams();
-  const urlToValidate = resource ? decodeURIComponent(resource) : '';
+  const url = resource ? decodeURIComponent(resource) : '';
+
+  const onValidate = (request: ValidationRequest) => validateRdf(request);
 
   useEffect(() => {
-    if (urlToValidate && urlToValidate.length > 0) {
-      onValidate(urlToValidate);
+    if (url && url.length > 0) {
+      onValidate({ resource: url, version: DcatVersion.V2 });
     }
   }, []);
 
@@ -42,7 +43,7 @@ const ValidatorPage: FC<Props> = ({
     <SC.ValidatorPage>
       <SC.Title>Valideringsverktøy</SC.Title>
       <ValidationInputForm
-        url={urlToValidate}
+        url={url}
         isLoading={isValidating}
         onValidate={onValidate}
       />

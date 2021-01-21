@@ -1,44 +1,41 @@
-import { AxiosError } from 'axios';
+import axios from 'axios';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
-import { isValidUrl } from '../../../utils/commons';
+
+import env from '../../../env';
 
 import { VALIDATE_RDF_REQUESTED } from './action-types';
 import * as actions from './actions';
 
-import { mapToValidationReport, validateRdf } from './api';
+import { isValidUrl, createFormData, createValidationReport } from './utils';
+
+const { VALIDATOR_API_HOST } = env;
 
 function* validateRdfRequested({
   payload: { request }
 }: ReturnType<typeof actions.validateRdfRequested>) {
-  try {
-    if (typeof request.resource === 'string') {
-      if (!isValidUrl(request.resource)) {
-        yield put(actions.validateRdfFailed('Url to validate is not valid'));
-        return;
-      }
-    }
+  const { resource } = request;
 
-    const result = yield call(validateRdf, request);
-    // If error
-    if (result instanceof Error) {
-      const error = <AxiosError>result;
-      if (error.response) {
-        if (error.code === '500') {
-          yield put(
-            actions.validateRdfFailed(
-              'Oops, something went wrong. Try again later.'
-            )
-          );
-        } else {
-          yield put(actions.validateRdfFailed(error.response?.data.detail));
+  if (typeof resource === 'string' && !isValidUrl(resource)) {
+    yield put(actions.validateRdfFailed('Url to validate is not valid'));
+    return;
+  }
+
+  try {
+    const { data } = yield call(
+      axios.post,
+      `${VALIDATOR_API_HOST}/validator`,
+      createFormData(request),
+      {
+        headers: {
+          Accept: 'text/turtle'
         }
-      } else {
-        yield put(actions.validateRdfFailed(error.message));
       }
-    } else if (result) {
-      yield put(
-        actions.validateRdfSucceeded(mapToValidationReport(result.data))
-      );
+    );
+
+    if (data) {
+      yield put(actions.validateRdfSucceeded(createValidationReport(data)));
+    } else {
+      yield put(actions.validateRdfFailed(''));
     }
   } catch (e) {
     yield put(actions.validateRdfFailed(e.message));
