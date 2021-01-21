@@ -17,15 +17,19 @@ const ValidationInputForm: FC<Props> = ({
 }) => {
   const [inputFile, setInputFile] = useState<File | null>(null);
   const [inputUrl, setInputUrl] = useState(externalUrl ?? '');
+
   const validateInput = () => {
     if (inputFile || inputUrl) {
       onValidate(inputFile || inputUrl);
     }
   };
+
   const removeInputFile = () => setInputFile(null);
+
   const handleInputFieldChange: ChangeEventHandler<HTMLInputElement> = ({
     target
   }) => setInputUrl(target.value);
+
   const {
     getRootProps,
     getInputProps,
