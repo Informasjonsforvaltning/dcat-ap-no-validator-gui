@@ -16,7 +16,7 @@ const Row = styled.div`
   align-items: center;
 `;
 
-const DropZone = styled.div<{ isDragActive?: boolean }>`
+const DropZone = styled.div<{ isDragActive?: boolean; disabled?: boolean }>`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -53,6 +53,14 @@ const DropZone = styled.div<{ isDragActive?: boolean }>`
       margin-left: ${theme.spacing('S24')};
     }
   }
+
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      opacity: 0.7;
+      user-select: none;
+      pointer-events: none;
+    `}
 `;
 
 const UploadedFileIcon = styled(LibraryAddCheckIcon)`
