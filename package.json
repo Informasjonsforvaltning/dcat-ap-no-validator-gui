@@ -138,6 +138,7 @@
     "react-refresh": "^0.9.0",
     "react-svg-loader": "^3.0.3",
     "source-map-loader": "^2.0.0",
+    "terser-webpack-plugin": "^5.1.1",
     "ts-jest": "^26.4.4",
     "ts-loader": "^8.0.14",
     "ts-node": "^9.1.1",

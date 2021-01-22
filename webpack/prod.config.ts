@@ -1,6 +1,6 @@
 import type { Configuration } from 'webpack';
 import { merge } from 'webpack-merge';
-
+import { TerserPlugin } from 'terser-webpack-plugin';
 import baseConfig from './base.config';
 
 const configuration: Configuration = merge(baseConfig, {
@@ -10,6 +10,8 @@ const configuration: Configuration = merge(baseConfig, {
     filename: '[name].[contenthash].js'
   },
   optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin()],
     splitChunks: {
       maxSize: 40000,
       cacheGroups: {
