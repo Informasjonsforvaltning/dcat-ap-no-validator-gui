@@ -1,6 +1,6 @@
 import type { Configuration } from 'webpack';
 import { merge } from 'webpack-merge';
-import { TerserPlugin } from 'terser-webpack-plugin';
+import TerserPlugin from 'terser-webpack-plugin';
 import baseConfig from './base.config';
 
 const configuration: Configuration = merge(baseConfig, {

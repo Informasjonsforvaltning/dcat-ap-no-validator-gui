@@ -101,6 +101,7 @@
     "@types/redux-api-middleware": "^3.2.2",
     "@types/redux-localstorage": "^1.0.8",
     "@types/styled-components": "^5.1.4",
+    "@types/terser-webpack-plugin": "^5.0.2",
     "@types/webpack": "^4.41.25",
     "@types/webpack-dev-server": "^3.11.1",
     "@types/yup": "^0.29.9",
