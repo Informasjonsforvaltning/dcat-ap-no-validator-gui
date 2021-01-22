@@ -27,11 +27,11 @@ const ValidatorPage: FC<Props> = ({
   };
 
   const { resource }: { resource: string } = useParams();
-  const urlToValidate = () => (resource ? decodeURIComponent(resource) : '');
+  const urlToValidate = resource ? decodeURIComponent(resource) : '';
 
   useEffect(() => {
     if (urlToValidate && urlToValidate.length > 0) {
-      onValidate(urlToValidate());
+      onValidate(urlToValidate);
     }
   }, []);
 
@@ -39,7 +39,7 @@ const ValidatorPage: FC<Props> = ({
     <SC.ValidatorPage>
       <SC.Title>Valideringsverktøy</SC.Title>
       <ValidationInputForm
-        url={urlToValidate()}
+        url={urlToValidate}
         isLoading={isValidating}
         onValidate={onValidate}
       />
