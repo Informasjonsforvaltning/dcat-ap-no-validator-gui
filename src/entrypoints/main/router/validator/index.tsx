@@ -9,7 +9,7 @@ const pages = {
 const ValidatorRouter: FC<RouteComponentProps> = ({ match: { url } }) => (
   <Suspense fallback={null}>
     <Switch>
-      <Route exact path={url} component={pages.validator} />
+      <Route path={`${url}/:resource?`} component={pages.validator} />
       <Redirect to={url} />
     </Switch>
   </Suspense>

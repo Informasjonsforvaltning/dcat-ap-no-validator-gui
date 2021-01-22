@@ -1,23 +1,31 @@
-import React, { memo, FC, useState } from 'react';
+import React, { memo, FC, useState, ChangeEventHandler } from 'react';
 import { compose } from 'redux';
 import { useDropzone } from 'react-dropzone';
-
 import Translation from '../translation';
-
 import SC from './styled';
 
 interface ExternalProps {
+  url?: string;
   isLoading: boolean;
   onValidate: (file: File | string) => void;
 }
-
 interface Props extends ExternalProps {}
-
-const ValidationInputForm: FC<Props> = ({ isLoading, onValidate }) => {
-  const [inputFile, setInputFile] = useState<File | string>('');
-
-  const onClickValidate = () => onValidate(inputFile);
-
+const ValidationInputForm: FC<Props> = ({
+  url: externalUrl,
+  isLoading,
+  onValidate
+}) => {
+  const [inputFile, setInputFile] = useState<File | null>(null);
+  const [inputUrl, setInputUrl] = useState(externalUrl ?? '');
+  const validateInput = () => {
+    if (inputFile || inputUrl) {
+      onValidate(inputFile || inputUrl);
+    }
+  };
+  const removeInputFile = () => setInputFile(null);
+  const handleInputFieldChange: ChangeEventHandler<HTMLInputElement> = ({
+    target
+  }) => setInputUrl(target.value);
   const {
     getRootProps,
     getInputProps,
@@ -25,8 +33,9 @@ const ValidationInputForm: FC<Props> = ({ isLoading, onValidate }) => {
     open: openFileSelector
   } = useDropzone({
     onDropAccepted: ([file]) => {
-      if (file && !inputFile) {
+      if (!isLoading) {
         setInputFile(file);
+        setInputUrl('');
       }
     },
     maxFiles: 1,
@@ -34,12 +43,11 @@ const ValidationInputForm: FC<Props> = ({ isLoading, onValidate }) => {
     noClick: true,
     noKeyboard: true
   });
-
   return (
     <SC.ValidationInputForm>
-      <SC.DropZone {...getRootProps({ isDragActive })}>
+      <SC.DropZone {...getRootProps({ isDragActive, disabled: isLoading })}>
         <input {...getInputProps()} />
-        {!inputFile && isDragActive && (
+        {isDragActive && (
           <p>
             <Translation id='Slipp filen her' />
           </p>
@@ -57,7 +65,7 @@ const ValidationInputForm: FC<Props> = ({ isLoading, onValidate }) => {
             </SC.Button>
           </>
         )}
-        {inputFile && (
+        {inputFile && !isDragActive && (
           <SC.Row>
             <SC.UploadedFileIcon />
             <p>
@@ -66,6 +74,9 @@ const ValidationInputForm: FC<Props> = ({ isLoading, onValidate }) => {
             <SC.Button onClick={openFileSelector}>
               <Translation id='Velg en annen fil' />
             </SC.Button>
+            <SC.Button onClick={removeInputFile}>
+              <Translation id='Slett fil' />
+            </SC.Button>
           </SC.Row>
         )}
       </SC.DropZone>
@@ -73,19 +84,18 @@ const ValidationInputForm: FC<Props> = ({ isLoading, onValidate }) => {
         <input
           type='text'
           placeholder='Last inn fil via lenke'
-          value={inputFile instanceof File ? inputFile?.name : inputFile}
-          disabled={!!inputFile}
+          value={inputFile?.name ?? inputUrl}
+          onChange={handleInputFieldChange}
+          disabled={!!inputFile || isLoading}
         />
-        <SC.Button onClick={onClickValidate} disabled={!inputFile}>
-          {inputFile && isLoading ? (
-            <SC.Spinner />
-          ) : (
-            <Translation id='Valider' />
-          )}
+        <SC.Button
+          onClick={validateInput}
+          disabled={isLoading || !(inputFile || inputUrl)}
+        >
+          {isLoading ? <SC.Spinner /> : <Translation id='Valider' />}
         </SC.Button>
       </SC.LinkInput>
     </SC.ValidationInputForm>
   );
 };
-
 export default compose<FC<ExternalProps>>(memo)(ValidationInputForm);

@@ -37,3 +37,12 @@ export const fixFileContentType = async (file: File) => {
     });
   }
 };
+
+export const isValidUrl = (url: string) => {
+  try {
+    const u = new URL(url);
+    return !!u;
+  } catch (e) {
+    return false;
+  }
+};

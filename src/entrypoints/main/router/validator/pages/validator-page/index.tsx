@@ -1,4 +1,5 @@
-import React, { memo, FC } from 'react';
+import React, { memo, FC, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { compose } from 'redux';
 import Alert, { Severity } from '@fellesdatakatalog/alert';
 import ValidationInputForm from '../../../../../../components/validation-input-form';
@@ -25,12 +26,27 @@ const ValidatorPage: FC<Props> = ({
     });
   };
 
+  const { resource }: { resource: string } = useParams();
+  const urlToValidate = () => (resource ? decodeURIComponent(resource) : '');
+
+  useEffect(() => {
+    if (urlToValidate && urlToValidate.length > 0) {
+      onValidate(urlToValidate());
+    }
+  }, []);
+
   return (
     <SC.ValidatorPage>
       <SC.Title>Valideringsverktøy</SC.Title>
-      <ValidationInputForm isLoading={isValidating} onValidate={onValidate} />
+      <ValidationInputForm
+        url={urlToValidate()}
+        isLoading={isValidating}
+        onValidate={onValidate}
+      />
       <SC.ValidationResult>
-        {validationError && <Alert severity={Severity.ERROR}>{validationError.message}</Alert>}
+        {validationError && (
+          <Alert severity={Severity.ERROR}>{validationError.message}</Alert>
+        )}
         {validationReport ? (
           <div>
             RDF resource is{' '}

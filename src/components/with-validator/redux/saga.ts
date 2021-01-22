@@ -1,5 +1,6 @@
 import { AxiosError } from 'axios';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
+import { isValidUrl } from '../../../utils/commons';
 
 import { VALIDATE_RDF_REQUESTED } from './action-types';
 import * as actions from './actions';
@@ -10,6 +11,13 @@ function* validateRdfRequested({
   payload: { request }
 }: ReturnType<typeof actions.validateRdfRequested>) {
   try {
+    if (typeof request.resource === 'string') {
+      if (!isValidUrl(request.resource)) {
+        yield put(actions.validateRdfFailed('Url to validate is not valid'));
+        return;
+      }
+    }
+
     const result = yield call(validateRdf, request);
     // If error
     if (result instanceof Error) {
