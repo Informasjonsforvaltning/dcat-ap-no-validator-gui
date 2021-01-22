@@ -30,11 +30,7 @@ const ValidatorPage: FC<Props> = ({
       <SC.Title>Valideringsverktøy</SC.Title>
       <ValidationInputForm isLoading={isValidating} onValidate={onValidate} />
       <SC.ValidationResult>
-        {validationError ? (
-          <Alert severity={Severity.ERROR}>{validationError.message}</Alert>
-        ) : (
-          ''
-        )}
+        {validationError && <Alert severity={Severity.ERROR}>{validationError.message}</Alert>}
         {validationReport ? (
           <div>
             RDF resource is{' '}
