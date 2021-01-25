@@ -24,7 +24,7 @@ function* validateRdfRequested({
     const { data } = yield call(
       axios.post,
       `${VALIDATOR_API_HOST}/validator`,
-      createFormData(request),
+      yield call(createFormData, request),
       {
         headers: {
           Accept: 'text/turtle'

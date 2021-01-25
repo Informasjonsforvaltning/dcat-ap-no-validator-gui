@@ -7,11 +7,6 @@ export enum Path {
   VALIDATOR = '/validator'
 }
 
-export enum DcatVersion {
-  V1 = 1,
-  V2 = 2
-}
-
 export enum Severity {
   VIOLATION = 'Violation',
   WARNING = 'Warning',

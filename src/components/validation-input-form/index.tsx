@@ -13,7 +13,6 @@ import Translation from '../translation';
 import SC from './styled';
 
 import type { ValidationRequest } from '../../types';
-import { DcatVersion } from '../../types/enums';
 
 interface ExternalProps {
   url?: string;
@@ -34,7 +33,7 @@ const ValidationInputForm: FC<Props> = ({
 
   const validateInput = () => {
     if (inputFile || inputUrl) {
-      onValidate({ resource: inputFile || inputUrl, version: DcatVersion.V2 });
+      onValidate({ resource: inputFile || inputUrl, config: {} });
     }
   };
 
