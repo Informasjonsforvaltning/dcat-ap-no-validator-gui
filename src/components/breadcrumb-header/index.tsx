@@ -3,7 +3,11 @@ import { compose } from 'redux';
 import { Breadcrumb } from '@fellesdatakatalog/breadcrumbs';
 import Link from '@fellesdatakatalog/link';
 
+import env from '../../env';
+
 import SC from './styled';
+
+const { FDK_BASE_URI } = env;
 
 const BreadcrumbHeader: FC = () => (
   <SC.BreadcrumbHeader>
@@ -11,7 +15,7 @@ const BreadcrumbHeader: FC = () => (
       separator={<SC.BreadcrumbSeparator>{'>'}</SC.BreadcrumbSeparator>}
     >
       <Breadcrumb>
-        <Link href='/' target='_self'>
+        <Link href={`${FDK_BASE_URI}/publishing`} target='_self'>
           Felles datakatalog publisering
         </Link>
       </Breadcrumb>
