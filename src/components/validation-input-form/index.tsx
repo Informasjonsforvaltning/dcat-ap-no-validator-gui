@@ -1,4 +1,10 @@
-import React, { memo, FC, useState, ChangeEventHandler } from 'react';
+import React, {
+  memo,
+  FC,
+  useState,
+  ChangeEventHandler,
+  FormEventHandler
+} from 'react';
 import { compose } from 'redux';
 import { useDropzone } from 'react-dropzone';
 
@@ -38,6 +44,11 @@ const ValidationInputForm: FC<Props> = ({
     target
   }) => setInputUrl(target.value);
 
+  const handleSubmitForm: FormEventHandler = e => {
+    e.preventDefault();
+    validateInput();
+  };
+
   const {
     getRootProps,
     getInputProps,
@@ -56,7 +67,7 @@ const ValidationInputForm: FC<Props> = ({
     noKeyboard: true
   });
   return (
-    <SC.ValidationInputForm {...props}>
+    <SC.ValidationInputForm {...props} onSubmit={handleSubmitForm}>
       <SC.DropZone {...getRootProps({ isDragActive, disabled: isLoading })}>
         <input {...getInputProps()} />
         {isDragActive && (
