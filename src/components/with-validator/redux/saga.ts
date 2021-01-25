@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 
 import env from '../../../env';
@@ -16,7 +16,7 @@ function* validateRdfRequested({
   const { resource } = request;
 
   if (typeof resource === 'string' && !isValidUrl(resource)) {
-    yield put(actions.validateRdfFailed('Url to validate is not valid'));
+    yield put(actions.validateRdfFailed('Oppgitt URL har ikke gyldig format.'));
     return;
   }
 
@@ -38,7 +38,15 @@ function* validateRdfRequested({
       yield put(actions.validateRdfFailed(''));
     }
   } catch (e) {
-    yield put(actions.validateRdfFailed(e.message));
+    const { message, response } = e as AxiosError;
+
+    if (response?.status === 500) {
+      yield put(
+        actions.validateRdfFailed('Noe gikk galt. Vennligst prøv igjen senere.')
+      );
+    } else {
+      yield put(actions.validateRdfFailed(message));
+    }
   }
 }
 
