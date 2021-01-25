@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { theme, Colour } from '@fellesdatakatalog/theme';
-import DoneAllSVG from '@material-ui/icons/DoneAll';
+import SuccessSVG from '@material-ui/icons/DoneAll';
 import ErrorSVG from '@material-ui/icons/Error';
 import WarningSVG from '@material-ui/icons/Warning';
-import InfoIconSVG from '@material-ui/icons/Info';
+import InfoSVG from '@material-ui/icons/Info';
 
 const ValidationReport = styled.div``;
 
@@ -15,7 +15,7 @@ const ValidationSummary = styled.div`
   background: ${theme.colour(Colour.NEUTRAL, 'N0')};
 `;
 
-const SuccessIcon = styled(DoneAllSVG)`
+const SuccessIcon = styled(SuccessSVG)`
   & > path {
     color: ${theme.colour(Colour.GREEN, 'G50')};
   }
@@ -33,7 +33,7 @@ const WarningIcon = styled(WarningSVG)`
   }
 `;
 
-const InfoIcon = styled(InfoIconSVG)`
+const InfoIcon = styled(InfoSVG)`
   & > path {
     color: ${theme.colour(Colour.NEUTRAL, 'N60')};
   }

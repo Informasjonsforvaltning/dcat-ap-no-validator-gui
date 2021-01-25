@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { theme, Colour } from '@fellesdatakatalog/theme';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import LibraryAddCheckIcon from '@material-ui/icons/LibraryAddCheck';
+import LibraryAddCheck from '@material-ui/icons/LibraryAddCheck';
 
 import ButtonBase from '../button';
 
@@ -63,7 +63,7 @@ const DropZone = styled.div<{ isDragActive?: boolean; disabled?: boolean }>`
     `}
 `;
 
-const UploadedFileIcon = styled(LibraryAddCheckIcon)`
+const UploadedFileIcon = styled(LibraryAddCheck)`
   height: 40px;
   width: 40px;
   min-height: 40px;
