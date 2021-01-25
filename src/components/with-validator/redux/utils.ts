@@ -46,7 +46,7 @@ const fixFileContentType = async (file: File) => {
 
 export const createFormData = async ({
   resource,
-  version
+  config
 }: ValidationRequest) => {
   const formData = new FormData();
 
@@ -56,7 +56,9 @@ export const createFormData = async ({
     formData.append('url', resource);
   }
 
-  formData.append('version', version.toString());
+  Object.entries(config).forEach(([key, value]) =>
+    formData.append(`config[${key}]`, value)
+  );
 
   return formData;
 };

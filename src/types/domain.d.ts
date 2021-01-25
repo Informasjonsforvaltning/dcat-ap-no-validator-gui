@@ -1,8 +1,11 @@
-import type { DcatVersion } from './enums';
-
+interface ValidationRequestConfig {
+  shapeId?: string;
+  expand?: boolean;
+  includeExpandedTriples?: boolean;
+}
 export interface ValidationRequest {
   resource: File | string;
-  version: DcatVersion;
+  config: ValidationRequestConfig;
 }
 
 export interface ValidationReport {

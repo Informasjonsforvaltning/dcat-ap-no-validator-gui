@@ -10,7 +10,6 @@ import withValidator, {
 import SC from './styled';
 
 import type { ValidationRequest } from '../../../../../../types';
-import { DcatVersion } from '../../../../../../types/enums';
 
 interface Props extends ValidatorProps {}
 
@@ -32,7 +31,7 @@ const ValidatorPage: FC<Props> = ({
 
   useEffect(() => {
     if (url && url.length > 0) {
-      onValidate({ resource: url, version: DcatVersion.V2 });
+      onValidate({ resource: url, config: {} });
     }
   }, []);
 
