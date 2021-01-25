@@ -20,7 +20,8 @@ interface Props extends ExternalProps {}
 const ValidationInputForm: FC<Props> = ({
   url: externalUrl,
   isLoading,
-  onValidate
+  onValidate,
+  ...props
 }) => {
   const [inputFile, setInputFile] = useState<File | null>(null);
   const [inputUrl, setInputUrl] = useState(externalUrl ?? '');
@@ -55,7 +56,7 @@ const ValidationInputForm: FC<Props> = ({
     noKeyboard: true
   });
   return (
-    <SC.ValidationInputForm>
+    <SC.ValidationInputForm {...props}>
       <SC.DropZone {...getRootProps({ isDragActive, disabled: isLoading })}>
         <input {...getInputProps()} />
         {isDragActive && (

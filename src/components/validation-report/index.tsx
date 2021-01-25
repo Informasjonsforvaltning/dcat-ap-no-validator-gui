@@ -17,7 +17,8 @@ interface ExternalProps {
 interface Props extends ExternalProps {}
 
 const ValidationReport: FC<Props> = ({
-  report: { conforms, results = [] }
+  report: { conforms, results = [] },
+  ...props
 }) => {
   const errors = results.filter(isError);
   const warnings = results.filter(isWarning);
@@ -28,7 +29,7 @@ const ValidationReport: FC<Props> = ({
   const groupedTips = groupValidationResults(tips);
 
   return (
-    <SC.ValidationReport>
+    <SC.ValidationReport {...props}>
       <SC.ValidationSummary>
         {conforms ? (
           <SC.ConformsSummary>
