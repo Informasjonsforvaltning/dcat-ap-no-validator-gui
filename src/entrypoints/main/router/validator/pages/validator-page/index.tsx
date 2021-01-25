@@ -1,14 +1,11 @@
 import React, { memo, FC, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { compose } from 'redux';
-import Alert, { Severity } from '@fellesdatakatalog/alert';
+import { Severity } from '@fellesdatakatalog/alert';
 
 import withValidator, {
   Props as ValidatorProps
 } from '../../../../../../components/with-validator';
-
-import ValidationInputForm from '../../../../../../components/validation-input-form';
-import ValidationReport from '../../../../../../components/validation-report';
 
 import SC from './styled';
 
@@ -42,15 +39,15 @@ const ValidatorPage: FC<Props> = ({
   return (
     <SC.ValidatorPage>
       <SC.Title>Valideringsverktøy</SC.Title>
-      <ValidationInputForm
+      <SC.ValidationInputForm
         url={url}
         isLoading={isValidating}
         onValidate={onValidate}
       />
       {validationError && (
-        <Alert severity={Severity.ERROR}>{validationError.message}</Alert>
+        <SC.Alert severity={Severity.ERROR}>{validationError.message}</SC.Alert>
       )}
-      {validationReport && <ValidationReport report={validationReport} />}
+      {validationReport && <SC.ValidationReport report={validationReport} />}
     </SC.ValidatorPage>
   );
 };

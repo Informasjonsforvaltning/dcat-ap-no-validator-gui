@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 import { theme } from '@fellesdatakatalog/theme';
+import AlertBase from '@fellesdatakatalog/alert';
+
+import ValidationInputFormBase from '../../../../../../components/validation-input-form';
+import ValidationReportBase from '../../../../../../components/validation-report';
 
 const ValidatorPage = styled.article`
   flex: 1;
@@ -15,7 +19,6 @@ const ValidatorPage = styled.article`
 const Title = styled.h1`
   font-size: ${theme.fontSize('FS48')};
   font-weight: ${theme.fontWeight('FW700')};
-  margin-bottom: ${theme.spacing('S56')};
 
   @media (max-width: 1020px) {
     & {
@@ -24,7 +27,22 @@ const Title = styled.h1`
   }
 `;
 
+const ValidationInputForm = styled(ValidationInputFormBase)`
+  margin-top: ${theme.spacing('S56')};
+`;
+
+const Alert = styled(AlertBase)`
+  margin-top: ${theme.spacing('S16')};
+`;
+
+const ValidationReport = styled(ValidationReportBase)`
+  margin-top: ${theme.spacing('S32')};
+`;
+
 export default {
   ValidatorPage,
-  Title
+  Title,
+  ValidationInputForm,
+  Alert,
+  ValidationReport
 };

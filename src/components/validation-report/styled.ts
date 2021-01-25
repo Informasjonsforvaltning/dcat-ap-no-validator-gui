@@ -5,9 +5,7 @@ import ErrorSVG from '@material-ui/icons/Error';
 import WarningSVG from '@material-ui/icons/Warning';
 import InfoIconSVG from '@material-ui/icons/Info';
 
-const ValidationReport = styled.div`
-  margin-top: ${theme.spacing('S32')};
-`;
+const ValidationReport = styled.div``;
 
 const ValidationSummary = styled.div`
   display: flex;
