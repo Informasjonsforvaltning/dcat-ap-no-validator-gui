@@ -1,6 +1,7 @@
-import { Breadcrumb } from '@fellesdatakatalog/breadcrumbs';
 import React, { memo, FC } from 'react';
 import { compose } from 'redux';
+import { Breadcrumb } from '@fellesdatakatalog/breadcrumbs';
+import Link from '@fellesdatakatalog/link';
 
 import SC from './styled';
 
@@ -10,9 +11,9 @@ const BreadcrumbHeader: FC = () => (
       separator={<SC.BreadcrumbSeparator>{'>'}</SC.BreadcrumbSeparator>}
     >
       <Breadcrumb>
-        <SC.Link href='/' target='_self'>
+        <Link href='/' target='_self'>
           Felles datakatalog publisering
-        </SC.Link>
+        </Link>
       </Breadcrumb>
       <Breadcrumb active>Valideringsverktøy</Breadcrumb>
     </SC.Breadcrumbs>

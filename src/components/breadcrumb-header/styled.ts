@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-
-import LinkBase from '@fellesdatakatalog/link';
 import { theme, Colour } from '@fellesdatakatalog/theme';
 import BreadcrumbsBase from '@fellesdatakatalog/breadcrumbs';
 
@@ -35,16 +33,8 @@ const Breadcrumbs = styled(BreadcrumbsBase)`
   }
 `;
 
-const Link = styled(LinkBase)`
-  & > div {
-    padding: 0;
-    border: none;
-  }
-`;
-
 export default {
   BreadcrumbHeader,
   Breadcrumbs,
-  BreadcrumbSeparator,
-  Link
+  BreadcrumbSeparator
 };
