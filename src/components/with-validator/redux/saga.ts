@@ -45,7 +45,7 @@ function* validateRdfRequested({
         actions.validateRdfFailed('Noe gikk galt. Vennligst prøv igjen senere.')
       );
     } else {
-      yield put(actions.validateRdfFailed(message));
+      yield put(actions.validateRdfFailed(response?.data.detail ?? message));
     }
   }
 }
