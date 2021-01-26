@@ -12,6 +12,7 @@ import type { History } from 'history';
 import Footer from '@fellesdatakatalog/internal-footer';
 import Header from '../../../components/header';
 import BreadcrumbHeader from '../../../components/breadcrumb-header';
+import BetaTag from '../../../components/beta-tag';
 
 import Root from '../../../components/root';
 
@@ -37,6 +38,7 @@ const Router: FC<Props> = ({ history }) => {
     <AppRouter>
       <Header />
       <BreadcrumbHeader />
+      <BetaTag />
       <Root>
         <Suspense fallback={null}>
           <Switch>

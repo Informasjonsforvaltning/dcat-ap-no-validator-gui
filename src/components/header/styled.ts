@@ -11,6 +11,7 @@ const Header = styled.header`
   align-items: center;
   height: 80px;
   background: ${theme.colour(Colour.NEUTRAL, 'N60')};
+  z-index: 2;
 
   @media (max-width: 900px) {
     & {
