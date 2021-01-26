@@ -31,7 +31,10 @@ const ValidatorPage: FC<Props> = ({
 
   useEffect(() => {
     if (url && url.length > 0) {
-      onValidate({ resource: url, config: {} });
+      onValidate({
+        resource: url,
+        config: { expand: true, includeExpandedTriples: true }
+      });
     }
   }, []);
 

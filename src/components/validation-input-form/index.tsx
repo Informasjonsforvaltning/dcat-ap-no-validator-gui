@@ -33,7 +33,10 @@ const ValidationInputForm: FC<Props> = ({
 
   const validateInput = () => {
     if (inputFile || inputUrl) {
-      onValidate({ resource: inputFile || inputUrl, config: {} });
+      onValidate({
+        resource: inputFile || inputUrl,
+        config: { expand: true, includeExpandedTriples: true }
+      });
     }
   };
 
