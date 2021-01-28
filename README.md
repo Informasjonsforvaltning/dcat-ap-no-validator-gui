@@ -56,3 +56,4 @@ This repository uses conventional commmit format. In order to commit, follow the
 - Run `npm run commit` script
 
 Do not use `--no-verify` flag when making commits.
+
