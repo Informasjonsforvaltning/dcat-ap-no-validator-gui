@@ -22,7 +22,7 @@ jobs:
       - name: Configure docker to use the gcloud command-line tool as a credential helper
         run: gcloud auth configure-docker eu.gcr.io
 
-      - name: Build Docker image with GitHub commit sha and staging tag
+      - name: Build Docker image with GitHub commit sha and latest tag
         run: docker build . -t eu.gcr.io/digdir-fdk-infra/dcat-ap-no-validator-gui:$GITHUB_SHA -t eu.gcr.io/digdir-fdk-infra/dcat-ap-no-validator-gui:latest
 
       - name: Publish docker image to Google Cloud
