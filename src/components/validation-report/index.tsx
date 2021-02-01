@@ -74,7 +74,12 @@ const ValidationReport: FC<Props> = ({
                   </h6>
                   {entries.map(({ resultMessage, value }, index) => (
                     <p key={`${resultMessage}-${index}`}>
-                      {resultMessage}: <strong>{value}</strong>
+                      {resultMessage}
+                      {value && (
+                        <>
+                          : <strong>{value}</strong>
+                        </>
+                      )}
                     </p>
                   ))}
                 </Fragment>
@@ -104,7 +109,12 @@ const ValidationReport: FC<Props> = ({
                   </h6>
                   {entries.map(({ resultMessage, value }, index) => (
                     <p key={`${resultMessage}-${index}`}>
-                      {resultMessage}: <strong>{value}</strong>
+                      {resultMessage}
+                      {value && (
+                        <>
+                          : <strong>{value}</strong>
+                        </>
+                      )}
                     </p>
                   ))}
                 </Fragment>
@@ -134,7 +144,12 @@ const ValidationReport: FC<Props> = ({
                   </h6>
                   {entries.map(({ resultMessage, value }, index) => (
                     <p key={`${resultMessage}-${index}`}>
-                      {resultMessage}: <strong>{value}</strong>
+                      {resultMessage}
+                      {value && (
+                        <>
+                          : <strong>{value}</strong>
+                        </>
+                      )}
                     </p>
                   ))}
                 </Fragment>
