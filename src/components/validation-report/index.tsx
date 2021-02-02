@@ -72,8 +72,15 @@ const ValidationReport: FC<Props> = ({
                       {path}
                     </Link>
                   </h6>
-                  {entries.map(({ resultMessage }, index) => (
-                    <p key={`${resultMessage}-${index}`}>{resultMessage}</p>
+                  {entries.map(({ resultMessage, value }, index) => (
+                    <p key={`${resultMessage}-${index}`}>
+                      {resultMessage}
+                      {value && (
+                        <>
+                          : <strong>{value}</strong>
+                        </>
+                      )}
+                    </p>
                   ))}
                 </Fragment>
               ))}
@@ -100,8 +107,15 @@ const ValidationReport: FC<Props> = ({
                       {path}
                     </Link>
                   </h6>
-                  {entries.map(({ resultMessage }, index) => (
-                    <p key={`${resultMessage}-${index}`}>{resultMessage}</p>
+                  {entries.map(({ resultMessage, value }, index) => (
+                    <p key={`${resultMessage}-${index}`}>
+                      {resultMessage}
+                      {value && (
+                        <>
+                          : <strong>{value}</strong>
+                        </>
+                      )}
+                    </p>
                   ))}
                 </Fragment>
               ))}
@@ -128,8 +142,15 @@ const ValidationReport: FC<Props> = ({
                       {path}
                     </Link>
                   </h6>
-                  {entries.map(({ resultMessage }, index) => (
-                    <p key={`${resultMessage}-${index}`}>{resultMessage}</p>
+                  {entries.map(({ resultMessage, value }, index) => (
+                    <p key={`${resultMessage}-${index}`}>
+                      {resultMessage}
+                      {value && (
+                        <>
+                          : <strong>{value}</strong>
+                        </>
+                      )}
+                    </p>
                   ))}
                 </Fragment>
               ))}
