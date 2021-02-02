@@ -16,6 +16,7 @@ export default css`
 
   body {
     background: ${theme.colour(Colour.NEUTRAL, 'N10')};
+    overflow-x: hidden;
   }
 
   body.no-scroll {
