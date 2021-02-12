@@ -26,7 +26,7 @@ jobs:
         run: docker build . -t eu.gcr.io/digdir-fdk-infra/dcat-ap-no-validator-gui:$GITHUB_SHA -t eu.gcr.io/digdir-fdk-infra/dcat-ap-no-validator-gui:latest
 
       - name: Publish docker image to Google Cloud
-        run: docker -- push eu.gcr.io/digdir-fdk-infra/dcat-ap-no-validator-gui
+        run: docker -- push eu.gcr.io/digdir-fdk-infra/dcat-ap-no-validator-gui -a
 
       - name: Apply Helm template
         run: |
