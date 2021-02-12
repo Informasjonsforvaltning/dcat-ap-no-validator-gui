@@ -2,13 +2,15 @@ name: Deploy to staging
 
 on:
   pull_request:
+    types: [ready_for_review, opened, reopened, synchronize]
     branches:
       - main
 
 jobs:
   build-and-deploy:
-    name: Build and deploy to staging environment
+    name: Build and deploy to staging environment when pull request is created
     runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
 
     steps:
       - uses: actions/checkout@v2
@@ -26,7 +28,7 @@ jobs:
         run: docker build . -t eu.gcr.io/digdir-fdk-infra/dcat-ap-no-validator-gui:$GITHUB_SHA -t eu.gcr.io/digdir-fdk-infra/dcat-ap-no-validator-gui:staging_latest
 
       - name: Publish docker image to Google Cloud
-        run: docker -- push eu.gcr.io/digdir-fdk-infra/dcat-ap-no-validator-gui
+        run: docker -- push eu.gcr.io/digdir-fdk-infra/dcat-ap-no-validator-gui -a
 
       - name: Apply Helm template
         run: |
