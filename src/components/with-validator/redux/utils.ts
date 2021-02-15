@@ -14,35 +14,13 @@ import {
 import env from '../../../env';
 
 import type { ValidationRequest, ValidationReport } from '../../../types';
+import { RequestParameter } from '../../../types/enums';
 
 const { FDK_BASE_URI } = env;
 
 const sh = Namespace('http://www.w3.org/ns/shacl#');
 const rdf = Namespace('http://www.w3.org/1999/02/22-rdf-syntax-ns#');
 const dcat = Namespace('http://www.w3.org/ns/dcat#');
-
-const readFileAsText = async (file: File) =>
-  new Promise<string>(resolve => {
-    const fileReader = new FileReader();
-    fileReader.onload = () => resolve(fileReader.result as string);
-    fileReader.readAsText(file);
-  });
-
-const fixFileContentType = async (file: File) => {
-  const fileContent = await readFileAsText(file);
-
-  try {
-    JSON.parse(fileContent);
-
-    return new File([fileContent], file.name, {
-      type: 'application/ld+json'
-    });
-  } catch (e) {
-    return new File([fileContent], file.name, {
-      type: 'text/turtle'
-    });
-  }
-};
 
 export const createFormData = async ({
   resource,
@@ -51,14 +29,12 @@ export const createFormData = async ({
   const formData = new FormData();
 
   if (resource instanceof File) {
-    formData.append('file', await fixFileContentType(resource));
+    formData.append(RequestParameter.DATA_GRAPH_FILE, resource);
   } else {
-    formData.append('url', resource);
+    formData.append(RequestParameter.DATA_GRAPH_URL, resource);
   }
 
-  Object.entries(config).forEach(([key, value]) =>
-    formData.append(`config[${key}]`, value)
-  );
+  formData.append(RequestParameter.CONFIG, JSON.stringify(config));
 
   return formData;
 };

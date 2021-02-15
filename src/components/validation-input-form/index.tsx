@@ -30,21 +30,31 @@ const ValidationInputForm: FC<Props> = ({
 }) => {
   const [inputFile, setInputFile] = useState<File | null>(null);
   const [inputUrl, setInputUrl] = useState(externalUrl ?? '');
+  const [inputText, setInputText] = useState('');
 
   const validateInput = () => {
-    if (inputFile || inputUrl) {
+    if (inputFile || inputUrl || inputText) {
       onValidate({
-        resource: inputFile || inputUrl,
-        config: { expand: true, includeExpandedTriples: true }
+        resource:
+          inputFile ||
+          inputUrl ||
+          new File([inputText], 'data-graph.rdf', {
+            type: 'text/plain'
+          }),
+        config: { expand: true, includeExpandedTriples: false }
       });
     }
   };
 
   const removeInputFile = () => setInputFile(null);
 
-  const handleInputFieldChange: ChangeEventHandler<HTMLInputElement> = ({
+  const handleInputUrlChange: ChangeEventHandler<HTMLInputElement> = ({
     target
   }) => setInputUrl(target.value);
+
+  const handleInputTextChange: ChangeEventHandler<HTMLTextAreaElement> = ({
+    target
+  }) => setInputText(target.value);
 
   const handleSubmitForm: FormEventHandler = e => {
     e.preventDefault();
@@ -61,6 +71,7 @@ const ValidationInputForm: FC<Props> = ({
       if (!isLoading) {
         setInputFile(file);
         setInputUrl('');
+        setInputText('');
       }
     },
     maxFiles: 1,
@@ -105,17 +116,25 @@ const ValidationInputForm: FC<Props> = ({
           </SC.Row>
         )}
       </SC.DropZone>
+      <SC.TextInput>
+        <textarea
+          placeholder='Skriv eller lim inn rdf data'
+          value={inputText}
+          onChange={handleInputTextChange}
+          disabled={!!inputFile || !!inputUrl || isLoading}
+        />
+      </SC.TextInput>
       <SC.LinkInput>
         <input
           type='text'
           placeholder='Last inn fil via lenke'
           value={inputFile?.name ?? inputUrl}
-          onChange={handleInputFieldChange}
+          onChange={handleInputUrlChange}
           disabled={!!inputFile || isLoading}
         />
         <SC.Button
           onClick={validateInput}
-          disabled={isLoading || !(inputFile || inputUrl)}
+          disabled={isLoading || !(inputFile || inputUrl || inputText)}
         >
           {isLoading ? <SC.Spinner /> : <Translation id='Valider' />}
         </SC.Button>

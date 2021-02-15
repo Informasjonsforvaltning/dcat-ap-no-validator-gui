@@ -103,6 +103,27 @@ const LinkInput = styled.div`
   }
 `;
 
+const TextInput = styled.div`
+  display: flex;
+  margin-top: ${theme.spacing('S16')};
+
+  & > textarea {
+    flex: 1;
+    padding: ${theme.spacing('S8')} ${theme.spacing('S12')};
+    border: 1px solid ${theme.colour(Colour.NEUTRAL, 'N50')};
+    border-radius: 4px;
+    outline: none;
+    background: ${theme.colour(Colour.NEUTRAL, 'N0')};
+    height: 200px;
+
+    &:disabled {
+      opacity: 0.7;
+      user-select: none;
+      pointer-events: none;
+    }
+  }
+`;
+
 const Spinner = styled(CircularProgress)`
   height: 16px !important;
   width: 16px !important;
@@ -121,5 +142,6 @@ export default {
   Row,
   UploadedFileIcon,
   LinkInput,
+  TextInput,
   Spinner
 };

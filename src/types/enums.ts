@@ -12,3 +12,10 @@ export enum Severity {
   WARNING = 'Warning',
   INFO = 'Info'
 }
+
+export enum RequestParameter {
+  DATA_GRAPH_FILE = 'data-graph-file',
+  DATA_GRAPH_URL = 'data-graph-url',
+  SHAPES_GRAPH_FILE = 'shapes-graph-file',
+  CONFIG = 'config'
+}

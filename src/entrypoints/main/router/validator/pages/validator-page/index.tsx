@@ -33,7 +33,7 @@ const ValidatorPage: FC<Props> = ({
     if (url && url.length > 0) {
       onValidate({
         resource: url,
-        config: { expand: true, includeExpandedTriples: true }
+        config: { expand: true, includeExpandedTriples: false }
       });
     }
   }, []);
