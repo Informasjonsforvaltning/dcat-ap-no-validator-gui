@@ -23,17 +23,24 @@ const rdf = Namespace('http://www.w3.org/1999/02/22-rdf-syntax-ns#');
 const dcat = Namespace('http://www.w3.org/ns/dcat#');
 
 export const createFormData = async ({
-  resource,
+  dataGraph,
+  shapesGraph,
   config
 }: ValidationRequest) => {
   const formData = new FormData();
 
-  if (resource instanceof File) {
-    formData.append(RequestParameter.DATA_GRAPH_FILE, resource);
-  } else {
-    formData.append(RequestParameter.DATA_GRAPH_URL, resource);
-  }
-
+  formData.append(
+    dataGraph instanceof File
+      ? RequestParameter.DATA_GRAPH_FILE
+      : RequestParameter.DATA_GRAPH_URL,
+    dataGraph
+  );
+  formData.append(
+    shapesGraph instanceof File
+      ? RequestParameter.SHAPES_GRAPH_FILE
+      : RequestParameter.SHAPES_GRAPH_URL,
+    shapesGraph
+  );
   formData.append(RequestParameter.CONFIG, JSON.stringify(config));
 
   return formData;

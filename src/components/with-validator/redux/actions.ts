@@ -1,32 +1,65 @@
 import {
-  VALIDATE_RDF_REQUESTED,
-  VALIDATE_RDF_SUCCEEDED,
-  VALIDATE_RDF_FAILED
+  VALIDATE_DATA_GRAPH_REQUESTED,
+  VALIDATE_DATA_GRAPH_SUCCEEDED,
+  VALIDATE_DATA_GRAPH_FAILED,
+  FETCH_SHAPES_COLLECTION_REQUESTED,
+  FETCH_SHAPES_COLLECTION_SUCCEEDED,
+  FETCH_SHAPES_COLLECTION_FAILED
 } from './action-types';
 
-import type { ValidationReport, ValidationRequest } from '../../../types';
+import type {
+  ShapesCollection,
+  ValidationReport,
+  ValidationRequest
+} from '../../../types';
 
-export function validateRdfRequested(request: ValidationRequest) {
+export function validateDataGraphRequested(request: ValidationRequest) {
   return {
-    type: VALIDATE_RDF_REQUESTED,
+    type: VALIDATE_DATA_GRAPH_REQUESTED,
     payload: {
       request
     }
   };
 }
 
-export function validateRdfSucceeded(validationReport: ValidationReport) {
+export function validateDataGraphSucceeded(validationReport: ValidationReport) {
   return {
-    type: VALIDATE_RDF_SUCCEEDED,
+    type: VALIDATE_DATA_GRAPH_SUCCEEDED,
     payload: {
       validationReport
     }
   };
 }
 
-export function validateRdfFailed(message: string) {
+export function validateDataGraphFailed(message: string) {
   return {
-    type: VALIDATE_RDF_FAILED,
+    type: VALIDATE_DATA_GRAPH_FAILED,
+    payload: {
+      message
+    }
+  };
+}
+
+export function fetchShapesCollectionRequested() {
+  return {
+    type: FETCH_SHAPES_COLLECTION_REQUESTED
+  };
+}
+
+export function fetchShapesCollectionSucceeded(
+  shapesCollection: ShapesCollection
+) {
+  return {
+    type: FETCH_SHAPES_COLLECTION_SUCCEEDED,
+    payload: {
+      shapesCollection
+    }
+  };
+}
+
+export function fetchShapesCollectionFailed(message: string) {
+  return {
+    type: FETCH_SHAPES_COLLECTION_FAILED,
     payload: {
       message
     }

@@ -17,5 +17,13 @@ export enum RequestParameter {
   DATA_GRAPH_FILE = 'data-graph-file',
   DATA_GRAPH_URL = 'data-graph-url',
   SHAPES_GRAPH_FILE = 'shapes-graph-file',
+  SHAPES_GRAPH_URL = 'shapes-graph-url',
   CONFIG = 'config'
+}
+
+export enum InputType {
+  FILE = 'file',
+  URL = 'url',
+  TEXT = 'text',
+  SELECT = 'select'
 }
