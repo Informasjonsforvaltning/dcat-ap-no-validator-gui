@@ -75,7 +75,7 @@ const ValidationInputForm: FC<Props> = ({
       }
     },
     maxFiles: 1,
-    accept: ['text/plain', 'application/json', '.ttl', '.json'],
+    accept: ['text/plain', 'text/xml', 'application/json'],
     noClick: true,
     noKeyboard: true
   });
@@ -130,7 +130,7 @@ const ValidationInputForm: FC<Props> = ({
           placeholder='Last inn fil via lenke'
           value={inputFile?.name ?? inputUrl}
           onChange={handleInputUrlChange}
-          disabled={!!inputFile || isLoading}
+          disabled={!!inputFile || !!inputText || isLoading}
         />
         <SC.Button
           onClick={validateInput}
