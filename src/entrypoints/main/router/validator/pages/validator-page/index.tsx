@@ -1,5 +1,4 @@
 import React, { memo, FC, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import { compose } from 'redux';
 import { Severity } from '@fellesdatakatalog/alert';
 
@@ -10,29 +9,27 @@ import withValidator, {
 import SC from './styled';
 
 import type { ValidationRequest } from '../../../../../../types';
+import { useQuery } from '../../../../../../utils/commons';
 
 interface Props extends ValidatorProps {}
-
-interface RouteParams {
-  resource: string;
-}
 
 const ValidatorPage: FC<Props> = ({
   validationReport,
   validationError,
   isValidating,
-  validatorActions: { validateRdfRequested: validateRdf }
+  validatorActions: { validateDataGraphRequested: validateDataGraph }
 }) => {
-  const { resource } = useParams<RouteParams>();
+  const query = useQuery();
+  const dataGraph = decodeURIComponent(query.get('data') ?? '');
+  const shapesGraph = decodeURIComponent(query.get('shapes') ?? '');
 
-  const url = resource ? decodeURIComponent(resource) : '';
-
-  const onValidate = (request: ValidationRequest) => validateRdf(request);
+  const onValidate = (request: ValidationRequest) => validateDataGraph(request);
 
   useEffect(() => {
-    if (url && url.length > 0) {
+    if (query.has('dataGraph')) {
       onValidate({
-        resource: url,
+        dataGraph,
+        shapesGraph,
         config: { expand: true, includeExpandedTriples: false }
       });
     }
@@ -40,9 +37,10 @@ const ValidatorPage: FC<Props> = ({
 
   return (
     <SC.ValidatorPage>
-      <SC.Title>Valideringsverktøy</SC.Title>
-      <SC.ValidationInputForm
-        url={url}
+      <SC.Title>DCAT-AP-NO valideringsverktøy</SC.Title>
+      <SC.ValidationForm
+        dataGraph={dataGraph}
+        shapesGraph={shapesGraph}
         isLoading={isValidating}
         onValidate={onValidate}
       />

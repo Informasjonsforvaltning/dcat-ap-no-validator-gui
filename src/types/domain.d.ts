@@ -1,10 +1,13 @@
+import { InputType } from './enums';
+
 interface ValidationRequestConfig {
   shapeId?: string;
   expand?: boolean;
   includeExpandedTriples?: boolean;
 }
 export interface ValidationRequest {
-  resource: File | string;
+  dataGraph: File | string;
+  shapesGraph: File | string;
   config: ValidationRequestConfig;
 }
 
@@ -30,6 +33,32 @@ export interface GroupedValidationResults {
   entityType: string;
   entries: Record<string, ValidationResult[]>;
 }
-export interface ValidationError {
-  message: string;
+
+export interface ShapesDefinition {
+  id: string;
+  name: string;
+  description: string;
+  version: string;
+  url: string;
+  specificationName: string;
+  specificationUrl: string;
+  specificationVersion: string;
+}
+
+export interface ShapesCollection {
+  shapes: ShapesDefinition[];
+}
+
+export interface SelectOption {
+  value: string;
+  label: string;
+}
+
+export interface GraphField {
+  name: string;
+  title: string;
+  placeholder?: string;
+  inputType: InputType;
+  checked?: boolean;
+  options?: SelectOption[];
 }
