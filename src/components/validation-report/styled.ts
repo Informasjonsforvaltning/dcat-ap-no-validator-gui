@@ -17,25 +17,25 @@ const ValidationSummary = styled.div`
 
 const SuccessIcon = styled(SuccessSVG)`
   & > path {
-    color: ${theme.colour(Colour.GREEN, 'G50')};
+    fill: ${theme.colour(Colour.GREEN, 'G50')};
   }
 `;
 
 const ErrorIcon = styled(ErrorSVG)`
   & > path {
-    color: ${theme.colour(Colour.RED, 'R50')};
+    fill: ${theme.colour(Colour.RED, 'R50')};
   }
 `;
 
 const WarningIcon = styled(WarningSVG)`
   & > path {
-    color: ${theme.colour(Colour.YELLOW, 'Y70')};
+    fill: ${theme.colour(Colour.YELLOW, 'Y70')};
   }
 `;
 
 const InfoIcon = styled(InfoSVG)`
   & > path {
-    color: ${theme.colour(Colour.NEUTRAL, 'N60')};
+    fill: ${theme.colour(Colour.NEUTRAL, 'N60')};
   }
 `;
 

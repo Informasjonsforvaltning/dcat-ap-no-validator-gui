@@ -70,7 +70,7 @@ const UploadedFileIcon = styled(LibraryAddCheck)`
   min-width: 40px;
 
   & > path {
-    color: ${theme.colour(Colour.GREEN, 'G50')};
+    fill: ${theme.colour(Colour.GREEN, 'G50')};
   }
 `;
 
