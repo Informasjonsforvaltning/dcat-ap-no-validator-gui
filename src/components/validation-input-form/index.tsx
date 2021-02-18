@@ -75,7 +75,6 @@ const ValidationInputForm: FC<Props> = ({
       }
     },
     maxFiles: 1,
-    accept: ['text/plain', 'text/xml', 'application/json'],
     noClick: true,
     noKeyboard: true
   });
