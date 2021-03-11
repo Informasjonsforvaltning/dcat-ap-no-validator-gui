@@ -8,10 +8,12 @@ interface Props {
 
 const RadioButton = styled.div`
   display: flex;
+  align-items: flex-start;
   background: ${theme.colour(Colour.NEUTRAL, 'N0', 1)};
   cursor: pointer;
 
   & > input {
+    -moz-appearance: none;
     margin-top: 3px;
     cursor: pointer;
   }

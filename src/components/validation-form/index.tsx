@@ -23,6 +23,8 @@ import withValidator, { Props as ValidatorProps } from '../with-validator';
 interface ExternalProps {
   dataGraph?: File | string;
   shapesGraph?: File | string;
+  expand: boolean;
+  includeExpandedTriples: boolean;
   isLoading: boolean;
   onValidate: (request: ValidationRequest) => void;
 }
@@ -32,6 +34,8 @@ interface Props extends ExternalProps, ValidatorProps {}
 const ValidationForm: FC<Props> = ({
   dataGraph,
   shapesGraph,
+  expand,
+  includeExpandedTriples,
   shapesCollection,
   validatorActions: { fetchShapesCollectionRequested: fetchShapesCollection },
   isLoading,
@@ -57,11 +61,11 @@ const ValidationForm: FC<Props> = ({
   const [inputShapesGraph, setInputShapesGraph] = useState<
     File | string | null
   >(shapesGraph ?? '');
-  const [inputConfigExpand, setInputConfigExpand] = useState(true);
+  const [inputConfigExpand, setInputConfigExpand] = useState(expand);
   const [
     inputConfigIncludeExpandedTriples,
     setInputConfigIncludeExpandedTriples
-  ] = useState(false);
+  ] = useState(includeExpandedTriples);
 
   const validateInput = () => {
     if (inputDataGraph && inputShapesGraph) {
@@ -145,13 +149,14 @@ const ValidationForm: FC<Props> = ({
             name: 'dataGraphFile',
             inputType: InputType.FILE,
             title: 'Valider fil',
-            checked: true
+            checked: !inputDataGraph
           },
           {
             name: 'dataGraphUrl',
             inputType: InputType.URL,
             title: 'Valider lenke',
-            placeholder: 'Eks. https://mitt.domene.no/eksempel.ttl'
+            placeholder: 'Eks. https://mitt.domene.no/eksempel.ttl',
+            checked: !!inputDataGraph
           },
           {
             name: 'dataGraphText',
