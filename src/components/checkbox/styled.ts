@@ -8,6 +8,7 @@ interface Props {
 
 const Checkbox = styled.div`
   display: flex;
+  align-items: flex-start;
   background: ${theme.colour(Colour.NEUTRAL, 'N0', 1)};
   cursor: pointer;
 

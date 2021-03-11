@@ -26,7 +26,7 @@ const ValidatorPage: FC<Props> = ({
   const onValidate = (request: ValidationRequest) => validateDataGraph(request);
 
   useEffect(() => {
-    if (query.has('dataGraph')) {
+    if (query.has('data') && query.has('shapes')) {
       onValidate({
         dataGraph,
         shapesGraph,
@@ -41,6 +41,8 @@ const ValidatorPage: FC<Props> = ({
       <SC.ValidationForm
         dataGraph={dataGraph}
         shapesGraph={shapesGraph}
+        expand
+        includeExpandedTriples={false}
         isLoading={isValidating}
         onValidate={onValidate}
       />
