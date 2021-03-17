@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import {
   Namespace,
   graph,
@@ -48,13 +49,7 @@ export const createFormData = async ({
 
 const parseGraph = (g: string): Store => {
   const store = graph();
-
-  try {
-    parse(g, store, FDK_BASE_URI, 'text/turtle');
-  } catch (e) {
-    // do nothing
-  }
-
+  parse(g, store, FDK_BASE_URI, 'text/turtle');
   return store;
 };
 
@@ -105,6 +100,7 @@ const mapToValidationResult = (store: Store, node: any) => {
 
 export const createValidationReport = (g: string): ValidationReport => {
   const store = parseGraph(g);
+
   const conforms = !!store.any(null, sh('conforms'), term(true));
 
   const entities = [

@@ -1,4 +1,5 @@
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
+import type { AxiosError } from 'axios';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 
 import env from '../../../env';
@@ -51,9 +52,20 @@ function* validateDataGraphRequested({
     );
 
     if (data) {
-      yield put(
-        actions.validateDataGraphSucceeded(createValidationReport(data))
-      );
+      try {
+        yield put(
+          actions.validateDataGraphSucceeded(createValidationReport(data))
+        );
+      } catch (e) {
+        // Log error to console and show friendly error.
+        // eslint-disable-next-line no-console
+        console.log(e);
+        yield put(
+          actions.validateDataGraphFailed(
+            'Beklager, men vi klarer ikke parse resultatet. Ta kontakt eller vennligst prøv igjen senere.'
+          )
+        );
+      }
     } else {
       yield put(
         actions.validateDataGraphFailed(
