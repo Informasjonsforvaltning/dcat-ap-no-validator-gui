@@ -1,5 +1,4 @@
-import axios from 'axios';
-import type { AxiosError } from 'axios';
+import axios, { AxiosError } from 'axios';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 
 import env from '../../../env';
@@ -52,20 +51,9 @@ function* validateDataGraphRequested({
     );
 
     if (data) {
-      try {
-        yield put(
-          actions.validateDataGraphSucceeded(createValidationReport(data))
-        );
-      } catch (e) {
-        // Log error to console and show friendly error.
-        // eslint-disable-next-line no-console
-        console.log(e);
-        yield put(
-          actions.validateDataGraphFailed(
-            'Beklager, men vi klarer ikke parse resultatet. Ta kontakt eller vennligst prøv igjen senere.'
-          )
-        );
-      }
+      yield put(
+        actions.validateDataGraphSucceeded(createValidationReport(data))
+      );
     } else {
       yield put(
         actions.validateDataGraphFailed(
@@ -74,17 +62,28 @@ function* validateDataGraphRequested({
       );
     }
   } catch (e) {
-    const { message, response } = e as AxiosError;
+    if (e.isAxiosError) {
+      const { message, response } = e as AxiosError;
 
-    if (response?.status === 500) {
+      if (response?.status === 500) {
+        yield put(
+          actions.validateDataGraphFailed(
+            'Noe gikk galt. Vennligst prøv igjen senere.'
+          )
+        );
+      } else {
+        yield put(
+          actions.validateDataGraphFailed(response?.data.detail ?? message)
+        );
+      }
+    } else {
+      // Log error to console
+      // eslint-disable-next-line no-console
+      console.log(e);
       yield put(
         actions.validateDataGraphFailed(
-          'Noe gikk galt. Vennligst prøv igjen senere.'
+          'Beklager, men vi klarer ikke parse resultatet. Ta kontakt eller vennligst prøv igjen senere.'
         )
-      );
-    } else {
-      yield put(
-        actions.validateDataGraphFailed(response?.data.detail ?? message)
       );
     }
   }
