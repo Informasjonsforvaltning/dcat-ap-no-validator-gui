@@ -66,7 +66,9 @@ const findConnected = (store: Store, node: Node): Statement[] =>
           (previous, current) => [
             ...previous,
             current,
-            ...findConnected(store, current.object)
+            ...(current.subject.equals(current.object)
+              ? []
+              : findConnected(store, current.object))
           ],
           [] as Statement[]
         )
