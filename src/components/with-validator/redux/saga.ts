@@ -37,10 +37,12 @@ function* validateDataGraphRequested({
   }
 
   try {
+    const formData: FormData = yield call(createFormData, request);
+
     const { data } = yield call(
       axios.post,
       `${VALIDATOR_API_HOST}/validator`,
-      yield call(createFormData, request),
+      formData,
       {
         headers: {
           Accept: 'text/turtle'
