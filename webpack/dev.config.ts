@@ -1,4 +1,5 @@
-import type { Configuration } from 'webpack';
+import type { Configuration as WebpackConfiguration } from 'webpack';
+import type { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server';
 import { resolve } from 'path';
 import {
   mergeWithCustomize,
@@ -9,6 +10,10 @@ import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
 import baseConfig from './base.config';
+
+interface Configuration extends WebpackConfiguration {
+  devServer?: WebpackDevServerConfiguration;
+}
 
 const configuration: Configuration = mergeWithCustomize<Configuration>({
   customizeArray: customizeArray({
