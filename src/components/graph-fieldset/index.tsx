@@ -237,7 +237,6 @@ const GraphFieldset: FC<Props> = ({ graph, fields, isLoading, onChange }) => {
             checked={selectedInputType === InputType.URL}
             labelPosition={LabelPosition.RIGHT}
             onClick={() => handleOnClickInputType(InputType.URL)}
-            onChange={() => ''}
           >
             <SC.InputType>
               <SC.InputTypeTitle>{field.title}</SC.InputTypeTitle>
@@ -262,7 +261,6 @@ const GraphFieldset: FC<Props> = ({ graph, fields, isLoading, onChange }) => {
             checked={selectedInputType === InputType.TEXT}
             labelPosition={LabelPosition.RIGHT}
             onClick={() => handleOnClickInputType(InputType.TEXT)}
-            onChange={() => ''}
           >
             <SC.InputType>
               <SC.InputTypeTitle>{field.title}</SC.InputTypeTitle>
