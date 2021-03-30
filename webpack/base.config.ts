@@ -1,7 +1,6 @@
 import type { Configuration } from 'webpack';
 import { resolve } from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 
 const configuration: Configuration = {
   entry: {
@@ -9,7 +8,8 @@ const configuration: Configuration = {
   },
   output: {
     path: resolve(__dirname, '../dist'),
-    publicPath: '/validator/'
+    publicPath: '/validator/',
+    clean: true
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx']
@@ -90,7 +90,6 @@ const configuration: Configuration = {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: './src/entrypoints/main/index.html',
       filename: 'index.html',
