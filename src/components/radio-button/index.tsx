@@ -19,6 +19,7 @@ interface Props extends ComponentPropsWithoutRef<'input'> {
 
 const RadioButton: FC<Props> = ({
   checked,
+  onChange = () => {},
   labelPosition,
   children,
   ...props
@@ -38,7 +39,13 @@ const RadioButton: FC<Props> = ({
           {children}
         </SC.Label>
       )}
-      <input id={id} type='radio' checked={isChecked} {...props} />
+      <input
+        id={id}
+        type='radio'
+        checked={isChecked}
+        onChange={onChange}
+        {...props}
+      />
       {labelPosition === LabelPosition.RIGHT && (
         <SC.Label labelPosition={labelPosition} htmlFor={id}>
           {children}
