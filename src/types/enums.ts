@@ -27,3 +27,10 @@ export enum InputType {
   TEXT = 'text',
   SELECT = 'select'
 }
+
+export enum Vocabulary {
+  SHACL = 'http://www.w3.org/ns/shacl#',
+  RDF = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
+  DCAT = 'http://www.w3.org/ns/dcat#',
+  XML = 'http://www.w3.org/2001/XMLSchema#'
+}
