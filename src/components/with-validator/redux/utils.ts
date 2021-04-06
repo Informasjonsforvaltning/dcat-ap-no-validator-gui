@@ -1,26 +1,19 @@
-import {
-  Namespace,
-  graph,
-  parse,
-  term,
-  Store,
-  NamedNode,
-  isNamedNode,
-  isBlankNode,
-  Statement,
-  Node
-} from 'rdflib';
+import { Parser, Store, DataFactory, Util, Quad } from 'n3';
 
-import env from '../../../env';
+import type {
+  ValidationRequest,
+  ValidationReport,
+  ValidationResult
+} from '../../../types';
+import { Vocabulary, RequestParameter } from '../../../types/enums';
 
-import type { ValidationRequest, ValidationReport } from '../../../types';
-import { RequestParameter } from '../../../types/enums';
+const { namedNode, literal, defaultGraph } = DataFactory;
+const { isNamedNode, isBlankNode } = Util;
 
-const { FDK_BASE_URI } = env;
-
-const sh = Namespace('http://www.w3.org/ns/shacl#');
-const rdf = Namespace('http://www.w3.org/1999/02/22-rdf-syntax-ns#');
-const dcat = Namespace('http://www.w3.org/ns/dcat#');
+const sh = (value: string) => `${Vocabulary.SHACL}${value}`;
+const xml = (value: string) => `${Vocabulary.XML}${value}`;
+const rdf = (value: string) => `${Vocabulary.RDF}${value}`;
+const dcat = (value: string) => `${Vocabulary.DCAT}${value}`;
 
 export const createFormData = async ({
   dataGraph,
@@ -46,16 +39,10 @@ export const createFormData = async ({
   return formData;
 };
 
-const parseGraph = (g: string): Store => {
-  const store = graph();
-  parse(g, store, FDK_BASE_URI, 'text/turtle');
-  return store;
-};
-
-const findConnected = (store: Store, node: Node): Statement[] =>
+const findConnected = (store: Store, node: any): any[] =>
   isNamedNode(node) || isBlankNode(node)
     ? store
-        .statementsMatching(node)
+        .getQuads(node, null, null, defaultGraph())
         .reduce(
           (previous, current) => [
             ...previous,
@@ -64,27 +51,37 @@ const findConnected = (store: Store, node: Node): Statement[] =>
               ? []
               : findConnected(store, current.object))
           ],
-          [] as Statement[]
+          [] as Quad[]
         )
     : [];
 
-const mapToValidationResult = (store: Store, node: any) => {
-  const resultSeverity = (store.anyStatementMatching(node, sh('resultSeverity'))
-    ?.object as NamedNode).id();
-  const focusNode = (store.anyStatementMatching(node, sh('focusNode'))
-    ?.object as NamedNode)?.uri;
-  const resultPath = (store.anyStatementMatching(node, sh('resultPath'))
-    ?.object as NamedNode)?.uri;
-  const value = store
-    .anyStatementMatching(node, sh('value'))
-    ?.object.toString();
-  const sourceShape = (store.anyStatementMatching(node, sh('sourceShape'))
-    ?.object as NamedNode)?.uri;
-  const detail = (store.anyStatementMatching(node, sh('detail'))
-    ?.object as NamedNode)?.uri;
-  const resultMessage = store
-    .statementsMatching(node, sh('resultMessage'))
-    .shift()?.object.value;
+const mapToValidationResult = (
+  node: any,
+  store: Store,
+  entityTypes: string[],
+  entityId?: string
+): ValidationResult => {
+  const resultSeverity =
+    store.getObjects(node, sh('resultSeverity'), defaultGraph()).shift()?.id ||
+    '';
+  const focusNode =
+    store.getObjects(node, sh('focusNode'), defaultGraph()).shift()?.value ||
+    '';
+  const resultPath =
+    store.getObjects(node, sh('resultPath'), defaultGraph()).shift()?.value ||
+    '';
+  const value = store.getObjects(node, sh('value'), defaultGraph()).shift()
+    ?.value;
+  const sourceShape = store
+    .getObjects(node, sh('sourceShape'), defaultGraph())
+    .shift()?.id;
+  const sourceConstraintComponent =
+    store
+      .getObjects(node, sh('sourceConstraintComponent'), defaultGraph())
+      .shift()?.value || '';
+  const resultMessage =
+    store.getObjects(node, sh('resultMessage'), defaultGraph()).shift()
+      ?.value || '';
 
   return {
     resultSeverity,
@@ -92,29 +89,37 @@ const mapToValidationResult = (store: Store, node: any) => {
     resultPath,
     value,
     sourceShape,
-    detail,
-    resultMessage
+    sourceConstraintComponent,
+    resultMessage,
+    entityId,
+    entityTypes
   };
 };
 
-export const createValidationReport = (g: string): ValidationReport => {
-  const store = parseGraph(g);
+export const createValidationReport = (ttl: string): ValidationReport => {
+  const parser = new Parser({ format: 'Turtle' });
+  const store = new Store(parser.parse(ttl));
 
-  const conforms = !!store.any(null, sh('conforms'), term(true));
+  const conforms = store.some(
+    () => true,
+    null,
+    sh('conforms'),
+    literal('true', namedNode(xml('boolean'))),
+    defaultGraph()
+  );
 
   const entities = [
-    ...store.each(null, rdf('type'), dcat('Dataset')),
-    ...store.each(null, rdf('type'), dcat('DataService')),
-    ...store.each(null, rdf('type'), dcat('Catalog'))
-  ].filter(isNamedNode) as NamedNode[];
+    ...store.getSubjects(rdf('type'), dcat('Dataset'), defaultGraph()),
+    ...store.getSubjects(rdf('type'), dcat('DataService'), defaultGraph()),
+    ...store.getSubjects(rdf('type'), dcat('Catalog'), defaultGraph())
+  ];
 
   const results = store
-    .each(null, null, sh('ValidationResult'))
+    .getSubjects(null, sh('ValidationResult'), defaultGraph())
     .map(node => {
-      const focusNode = (store.anyStatementMatching(
-        node as any,
-        sh('focusNode')
-      )?.object as NamedNode).value;
+      const focusNode = store
+        .getObjects(node, sh('focusNode'), defaultGraph())
+        .shift()?.value;
 
       const relatedEntity = entities.find(
         entity =>
@@ -125,15 +130,16 @@ export const createValidationReport = (g: string): ValidationReport => {
       );
 
       return relatedEntity
-        ? {
-            ...mapToValidationResult(store, node),
-            entityId: relatedEntity.value,
-            entityType: store.anyStatementMatching(relatedEntity, rdf('type'))
-              ?.object.value
-          }
-        : null;
-    })
-    .filter(Boolean) as any;
+        ? mapToValidationResult(
+            node,
+            store,
+            store
+              .getObjects(relatedEntity, rdf('type'), defaultGraph())
+              .map(({ value }) => value),
+            relatedEntity.value
+          )
+        : mapToValidationResult(node, store, []);
+    });
 
   return {
     conforms,

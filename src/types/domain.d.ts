@@ -17,8 +17,9 @@ export interface ValidationReport {
 }
 
 export interface ValidationResult {
-  entityId: string;
-  entityType: string;
+  entityId?: string;
+  entityTypes: string[];
+  detail?: string;
   focusNode: string;
   resultMessage: string;
   resultPath: string;
@@ -26,12 +27,6 @@ export interface ValidationResult {
   sourceConstraintComponent?: string;
   sourceShape?: any;
   value?: string;
-}
-
-export interface GroupedValidationResults {
-  entityId: string;
-  entityType: string;
-  entries: Record<string, ValidationResult[]>;
 }
 
 export interface ShapesDefinition {

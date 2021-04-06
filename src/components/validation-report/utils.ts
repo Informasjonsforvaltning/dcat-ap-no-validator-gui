@@ -1,31 +1,41 @@
-import type { ValidationResult, GroupedValidationResults } from '../../types';
-import { Severity } from '../../types/enums';
+import type { ValidationResult } from '../../types';
+import { Vocabulary, Severity } from '../../types/enums';
 
 export const isError = ({ resultSeverity }: ValidationResult) =>
-  resultSeverity === Severity.VIOLATION;
+  resultSeverity === `${Vocabulary.SHACL}${Severity.VIOLATION}`;
 
 export const isWarning = ({ resultSeverity }: ValidationResult) =>
-  resultSeverity === Severity.WARNING;
+  resultSeverity === `${Vocabulary.SHACL}${Severity.WARNING}`;
 
 export const isTip = ({ resultSeverity }: ValidationResult) =>
-  resultSeverity === Severity.INFO;
+  resultSeverity === `${Vocabulary.SHACL}${Severity.INFO}`;
 
-export const groupValidationResults = (results: ValidationResult[]) =>
-  results.reduce(
-    (previous, current) => ({
-      ...previous,
-      [current.entityId]: {
-        entityId: current.entityId,
-        entityType: current.entityType,
-        entries: {
-          ...previous?.[current.entityId]?.entries,
+export const groupValidationResults = (
+  results: ValidationResult[],
+  defaultGroup: string
+) => {
+  const sortGroups = (_: any, [currentKey]: any) =>
+    currentKey === defaultGroup ? -1 : 1;
+
+  return Object.entries(
+    results.reduce(
+      (previous, current) => ({
+        ...previous,
+        [current.entityId || defaultGroup]: {
+          ...previous?.[current.entityId || defaultGroup],
           [current.resultPath]: [
-            ...(previous?.[current.entityId]?.entries?.[current.resultPath] ??
-              []),
+            ...(previous?.[current.entityId || defaultGroup]?.[
+              current.resultPath
+            ] ?? []),
             current
           ]
         }
-      }
-    }),
-    {} as Record<string, GroupedValidationResults>
-  );
+      }),
+      {} as Record<string, Record<string, ValidationResult[]>>
+    )
+  ).sort(sortGroups);
+};
+
+export const getEntityTypes = (
+  validationResults: Record<string, ValidationResult[]>
+) => Object.values(validationResults)[0][0].entityTypes;
