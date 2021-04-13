@@ -1,4 +1,4 @@
-import { Parser, Store, DataFactory, Util, Quad } from 'n3';
+import { Parser, Store, DataFactory, Util, Quad, Term } from 'n3';
 
 import type {
   ValidationRequest,
@@ -8,7 +8,7 @@ import type {
 import { Vocabulary, RequestParameter } from '../../../types/enums';
 
 const { namedNode, literal, defaultGraph } = DataFactory;
-const { isNamedNode, isBlankNode } = Util;
+const { isNamedNode, isBlankNode, isLiteral } = Util;
 
 const sh = (value: string) => `${Vocabulary.SHACL}${value}`;
 const xml = (value: string) => `${Vocabulary.XML}${value}`;
@@ -39,7 +39,7 @@ export const createFormData = async ({
   return formData;
 };
 
-const findConnected = (store: Store, node: any): any[] =>
+const findConnected = (store: Store, node: Term): Quad[] =>
   isNamedNode(node) || isBlankNode(node)
     ? store
         .getQuads(node, null, null, defaultGraph())
@@ -47,7 +47,9 @@ const findConnected = (store: Store, node: any): any[] =>
           (previous, current) => [
             ...previous,
             current,
-            ...(current.subject.equals(current.object)
+            ...(current.subject.equals(node) ||
+            current.subject.equals(current.object) ||
+            isLiteral(current.object)
               ? []
               : findConnected(store, current.object))
           ],
@@ -126,7 +128,7 @@ export const createValidationReport = (ttl: string): ValidationReport => {
           entity.value === focusNode ||
           findConnected(store, entity)
             .map(({ object }) => object.value)
-            .includes(focusNode)
+            .includes(focusNode ?? '')
       );
 
       return relatedEntity
