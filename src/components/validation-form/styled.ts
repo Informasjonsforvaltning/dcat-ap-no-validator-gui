@@ -144,10 +144,10 @@ const TextInput = styled.div`
 `;
 
 const Spinner = styled(CircularProgress)`
-  height: 16px !important;
-  width: 16px !important;
-  min-height: 16px !important;
-  min-width: 16px !important;
+  height: 18px !important;
+  width: 18px !important;
+  min-height: 18px !important;
+  min-width: 18px !important;
   margin: 0 auto;
 
   & > svg > circle {
