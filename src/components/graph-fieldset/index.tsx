@@ -283,11 +283,7 @@ const GraphFieldset: FC<Props> = ({ graph, fields, isLoading, onChange }) => {
 
   validate();
 
-  return (
-    <SC.GraphInputGroup>
-      {fields.map(field => renderField(field))}
-    </SC.GraphInputGroup>
-  );
+  return <SC.GraphInputGroup>{fields.map(renderField)}</SC.GraphInputGroup>;
 };
 
 export default compose<FC<ExternalProps>>(memo)(GraphFieldset);
