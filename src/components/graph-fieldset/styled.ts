@@ -165,6 +165,8 @@ const TextInput = styled.div`
     outline: none;
     background: ${theme.colour(Colour.NEUTRAL, 'N0')};
     height: 100px;
+    min-height: 100px;
+    resize: vertical;
 
     &:disabled {
       opacity: 0.7;
