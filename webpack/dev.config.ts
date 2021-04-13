@@ -114,7 +114,7 @@ const configuration: Configuration = mergeWithCustomize<Configuration>({
   plugins: [
     new ReactRefreshWebpackPlugin(),
     new ForkTsCheckerWebpackPlugin({
-      eslint: { files: './src/**/*.{tsx,ts,jsx,js,json,md,html}' }
+      eslint: { files: './src/**/*.{tsx,ts,jsx,js,json,html}' }
     })
   ]
 });
