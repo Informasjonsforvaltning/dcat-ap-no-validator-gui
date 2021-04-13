@@ -30,9 +30,9 @@ const ValidationReport: FC<Props> = ({
   const warnings = results.filter(isWarning);
   const tips = results.filter(isTip);
 
-  const groupedErrors = groupValidationResults(errors, 'andre feil');
-  const groupedWarnings = groupValidationResults(warnings, 'andre advarsler');
-  const groupedTips = groupValidationResults(tips, 'andre tips');
+  const groupedErrors = groupValidationResults(errors, 'Andre feil');
+  const groupedWarnings = groupValidationResults(warnings, 'Andre advarsler');
+  const groupedTips = groupValidationResults(tips, 'Andre tips');
 
   return (
     <SC.ValidationReport {...props}>
