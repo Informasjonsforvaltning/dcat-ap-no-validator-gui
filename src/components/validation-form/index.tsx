@@ -166,6 +166,7 @@ const ValidationForm: FC<Props> = ({
           }
         ]}
         isLoading={isLoading}
+        isStandalone
         onChange={handleOnChangeDataGraph}
       />
       <SC.ExpansionPanel>

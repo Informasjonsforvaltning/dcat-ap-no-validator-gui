@@ -3,11 +3,15 @@ import { theme, Colour } from '@fellesdatakatalog/theme';
 import ButtonBase from '@fellesdatakatalog/button';
 import LibraryAddCheck from '@material-ui/icons/LibraryAddCheck';
 
-const GraphInputGroup = styled.div`
-  padding: ${theme.spacing('S24')};
-  border-radius: 4px;
-  background: ${theme.colour(Colour.NEUTRAL, 'N0')};
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+const GraphInputGroup = styled.div<{ $isStandalone?: boolean }>`
+  ${({ $isStandalone }) =>
+    $isStandalone &&
+    css`
+      padding: ${theme.spacing('S24')};
+      border-radius: 4px;
+      background: ${theme.colour(Colour.NEUTRAL, 'N0')};
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    `}
 
   & > *:nth-child(n + 2) {
     margin-top: ${theme.spacing('S24')};

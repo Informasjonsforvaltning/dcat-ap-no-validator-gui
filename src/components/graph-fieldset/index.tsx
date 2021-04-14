@@ -27,12 +27,19 @@ interface ExternalProps {
   graph: File | string | null;
   fields: GraphField[];
   isLoading: boolean;
+  isStandalone?: boolean;
   onChange: (inputType: InputType, graph: File | string | null) => void;
 }
 
 interface Props extends ExternalProps {}
 
-const GraphFieldset: FC<Props> = ({ graph, fields, isLoading, onChange }) => {
+const GraphFieldset: FC<Props> = ({
+  graph,
+  fields,
+  isLoading,
+  isStandalone,
+  onChange
+}) => {
   const validate = () => {
     if (fields.filter(field => field.inputType === InputType.FILE).length > 1) {
       throw new Error(
@@ -283,7 +290,11 @@ const GraphFieldset: FC<Props> = ({ graph, fields, isLoading, onChange }) => {
 
   validate();
 
-  return <SC.GraphInputGroup>{fields.map(renderField)}</SC.GraphInputGroup>;
+  return (
+    <SC.GraphInputGroup $isStandalone={isStandalone}>
+      {fields.map(renderField)}
+    </SC.GraphInputGroup>
+  );
 };
 
 export default compose<FC<ExternalProps>>(memo)(GraphFieldset);
