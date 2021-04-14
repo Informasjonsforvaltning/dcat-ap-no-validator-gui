@@ -87,8 +87,8 @@ const GraphFieldset: FC<Props> = ({ graph, fields, isLoading, onChange }) => {
   const handleInputUrlChange: ChangeEventHandler<HTMLInputElement> = ({
     target
   }) => {
-    setInputGraphUrl(target.value);
-    onChange(InputType.URL, target.value);
+    setInputGraphUrl(target.value.trim());
+    onChange(InputType.URL, target.value.trim());
   };
 
   const handleInputTextChange: ChangeEventHandler<HTMLTextAreaElement> = ({
