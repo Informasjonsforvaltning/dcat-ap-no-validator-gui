@@ -8,6 +8,7 @@ interface ValidationRequestConfig {
 export interface ValidationRequest {
   dataGraph: File | string;
   shapesGraph: File | string;
+  ontologyGraph: File | string;
   config: ValidationRequestConfig;
 }
 

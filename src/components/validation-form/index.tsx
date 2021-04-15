@@ -23,6 +23,7 @@ import withValidator, { Props as ValidatorProps } from '../with-validator';
 interface ExternalProps {
   dataGraph?: File | string;
   shapesGraph?: File | string;
+  ontologyGraph?: File | string;
   expand: boolean;
   includeExpandedTriples: boolean;
   isLoading: boolean;
@@ -34,6 +35,7 @@ interface Props extends ExternalProps, ValidatorProps {}
 const ValidationForm: FC<Props> = ({
   dataGraph,
   shapesGraph,
+  ontologyGraph,
   expand,
   includeExpandedTriples,
   shapesCollection,
@@ -61,6 +63,9 @@ const ValidationForm: FC<Props> = ({
   const [inputShapesGraph, setInputShapesGraph] = useState<
     File | string | null
   >(shapesGraph ?? '');
+  const [inputOntologyGraph, setInputOntologyGraph] = useState<
+    File | string | null
+  >(ontologyGraph ?? '');
   const [inputConfigExpand, setInputConfigExpand] = useState(expand);
   const [
     inputConfigIncludeExpandedTriples,
@@ -72,6 +77,7 @@ const ValidationForm: FC<Props> = ({
       onValidate({
         dataGraph: inputDataGraph,
         shapesGraph: inputShapesGraph,
+        ontologyGraph: inputOntologyGraph ?? '',
         config: {
           expand: inputConfigExpand,
           includeExpandedTriples: inputConfigIncludeExpandedTriples
@@ -100,6 +106,15 @@ const ValidationForm: FC<Props> = ({
   ) => {
     if (inputType) {
       setInputShapesGraph(graph);
+    }
+  };
+
+  const handleOnChangeOntologyGraph = (
+    inputType: InputType,
+    graph: File | string | null
+  ) => {
+    if (inputType) {
+      setInputOntologyGraph(graph);
     }
   };
 
@@ -202,6 +217,36 @@ const ValidationForm: FC<Props> = ({
             ]}
             isLoading={isLoading}
             onChange={handleOnChangeShapesGraph}
+          />
+        </ExpansionPanelBody>
+      </SC.ExpansionPanel>
+      <SC.ExpansionPanel>
+        <ExpansionPanelHead>Ontologi</ExpansionPanelHead>
+        <ExpansionPanelBody>
+          <GraphFieldset
+            graph={inputOntologyGraph}
+            fields={[
+              {
+                name: 'ontologyGraphFile',
+                inputType: InputType.FILE,
+                title: 'Ontologi fil'
+              },
+              {
+                name: 'ontologyGraphUrl',
+                inputType: InputType.URL,
+                title: 'Ontologi lenke',
+                placeholder: 'Eks. https://mitt.domene.no/eksempel.ttl',
+                checked: true
+              },
+              {
+                name: 'ontologyGraphText',
+                inputType: InputType.TEXT,
+                title: 'Ontologi tekst',
+                placeholder: 'Lim inn tekst her'
+              }
+            ]}
+            isLoading={isLoading}
+            onChange={handleOnChangeOntologyGraph}
           />
         </ExpansionPanelBody>
       </SC.ExpansionPanel>
