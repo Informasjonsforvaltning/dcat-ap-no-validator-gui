@@ -18,6 +18,7 @@ const dcat = (value: string) => `${Vocabulary.DCAT}${value}`;
 export const createFormData = async ({
   dataGraph,
   shapesGraph,
+  ontologyGraph,
   config
 }: ValidationRequest) => {
   const formData = new FormData();
@@ -33,6 +34,12 @@ export const createFormData = async ({
       ? RequestParameter.SHAPES_GRAPH_FILE
       : RequestParameter.SHAPES_GRAPH_URL,
     shapesGraph
+  );
+  formData.append(
+    ontologyGraph instanceof File
+      ? RequestParameter.ONTOLOGY_GRAPH_FILE
+      : RequestParameter.ONTOLOGY_GRAPH_URL,
+    ontologyGraph
   );
   formData.append(RequestParameter.CONFIG, JSON.stringify(config));
 

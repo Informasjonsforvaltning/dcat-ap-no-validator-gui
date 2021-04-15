@@ -18,6 +18,8 @@ export enum RequestParameter {
   DATA_GRAPH_URL = 'data-graph-url',
   SHAPES_GRAPH_FILE = 'shapes-graph-file',
   SHAPES_GRAPH_URL = 'shapes-graph-url',
+  ONTOLOGY_GRAPH_FILE = 'ontology-graph-file',
+  ONTOLOGY_GRAPH_URL = 'ontology-graph-url',
   CONFIG = 'config'
 }
 
@@ -33,4 +35,8 @@ export enum Vocabulary {
   RDF = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
   DCAT = 'http://www.w3.org/ns/dcat#',
   XML = 'http://www.w3.org/2001/XMLSchema#'
+}
+
+export enum Ontology {
+  DEFAULT = 'https://github.com/Informasjonsforvaltning/dcat-ap-no/blob/develop/shacl/ontologies.ttl'
 }
