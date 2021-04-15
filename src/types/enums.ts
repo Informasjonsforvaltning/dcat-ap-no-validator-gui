@@ -38,5 +38,5 @@ export enum Vocabulary {
 }
 
 export enum Ontology {
-  DEFAULT = 'https://github.com/Informasjonsforvaltning/dcat-ap-no/blob/develop/shacl/ontologies.ttl'
+  DEFAULT = 'https://raw.githubusercontent.com/Informasjonsforvaltning/dcat-ap-no/v2/shacl/ontologies.ttl'
 }
