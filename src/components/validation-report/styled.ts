@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link as ScrollLink } from 'react-scroll';
 import { theme, Colour } from '@fellesdatakatalog/theme';
 import SuccessSVG from '@material-ui/icons/DoneAll';
 import ErrorSVG from '@material-ui/icons/Error';
@@ -37,6 +38,12 @@ const InfoIcon = styled(InfoSVG)`
   & > path {
     fill: ${theme.colour(Colour.NEUTRAL, 'N60')};
   }
+`;
+
+const SummaryLink = styled(ScrollLink)`
+  display: flex;
+  flex: 1;
+  padding: ${theme.spacing('S6')};
 `;
 
 const SummaryBox = styled.div`
@@ -165,6 +172,7 @@ export default {
   ErrorIcon,
   InfoIcon,
   WarningIcon,
+  SummaryLink,
   ConformsSummary,
   ErrorsSummary,
   WarningsSummary,
