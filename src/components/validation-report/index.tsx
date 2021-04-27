@@ -1,5 +1,6 @@
 import React, { memo, FC, Fragment } from 'react';
 import { compose } from 'redux';
+
 import Link from '@fellesdatakatalog/link';
 
 import Translation from '../translation';
@@ -44,23 +45,29 @@ const ValidationReport: FC<Props> = ({
           </SC.ConformsSummary>
         ) : (
           <>
-            <SC.ErrorsSummary>
-              <SC.ErrorIcon />
-              <Translation id={`${errors.length} feil`} />
-            </SC.ErrorsSummary>
-            <SC.WarningsSummary>
-              <SC.WarningIcon />
-              <Translation id={`${warnings.length} advarsler`} />
-            </SC.WarningsSummary>
-            <SC.TipsSummary>
-              <SC.InfoIcon />
-              <Translation id={`${tips.length} tips`} />
-            </SC.TipsSummary>
+            <SC.SummaryLink to='errors'>
+              <SC.ErrorsSummary>
+                <SC.ErrorIcon />
+                <Translation id={`${errors.length} feil`} />
+              </SC.ErrorsSummary>
+            </SC.SummaryLink>
+            <SC.SummaryLink to='warnings'>
+              <SC.WarningsSummary>
+                <SC.WarningIcon />
+                <Translation id={`${warnings.length} advarsler`} />
+              </SC.WarningsSummary>
+            </SC.SummaryLink>
+            <SC.SummaryLink to='tips'>
+              <SC.TipsSummary>
+                <SC.InfoIcon />
+                <Translation id={`${tips.length} tips`} />
+              </SC.TipsSummary>
+            </SC.SummaryLink>
           </>
         )}
       </SC.ValidationSummary>
       {groupedErrors.length > 0 && (
-        <SC.ValidationErrors>
+        <SC.ValidationErrors id='errors'>
           <h3>
             <SC.ErrorIcon />
             <Translation id={`Feil (${errors.length})`} />
@@ -99,7 +106,7 @@ const ValidationReport: FC<Props> = ({
         </SC.ValidationErrors>
       )}
       {groupedWarnings.length > 0 && (
-        <SC.ValidationWarnings>
+        <SC.ValidationWarnings id='warnings'>
           <h3>
             <SC.WarningIcon />
             <Translation id={`Advarsler (${warnings.length})`} />
@@ -138,7 +145,7 @@ const ValidationReport: FC<Props> = ({
         </SC.ValidationWarnings>
       )}
       {groupedTips.length > 0 && (
-        <SC.ValidationTips>
+        <SC.ValidationTips id='tips'>
           <h3>
             <SC.InfoIcon />
             <Translation id={`Tips (${tips.length})`} />
