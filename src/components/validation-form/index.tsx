@@ -40,7 +40,10 @@ const ValidationForm: FC<Props> = ({
   includeExpandedTriples,
   shapesCollection,
   ontologyCollection,
-  validatorActions: { fetchShapesCollectionRequested: fetchShapesCollection },
+  validatorActions: {
+    fetchShapesCollectionRequested: fetchShapesCollection,
+    fetchOntologyCollectionRequested: fetchOntologyCollection
+  },
   isLoading,
   onValidate,
   ...props
@@ -167,6 +170,7 @@ const ValidationForm: FC<Props> = ({
 
   useEffect(() => {
     fetchShapesCollection();
+    fetchOntologyCollection();
   }, []);
 
   useEffect(() => {
