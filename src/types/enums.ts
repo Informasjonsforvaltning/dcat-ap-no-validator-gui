@@ -36,7 +36,3 @@ export enum Vocabulary {
   DCAT = 'http://www.w3.org/ns/dcat#',
   XML = 'http://www.w3.org/2001/XMLSchema#'
 }
-
-export enum Ontology {
-  DEFAULT = 'https://raw.githubusercontent.com/Informasjonsforvaltning/dcat-ap-no/v2/shacl/ontologies.ttl'
-}

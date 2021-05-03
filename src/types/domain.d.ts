@@ -30,19 +30,23 @@ export interface ValidationResult {
   value?: string;
 }
 
-export interface ShapesDefinition {
+export interface Definition {
   id: string;
   name: string;
   description: string;
   version: string;
   url: string;
-  specificationName: string;
-  specificationUrl: string;
-  specificationVersion: string;
+  specificationName?: string;
+  specificationUrl?: string;
+  specificationVersion?: string;
 }
 
 export interface ShapesCollection {
-  shapes: ShapesDefinition[];
+  shapes: Definition[];
+}
+
+export interface OntologyCollection {
+  ontologies: Definition[];
 }
 
 export interface SelectOption {

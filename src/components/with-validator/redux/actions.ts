@@ -4,10 +4,14 @@ import {
   VALIDATE_DATA_GRAPH_FAILED,
   FETCH_SHAPES_COLLECTION_REQUESTED,
   FETCH_SHAPES_COLLECTION_SUCCEEDED,
-  FETCH_SHAPES_COLLECTION_FAILED
+  FETCH_SHAPES_COLLECTION_FAILED,
+  FETCH_ONTOLOGY_COLLECTION_REQUESTED,
+  FETCH_ONTOLOGY_COLLECTION_SUCCEEDED,
+  FETCH_ONTOLOGY_COLLECTION_FAILED
 } from './action-types';
 
 import type {
+  OntologyCollection,
   ShapesCollection,
   ValidationReport,
   ValidationRequest
@@ -60,6 +64,32 @@ export function fetchShapesCollectionSucceeded(
 export function fetchShapesCollectionFailed(message: string) {
   return {
     type: FETCH_SHAPES_COLLECTION_FAILED,
+    payload: {
+      message
+    }
+  };
+}
+
+export function fetchOntologyCollectionRequested() {
+  return {
+    type: FETCH_ONTOLOGY_COLLECTION_REQUESTED
+  };
+}
+
+export function fetchOntologyCollectionSucceeded(
+  ontologyCollection: OntologyCollection
+) {
+  return {
+    type: FETCH_ONTOLOGY_COLLECTION_SUCCEEDED,
+    payload: {
+      ontologyCollection
+    }
+  };
+}
+
+export function fetchOntologyCollectionFailed(message: string) {
+  return {
+    type: FETCH_ONTOLOGY_COLLECTION_FAILED,
     payload: {
       message
     }

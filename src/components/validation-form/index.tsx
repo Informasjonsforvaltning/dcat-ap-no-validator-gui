@@ -39,6 +39,7 @@ const ValidationForm: FC<Props> = ({
   expand,
   includeExpandedTriples,
   shapesCollection,
+  ontologyCollection,
   validatorActions: { fetchShapesCollectionRequested: fetchShapesCollection },
   isLoading,
   onValidate,
@@ -51,11 +52,15 @@ const ValidationForm: FC<Props> = ({
       }))
     : [];
 
-  const dcatUrl = (version: string) =>
-    shapesCollection?.shapes.find(
-      ({ specificationName, specificationVersion }) =>
-        specificationName === 'DCAT-AP-NO' && specificationVersion === version
-    )?.url;
+  const ontologyOptions = ontologyCollection
+    ? ontologyCollection.ontologies.map(ontologyDef => ({
+        value: ontologyDef.url,
+        label: `${ontologyDef.name}`
+      }))
+    : [];
+
+  const getShapesOption = (shapesUrl: string) =>
+    shapesCollection?.shapes.find(({ url }) => url === shapesUrl);
 
   const [inputDataGraph, setInputDataGraph] = useState<File | string | null>(
     dataGraph ?? ''
@@ -120,20 +125,36 @@ const ValidationForm: FC<Props> = ({
 
   const shapesGraphTitle = () => {
     const prefix = 'Regelsett';
-    const dcatv2 = dcatUrl('2.0');
-    if (!dcatv2) {
+
+    if (!inputShapesGraph) {
       return prefix;
     }
 
-    if (inputShapesGraph === dcatv2) {
-      return prefix.concat(' (DCAT-AP-NO 2.0)');
+    if (typeof inputShapesGraph === 'string') {
+      const shapesOption = getShapesOption(inputShapesGraph);
+      if (shapesOption) {
+        return `${prefix} (${shapesOption.specificationName} ${shapesOption.specificationVersion})`;
+      }
     }
 
-    if (inputShapesGraph === dcatUrl('1.1')) {
-      return prefix.concat(' (DCAT-AP-NO 1.1)');
+    return `${prefix} (tilpasset)`;
+  };
+
+  const ontologyGraphTitle = () => {
+    const prefix = 'Ontologi';
+
+    if (!inputOntologyGraph) {
+      return prefix;
     }
 
-    return prefix.concat(' (tilpasset)');
+    if (typeof inputOntologyGraph === 'string') {
+      const ontologyOption = getShapesOption(inputOntologyGraph);
+      if (ontologyOption) {
+        return `${prefix} (${ontologyOption.name})`;
+      }
+    }
+
+    return `${prefix} (tilpasset)`;
   };
 
   const handleOnChangExpand: ChangeEventHandler<HTMLInputElement> = e => {
@@ -149,9 +170,15 @@ const ValidationForm: FC<Props> = ({
   }, []);
 
   useEffect(() => {
-    const dcatV2 = dcatUrl('2.0');
-    if (!inputShapesGraph && dcatV2) {
-      setInputShapesGraph(dcatV2);
+    if (!inputShapesGraph) {
+      const dcatv2 = shapesCollection?.shapes.find(
+        ({ specificationName, specificationVersion }) =>
+          specificationName === 'DCAT-AP-NO' && specificationVersion === '2.0'
+      )?.url;
+
+      if (dcatv2) {
+        setInputShapesGraph(dcatv2);
+      }
     }
   }, [shapesCollection]);
 
@@ -221,11 +248,18 @@ const ValidationForm: FC<Props> = ({
         </ExpansionPanelBody>
       </SC.ExpansionPanel>
       <SC.ExpansionPanel>
-        <ExpansionPanelHead>Ontologi</ExpansionPanelHead>
+        <ExpansionPanelHead>{ontologyGraphTitle()}</ExpansionPanelHead>
         <ExpansionPanelBody>
           <GraphFieldset
             graph={inputOntologyGraph}
             fields={[
+              {
+                name: 'ontologyGraphSelect',
+                inputType: InputType.SELECT,
+                title: 'Velg ontologi',
+                options: ontologyOptions,
+                checked: true
+              },
               {
                 name: 'ontologyGraphFile',
                 inputType: InputType.FILE,
@@ -235,8 +269,7 @@ const ValidationForm: FC<Props> = ({
                 name: 'ontologyGraphUrl',
                 inputType: InputType.URL,
                 title: 'Ontologi lenke',
-                placeholder: 'Eks. https://mitt.domene.no/eksempel.ttl',
-                checked: true
+                placeholder: 'Eks. https://mitt.domene.no/eksempel.ttl'
               },
               {
                 name: 'ontologyGraphText',

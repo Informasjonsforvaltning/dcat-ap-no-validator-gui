@@ -7,7 +7,10 @@ import {
   VALIDATE_DATA_GRAPH_FAILED,
   FETCH_SHAPES_COLLECTION_REQUESTED,
   FETCH_SHAPES_COLLECTION_SUCCEEDED,
-  FETCH_SHAPES_COLLECTION_FAILED
+  FETCH_SHAPES_COLLECTION_FAILED,
+  FETCH_ONTOLOGY_COLLECTION_REQUESTED,
+  FETCH_ONTOLOGY_COLLECTION_SUCCEEDED,
+  FETCH_ONTOLOGY_COLLECTION_FAILED
 } from './action-types';
 
 import type { Actions } from '../../../types';
@@ -54,6 +57,21 @@ export default function reducer(
         .set('shapesCollection', null)
         .set('shapesError', fromJS(action.payload))
         .set('isFetchingShapes', false);
+    case FETCH_ONTOLOGY_COLLECTION_REQUESTED:
+      return state
+        .set('ontologyCollection', null)
+        .set('ontologyError', null)
+        .set('isFetchingOntologies', true);
+    case FETCH_ONTOLOGY_COLLECTION_SUCCEEDED:
+      return state
+        .set('ontologyCollection', fromJS(action.payload.ontologyCollection))
+        .set('ontologyError', null)
+        .set('isFetchingOntologies', false);
+    case FETCH_ONTOLOGY_COLLECTION_FAILED:
+      return state
+        .set('ontologyCollection', null)
+        .set('ontologyError', fromJS(action.payload))
+        .set('isFetchingOntologies', false);
     default:
       return state;
   }

@@ -1,18 +1,25 @@
 import React, { ComponentType, memo } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import { ShapesCollection, ValidationReport } from '../../types';
+import {
+  OntologyCollection,
+  ShapesCollection,
+  ValidationReport
+} from '../../types';
 
 import * as actions from './redux/actions';
 
 export interface Props {
   shapesCollection: ShapesCollection | null;
   shapesError: Error | null;
+  ontologyCollection: OntologyCollection | null;
+  ontologyError: Error | null;
   validationReport: ValidationReport | null;
   validationError: Error | null;
   validatorActions: typeof actions;
   isValidating: boolean;
   isFetchIngShapes: boolean;
+  isFetchIngOntologies: boolean;
 }
 
 const withValidator = (Component: ComponentType<any>) => {
@@ -27,7 +34,12 @@ const withValidator = (Component: ComponentType<any>) => {
     shapesCollection:
       state.ValidatorReducer.get('shapesCollection')?.toJS() ?? null,
     shapesError: state.ValidatorReducer.get('shapesError')?.toJS() ?? null,
-    isFetchingShapes: state.ValidatorReducer.get('isFetchingShapes') ?? false
+    isFetchingShapes: state.ValidatorReducer.get('isFetchingShapes') ?? false,
+    ontologyCollection:
+      state.ValidatorReducer.get('ontologyCollection')?.toJS() ?? null,
+    ontologyError: state.ValidatorReducer.get('ontologyError')?.toJS() ?? null,
+    isFetchingOntologies:
+      state.ValidatorReducer.get('isFetchingOntologies') ?? false
   });
 
   const mapDispatchToProps = (dispatch: Dispatch) => ({

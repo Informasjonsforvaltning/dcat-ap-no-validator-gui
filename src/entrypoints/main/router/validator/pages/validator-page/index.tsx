@@ -10,7 +10,6 @@ import SC from './styled';
 
 import type { ValidationRequest } from '../../../../../../types';
 import { useQuery } from '../../../../../../utils/commons';
-import { Ontology } from '../../../../../../types/enums';
 
 interface Props extends ValidatorProps {}
 
@@ -23,9 +22,7 @@ const ValidatorPage: FC<Props> = ({
   const query = useQuery();
   const dataGraph = decodeURIComponent(query.get('data') ?? '');
   const shapesGraph = decodeURIComponent(query.get('shapes') ?? '');
-  const ontologyGraph = decodeURIComponent(
-    query.get('ontology') ?? Ontology.DEFAULT
-  );
+  const ontologyGraph = decodeURIComponent(query.get('ontology') ?? '');
 
   const onValidate = (request: ValidationRequest) => validateDataGraph(request);
 
