@@ -5,6 +5,7 @@ import env from '../../../env';
 
 import {
   FETCH_SHAPES_COLLECTION_REQUESTED,
+  FETCH_ONTOLOGY_COLLECTION_REQUESTED,
   VALIDATE_DATA_GRAPH_REQUESTED
 } from './action-types';
 import * as actions from './actions';
@@ -123,12 +124,50 @@ function* fetchShapesCollectionRequested() {
   }
 }
 
+function* fetchOntologyCollectionRequested() {
+  try {
+    const { data } = yield call(axios.get, `${VALIDATOR_API_HOST}/ontologies`, {
+      headers: {
+        Accept: 'application/json'
+      }
+    });
+
+    if (data) {
+      yield put(actions.fetchOntologyCollectionSucceeded(data));
+    } else {
+      yield put(
+        actions.fetchOntologyCollectionFailed(
+          'Feil ved henting av ontologi. Vennligst prøv igjen senere.'
+        )
+      );
+    }
+  } catch (e) {
+    const { message, response } = e as AxiosError;
+
+    if (response?.status === 500) {
+      yield put(
+        actions.fetchOntologyCollectionFailed(
+          'Feil ved henting av ontologi. Vennligst prøv igjen senere.'
+        )
+      );
+    } else {
+      yield put(
+        actions.fetchOntologyCollectionFailed(response?.data.detail ?? message)
+      );
+    }
+  }
+}
+
 export default function* saga() {
   yield all([
     takeLatest(VALIDATE_DATA_GRAPH_REQUESTED, validateDataGraphRequested),
     takeLatest(
       FETCH_SHAPES_COLLECTION_REQUESTED,
       fetchShapesCollectionRequested
+    ),
+    takeLatest(
+      FETCH_ONTOLOGY_COLLECTION_REQUESTED,
+      fetchOntologyCollectionRequested
     )
   ]);
 }
