@@ -46,21 +46,21 @@ const ValidationForm: FC<Props> = ({
   ...props
 }) => {
   const shapesOptions = shapesCollection
-    ? shapesCollection.shapes.map(shapesDef => ({
+    ? shapesCollection.map(shapesDef => ({
         value: shapesDef.url,
         label: `${shapesDef.specificationName} ${shapesDef.specificationVersion}`
       }))
     : [];
 
   const ontologyOptions = ontologyCollection
-    ? ontologyCollection.ontologies.map(ontologyDef => ({
+    ? ontologyCollection.map(ontologyDef => ({
         value: ontologyDef.url,
         label: `${ontologyDef.name}`
       }))
     : [];
 
   const getShapesOption = (shapesUrl: string) =>
-    shapesCollection?.shapes.find(({ url }) => url === shapesUrl);
+    shapesCollection?.find(({ url }) => url === shapesUrl);
 
   const [inputDataGraph, setInputDataGraph] = useState<File | string | null>(
     dataGraph ?? ''
@@ -171,7 +171,7 @@ const ValidationForm: FC<Props> = ({
 
   useEffect(() => {
     if (!inputShapesGraph) {
-      const dcatv2 = shapesCollection?.shapes.find(
+      const dcatv2 = shapesCollection?.find(
         ({ specificationName, specificationVersion }) =>
           specificationName === 'DCAT-AP-NO' && specificationVersion === '2.0'
       )?.url;
