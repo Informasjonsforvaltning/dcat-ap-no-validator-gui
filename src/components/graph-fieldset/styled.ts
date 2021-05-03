@@ -42,7 +42,7 @@ const InputType = styled.div`
 const InputTypeSmall = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 200px;
+  max-width: 400px;
 `;
 
 const InputTypeTitle = styled.div`

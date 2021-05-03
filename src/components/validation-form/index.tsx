@@ -65,6 +65,9 @@ const ValidationForm: FC<Props> = ({
   const getShapesOption = (shapesUrl: string) =>
     shapesCollection?.find(({ url }) => url === shapesUrl);
 
+  const getOntologyOption = (ontologyUrl: string) =>
+    ontologyCollection?.find(({ url }) => url === ontologyUrl);
+
   const [inputDataGraph, setInputDataGraph] = useState<File | string | null>(
     dataGraph ?? ''
   );
@@ -151,7 +154,7 @@ const ValidationForm: FC<Props> = ({
     }
 
     if (typeof inputOntologyGraph === 'string') {
-      const ontologyOption = getShapesOption(inputOntologyGraph);
+      const ontologyOption = getOntologyOption(inputOntologyGraph);
       if (ontologyOption) {
         return `${prefix} (${ontologyOption.name})`;
       }
@@ -185,6 +188,13 @@ const ValidationForm: FC<Props> = ({
       }
     }
   }, [shapesCollection]);
+
+  useEffect(() => {
+    if (!inputOntologyGraph && ontologyCollection?.length) {
+      const { url } = ontologyCollection[0];
+      setInputOntologyGraph(url);
+    }
+  }, [ontologyCollection]);
 
   return (
     <SC.ValidationInputForm {...props} onSubmit={handleSubmitForm}>
