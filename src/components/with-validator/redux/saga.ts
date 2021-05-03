@@ -99,7 +99,8 @@ function* fetchShapesCollectionRequested() {
     });
 
     if (data) {
-      yield put(actions.fetchShapesCollectionSucceeded(data));
+      const { shapes } = data;
+      yield put(actions.fetchShapesCollectionSucceeded(shapes));
     } else {
       yield put(
         actions.fetchShapesCollectionFailed(
@@ -133,7 +134,8 @@ function* fetchOntologyCollectionRequested() {
     });
 
     if (data) {
-      yield put(actions.fetchOntologyCollectionSucceeded(data));
+      const { ontologies } = data;
+      yield put(actions.fetchOntologyCollectionSucceeded(ontologies));
     } else {
       yield put(
         actions.fetchOntologyCollectionFailed(

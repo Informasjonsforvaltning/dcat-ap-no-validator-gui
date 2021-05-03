@@ -1,18 +1,14 @@
 import React, { ComponentType, memo } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import {
-  OntologyCollection,
-  ShapesCollection,
-  ValidationReport
-} from '../../types';
+import { Definition, ValidationReport } from '../../types';
 
 import * as actions from './redux/actions';
 
 export interface Props {
-  shapesCollection: ShapesCollection | null;
+  shapesCollection: Definition[] | null;
   shapesError: Error | null;
-  ontologyCollection: OntologyCollection | null;
+  ontologyCollection: Definition[] | null;
   ontologyError: Error | null;
   validationReport: ValidationReport | null;
   validationError: Error | null;

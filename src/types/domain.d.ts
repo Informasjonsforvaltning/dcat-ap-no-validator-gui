@@ -41,14 +41,6 @@ export interface Definition {
   specificationVersion?: string;
 }
 
-export interface ShapesCollection {
-  shapes: Definition[];
-}
-
-export interface OntologyCollection {
-  ontologies: Definition[];
-}
-
 export interface SelectOption {
   value: string;
   label: string;

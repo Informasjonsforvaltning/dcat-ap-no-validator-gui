@@ -11,8 +11,7 @@ import {
 } from './action-types';
 
 import type {
-  OntologyCollection,
-  ShapesCollection,
+  Definition,
   ValidationReport,
   ValidationRequest
 } from '../../../types';
@@ -50,9 +49,7 @@ export function fetchShapesCollectionRequested() {
   };
 }
 
-export function fetchShapesCollectionSucceeded(
-  shapesCollection: ShapesCollection
-) {
+export function fetchShapesCollectionSucceeded(shapesCollection: Definition[]) {
   return {
     type: FETCH_SHAPES_COLLECTION_SUCCEEDED,
     payload: {
@@ -77,7 +74,7 @@ export function fetchOntologyCollectionRequested() {
 }
 
 export function fetchOntologyCollectionSucceeded(
-  ontologyCollection: OntologyCollection
+  ontologyCollection: Definition[]
 ) {
   return {
     type: FETCH_ONTOLOGY_COLLECTION_SUCCEEDED,
