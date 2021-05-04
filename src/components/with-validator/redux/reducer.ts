@@ -5,12 +5,12 @@ import {
   VALIDATE_DATA_GRAPH_REQUESTED,
   VALIDATE_DATA_GRAPH_SUCCEEDED,
   VALIDATE_DATA_GRAPH_FAILED,
-  FETCH_SHAPES_COLLECTION_REQUESTED,
-  FETCH_SHAPES_COLLECTION_SUCCEEDED,
-  FETCH_SHAPES_COLLECTION_FAILED,
-  FETCH_ONTOLOGY_COLLECTION_REQUESTED,
-  FETCH_ONTOLOGY_COLLECTION_SUCCEEDED,
-  FETCH_ONTOLOGY_COLLECTION_FAILED
+  FETCH_SHAPES_REQUESTED,
+  FETCH_SHAPES_SUCCEEDED,
+  FETCH_SHAPES_FAILED,
+  FETCH_ONTOLOGIES_REQUESTED,
+  FETCH_ONTOLOGIES_SUCCEEDED,
+  FETCH_ONTOLOGIES_FAILED
 } from './action-types';
 
 import type { Actions } from '../../../types';
@@ -42,35 +42,35 @@ export default function reducer(
         .set('validationReport', null)
         .set('validationError', fromJS(action.payload))
         .set('isValidating', false);
-    case FETCH_SHAPES_COLLECTION_REQUESTED:
+    case FETCH_SHAPES_REQUESTED:
       return state
-        .set('shapesCollection', null)
+        .set('shapes', null)
         .set('shapesError', null)
         .set('isFetchingShapes', true);
-    case FETCH_SHAPES_COLLECTION_SUCCEEDED:
+    case FETCH_SHAPES_SUCCEEDED:
       return state
-        .set('shapesCollection', fromJS(action.payload.shapesCollection))
+        .set('shapes', fromJS(action.payload.shapes))
         .set('shapesError', null)
         .set('isFetchingShapes', false);
-    case FETCH_SHAPES_COLLECTION_FAILED:
+    case FETCH_SHAPES_FAILED:
       return state
-        .set('shapesCollection', null)
+        .set('shapes', null)
         .set('shapesError', fromJS(action.payload))
         .set('isFetchingShapes', false);
-    case FETCH_ONTOLOGY_COLLECTION_REQUESTED:
+    case FETCH_ONTOLOGIES_REQUESTED:
       return state
-        .set('ontologyCollection', null)
-        .set('ontologyError', null)
+        .set('ontologies', null)
+        .set('ontologiesError', null)
         .set('isFetchingOntologies', true);
-    case FETCH_ONTOLOGY_COLLECTION_SUCCEEDED:
+    case FETCH_ONTOLOGIES_SUCCEEDED:
       return state
-        .set('ontologyCollection', fromJS(action.payload.ontologyCollection))
-        .set('ontologyError', null)
+        .set('ontologies', fromJS(action.payload.ontologies))
+        .set('ontologiesError', null)
         .set('isFetchingOntologies', false);
-    case FETCH_ONTOLOGY_COLLECTION_FAILED:
+    case FETCH_ONTOLOGIES_FAILED:
       return state
-        .set('ontologyCollection', null)
-        .set('ontologyError', fromJS(action.payload))
+        .set('ontologies', null)
+        .set('ontologiesError', fromJS(action.payload))
         .set('isFetchingOntologies', false);
     default:
       return state;
