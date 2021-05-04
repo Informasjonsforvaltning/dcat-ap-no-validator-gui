@@ -2,12 +2,12 @@ import {
   VALIDATE_DATA_GRAPH_REQUESTED,
   VALIDATE_DATA_GRAPH_SUCCEEDED,
   VALIDATE_DATA_GRAPH_FAILED,
-  FETCH_SHAPES_COLLECTION_REQUESTED,
-  FETCH_SHAPES_COLLECTION_SUCCEEDED,
-  FETCH_SHAPES_COLLECTION_FAILED,
-  FETCH_ONTOLOGY_COLLECTION_REQUESTED,
-  FETCH_ONTOLOGY_COLLECTION_SUCCEEDED,
-  FETCH_ONTOLOGY_COLLECTION_FAILED
+  FETCH_SHAPES_REQUESTED,
+  FETCH_SHAPES_SUCCEEDED,
+  FETCH_SHAPES_FAILED,
+  FETCH_ONTOLOGIES_REQUESTED,
+  FETCH_ONTOLOGIES_SUCCEEDED,
+  FETCH_ONTOLOGIES_FAILED
 } from './action-types';
 
 import type {
@@ -43,50 +43,48 @@ export function validateDataGraphFailed(message: string) {
   };
 }
 
-export function fetchShapesCollectionRequested() {
+export function fetchShapesRequested() {
   return {
-    type: FETCH_SHAPES_COLLECTION_REQUESTED
+    type: FETCH_SHAPES_REQUESTED
   };
 }
 
-export function fetchShapesCollectionSucceeded(shapesCollection: Definition[]) {
+export function fetchShapesSucceeded(shapes: Definition[]) {
   return {
-    type: FETCH_SHAPES_COLLECTION_SUCCEEDED,
+    type: FETCH_SHAPES_SUCCEEDED,
     payload: {
-      shapesCollection
+      shapes
     }
   };
 }
 
-export function fetchShapesCollectionFailed(message: string) {
+export function fetchShapesFailed(message: string) {
   return {
-    type: FETCH_SHAPES_COLLECTION_FAILED,
+    type: FETCH_SHAPES_FAILED,
     payload: {
       message
     }
   };
 }
 
-export function fetchOntologyCollectionRequested() {
+export function fetchOntologiesRequested() {
   return {
-    type: FETCH_ONTOLOGY_COLLECTION_REQUESTED
+    type: FETCH_ONTOLOGIES_REQUESTED
   };
 }
 
-export function fetchOntologyCollectionSucceeded(
-  ontologyCollection: Definition[]
-) {
+export function fetchOntologiesSucceeded(ontologies: Definition[]) {
   return {
-    type: FETCH_ONTOLOGY_COLLECTION_SUCCEEDED,
+    type: FETCH_ONTOLOGIES_SUCCEEDED,
     payload: {
-      ontologyCollection
+      ontologies
     }
   };
 }
 
-export function fetchOntologyCollectionFailed(message: string) {
+export function fetchOntologiesFailed(message: string) {
   return {
-    type: FETCH_ONTOLOGY_COLLECTION_FAILED,
+    type: FETCH_ONTOLOGIES_FAILED,
     payload: {
       message
     }

@@ -4,8 +4,8 @@ import { all, call, put, takeLatest } from 'redux-saga/effects';
 import env from '../../../env';
 
 import {
-  FETCH_SHAPES_COLLECTION_REQUESTED,
-  FETCH_ONTOLOGY_COLLECTION_REQUESTED,
+  FETCH_SHAPES_REQUESTED,
+  FETCH_ONTOLOGIES_REQUESTED,
   VALIDATE_DATA_GRAPH_REQUESTED
 } from './action-types';
 import * as actions from './actions';
@@ -90,7 +90,7 @@ function* validateDataGraphRequested({
   }
 }
 
-function* fetchShapesCollectionRequested() {
+function* fetchShapesRequested() {
   try {
     const { data } = yield call(axios.get, `${VALIDATOR_API_HOST}/shapes`, {
       headers: {
@@ -100,10 +100,10 @@ function* fetchShapesCollectionRequested() {
 
     if (data) {
       const { shapes } = data;
-      yield put(actions.fetchShapesCollectionSucceeded(shapes));
+      yield put(actions.fetchShapesSucceeded(shapes));
     } else {
       yield put(
-        actions.fetchShapesCollectionFailed(
+        actions.fetchShapesFailed(
           'Feil ved henting av regelsett. Vennligst prøv igjen senere.'
         )
       );
@@ -113,19 +113,17 @@ function* fetchShapesCollectionRequested() {
 
     if (response?.status === 500) {
       yield put(
-        actions.fetchShapesCollectionFailed(
+        actions.fetchShapesFailed(
           'Feil ved henting av regelsett. Vennligst prøv igjen senere.'
         )
       );
     } else {
-      yield put(
-        actions.fetchShapesCollectionFailed(response?.data.detail ?? message)
-      );
+      yield put(actions.fetchShapesFailed(response?.data.detail ?? message));
     }
   }
 }
 
-function* fetchOntologyCollectionRequested() {
+function* fetchOntologiesRequested() {
   try {
     const { data } = yield call(axios.get, `${VALIDATOR_API_HOST}/ontologies`, {
       headers: {
@@ -133,12 +131,11 @@ function* fetchOntologyCollectionRequested() {
       }
     });
 
-    if (data) {
-      const { ontologies } = data;
-      yield put(actions.fetchOntologyCollectionSucceeded(ontologies));
+    if (Array.isArray(data.ontologies)) {
+      yield put(actions.fetchOntologiesSucceeded(data.ontologies));
     } else {
       yield put(
-        actions.fetchOntologyCollectionFailed(
+        actions.fetchOntologiesFailed(
           'Feil ved henting av ontologi. Vennligst prøv igjen senere.'
         )
       );
@@ -148,13 +145,13 @@ function* fetchOntologyCollectionRequested() {
 
     if (response?.status === 500) {
       yield put(
-        actions.fetchOntologyCollectionFailed(
+        actions.fetchOntologiesFailed(
           'Feil ved henting av ontologi. Vennligst prøv igjen senere.'
         )
       );
     } else {
       yield put(
-        actions.fetchOntologyCollectionFailed(response?.data.detail ?? message)
+        actions.fetchOntologiesFailed(response?.data.detail ?? message)
       );
     }
   }
@@ -163,13 +160,7 @@ function* fetchOntologyCollectionRequested() {
 export default function* saga() {
   yield all([
     takeLatest(VALIDATE_DATA_GRAPH_REQUESTED, validateDataGraphRequested),
-    takeLatest(
-      FETCH_SHAPES_COLLECTION_REQUESTED,
-      fetchShapesCollectionRequested
-    ),
-    takeLatest(
-      FETCH_ONTOLOGY_COLLECTION_REQUESTED,
-      fetchOntologyCollectionRequested
-    )
+    takeLatest(FETCH_SHAPES_REQUESTED, fetchShapesRequested),
+    takeLatest(FETCH_ONTOLOGIES_REQUESTED, fetchOntologiesRequested)
   ]);
 }

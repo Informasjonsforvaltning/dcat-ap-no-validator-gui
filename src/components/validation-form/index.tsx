@@ -38,35 +38,35 @@ const ValidationForm: FC<Props> = ({
   ontologyGraph,
   expand,
   includeExpandedTriples,
-  shapesCollection,
-  ontologyCollection,
+  shapes,
+  ontologies,
   validatorActions: {
-    fetchShapesCollectionRequested: fetchShapesCollection,
-    fetchOntologyCollectionRequested: fetchOntologyCollection
+    fetchShapesRequested: fetchShapes,
+    fetchOntologiesRequested: fetchOntologies
   },
   isLoading,
   onValidate,
   ...props
 }) => {
-  const shapesOptions = shapesCollection
-    ? shapesCollection.map(shapesDef => ({
+  const shapesOptions = shapes
+    ? shapes.map(shapesDef => ({
         value: shapesDef.url,
         label: `${shapesDef.specificationName} ${shapesDef.specificationVersion}`
       }))
     : [];
 
-  const ontologyOptions = ontologyCollection
-    ? ontologyCollection.map(ontologyDef => ({
+  const ontologyOptions = ontologies
+    ? ontologies.map(ontologyDef => ({
         value: ontologyDef.url,
         label: `${ontologyDef.name}`
       }))
     : [];
 
   const getShapesOption = (shapesUrl: string) =>
-    shapesCollection?.find(({ url }) => url === shapesUrl);
+    shapes?.find(({ url }) => url === shapesUrl);
 
   const getOntologyOption = (ontologyUrl: string) =>
-    ontologyCollection?.find(({ url }) => url === ontologyUrl);
+    ontologies?.find(({ url }) => url === ontologyUrl);
 
   const [inputDataGraph, setInputDataGraph] = useState<File | string | null>(
     dataGraph ?? ''
@@ -172,13 +172,13 @@ const ValidationForm: FC<Props> = ({
   };
 
   useEffect(() => {
-    fetchShapesCollection();
-    fetchOntologyCollection();
+    fetchShapes();
+    fetchOntologies();
   }, []);
 
   useEffect(() => {
     if (!inputShapesGraph) {
-      const dcatv2 = shapesCollection?.find(
+      const dcatv2 = shapes?.find(
         ({ specificationName, specificationVersion }) =>
           specificationName === 'DCAT-AP-NO' && specificationVersion === '2.0'
       )?.url;
@@ -187,14 +187,14 @@ const ValidationForm: FC<Props> = ({
         setInputShapesGraph(dcatv2);
       }
     }
-  }, [shapesCollection]);
+  }, [shapes]);
 
   useEffect(() => {
-    if (!inputOntologyGraph && ontologyCollection?.length) {
-      const { url } = ontologyCollection[0];
+    if (!inputOntologyGraph && ontologies?.length) {
+      const { url } = ontologies[0];
       setInputOntologyGraph(url);
     }
-  }, [ontologyCollection]);
+  }, [ontologies]);
 
   return (
     <SC.ValidationInputForm {...props} onSubmit={handleSubmitForm}>
