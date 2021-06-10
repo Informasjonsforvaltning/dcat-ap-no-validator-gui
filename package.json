@@ -22,6 +22,7 @@
     "node": ">= 14.16.0"
   },
   "scripts": {
+    "preinstall": "npx npm-force-resolutions",
     "start": "run-s start:webpack",
     "start:webpack": "cross-env TS_NODE_PROJECT=tsconfig.webpack.json webpack serve --config webpack/dev.config.ts",
     "build:dev": "run-s build:webpack:dev",
@@ -52,6 +53,12 @@
     "commitizen": {
       "path": "cz-conventional-changelog"
     }
+  },
+  "resolutions": {
+    "hosted-git-info": "^4.0.2",
+    "glob-parent": "^6.0.0",
+    "css-what": "^5.0.1",
+    "ws": "^7.4.6"
   },
   "dependencies": {
     "@apollo/client": "^3.3.15",
