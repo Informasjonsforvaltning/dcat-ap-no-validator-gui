@@ -39,7 +39,7 @@ const ValidatorPage: FC<Props> = ({
 
   return (
     <SC.ValidatorPage>
-      <SC.Title>DCAT-AP-NO valideringsverktøy</SC.Title>
+      <SC.Title>Valideringsverktøy</SC.Title>
       <SC.ValidationForm
         dataGraph={dataGraph}
         shapesGraph={shapesGraph}
