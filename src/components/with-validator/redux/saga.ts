@@ -62,7 +62,7 @@ function* validateDataGraphRequested({
         )
       );
     }
-  } catch (e) {
+  } catch (e: any) {
     if (e.isAxiosError) {
       const { message, response } = e as AxiosError;
 

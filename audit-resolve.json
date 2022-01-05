@@ -1,0 +1,11 @@
+{
+  "decisions": {
+    "1005417|@fellesdatakatalog/internal-footer>@fellesdatakatalog/skatteetaten-frontend-components>react-i18next>html-parse-stringify2": {
+      "decision": "ignore",
+      "madeAt": 1641373669692,
+      "expiresAt": 1643965662017
+    }
+  },
+  "rules": {},
+  "version": 1
+}
