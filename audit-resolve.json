@@ -4,6 +4,36 @@
       "decision": "ignore",
       "madeAt": 1641373669692,
       "expiresAt": 1643965662017
+    },
+    "1005018|@fellesdatakatalog/internal-footer>@fellesdatakatalog/skatteetaten-frontend-components>axios": {
+      "decision": "ignore",
+      "madeAt": 1645539463424,
+      "expiresAt": 1648131451755
+    },
+    "1005018|axios": {
+      "decision": "ignore",
+      "madeAt": 1645539463424,
+      "expiresAt": 1648131451755
+    },
+    "1004946|commitizen>cz-conventional-changelog>inquirer>string-width>strip-ansi>ansi-regex": {
+      "decision": "ignore",
+      "madeAt": 1645539468134,
+      "expiresAt": 1648131451755
+    },
+    "1004946|cz-conventional-changelog>commitizen>inquirer>string-width>strip-ansi>ansi-regex": {
+      "decision": "ignore",
+      "madeAt": 1645539468134,
+      "expiresAt": 1648131451755
+    },
+    "1005417|react-i18next>html-parse-stringify2": {
+      "decision": "ignore",
+      "madeAt": 1645539475264,
+      "expiresAt": 1648131451755
+    },
+    "1004967|react-svg-loader>react-svg-core>svgo>css-select>nth-check": {
+      "decision": "ignore",
+      "madeAt": 1645539479103,
+      "expiresAt": 1648131451755
     }
   },
   "rules": {},
