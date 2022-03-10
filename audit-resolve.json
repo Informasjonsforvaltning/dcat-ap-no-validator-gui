@@ -4,6 +4,16 @@
       "decision": "ignore",
       "madeAt": 1641373669692,
       "expiresAt": 1643965662017
+    },
+    "1059673|@fellesdatakatalog/internal-footer>@fellesdatakatalog/skatteetaten-frontend-components>axios": {
+      "decision": "ignore",
+      "madeAt": 1646898056954,
+      "expiresAt": 1649490048308
+    },
+    "1060161|@fellesdatakatalog/internal-footer>@fellesdatakatalog/skatteetaten-frontend-components>react-i18next>html-parse-stringify2": {
+      "decision": "ignore",
+      "madeAt": 1646898059127,
+      "expiresAt": 1649490048308
     }
   },
   "rules": {},
