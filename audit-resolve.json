@@ -14,6 +14,26 @@
       "decision": "ignore",
       "madeAt": 1646898059127,
       "expiresAt": 1649490048308
+    },
+    "1069972|@fellesdatakatalog/internal-footer>@skatteetaten/frontend-components>moment": {
+      "decision": "ignore",
+      "madeAt": 1649765708610,
+      "expiresAt": 1652357698196
+    },
+    "1067342|commitizen>cz-conventional-changelog>minimist": {
+      "decision": "ignore",
+      "madeAt": 1649765713724,
+      "expiresAt": 1652357698196
+    },
+    "1067342|cz-conventional-changelog>commitizen>minimist": {
+      "decision": "ignore",
+      "madeAt": 1649765713724,
+      "expiresAt": 1652357698196
+    },
+    "1067654|react-svg-loader>react-svg-core>svgo>css-select>nth-check": {
+      "decision": "ignore",
+      "madeAt": 1649765715060,
+      "expiresAt": 1652357698196
     }
   },
   "rules": {},
