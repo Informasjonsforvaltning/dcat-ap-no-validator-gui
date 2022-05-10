@@ -1,39 +1,24 @@
 {
   "decisions": {
-    "1005417|@fellesdatakatalog/internal-footer>@fellesdatakatalog/skatteetaten-frontend-components>react-i18next>html-parse-stringify2": {
+    "1070245|@fellesdatakatalog/internal-footer>@skatteetaten/frontend-components>moment": {
       "decision": "ignore",
-      "madeAt": 1641373669692,
-      "expiresAt": 1643965662017
+      "madeAt": 1651666071661,
+      "expiresAt": 1654258065591
     },
-    "1059673|@fellesdatakatalog/internal-footer>@fellesdatakatalog/skatteetaten-frontend-components>axios": {
+    "1070206|async": {
       "decision": "ignore",
-      "madeAt": 1646898056954,
-      "expiresAt": 1649490048308
-    },
-    "1060161|@fellesdatakatalog/internal-footer>@fellesdatakatalog/skatteetaten-frontend-components>react-i18next>html-parse-stringify2": {
-      "decision": "ignore",
-      "madeAt": 1646898059127,
-      "expiresAt": 1649490048308
-    },
-    "1069972|@fellesdatakatalog/internal-footer>@skatteetaten/frontend-components>moment": {
-      "decision": "ignore",
-      "madeAt": 1649765708610,
-      "expiresAt": 1652357698196
+      "madeAt": 1651666073533,
+      "expiresAt": 1654258065591
     },
     "1067342|commitizen>cz-conventional-changelog>minimist": {
       "decision": "ignore",
-      "madeAt": 1649765713724,
-      "expiresAt": 1652357698196
+      "madeAt": 1651666076810,
+      "expiresAt": 1654258065591
     },
     "1067342|cz-conventional-changelog>commitizen>minimist": {
       "decision": "ignore",
-      "madeAt": 1649765713724,
-      "expiresAt": 1652357698196
-    },
-    "1067654|react-svg-loader>react-svg-core>svgo>css-select>nth-check": {
-      "decision": "ignore",
-      "madeAt": 1649765715060,
-      "expiresAt": 1652357698196
+      "madeAt": 1651666076810,
+      "expiresAt": 1654258065591
     }
   },
   "rules": {},
