@@ -13,6 +13,11 @@
     "plugin:import/typescript",
     "plugin:jsx-a11y/strict"
   ],
+  "settings": {
+    "import/resolver": {
+      "typescript": {}
+    }
+  },
   "globals": {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
