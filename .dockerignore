@@ -1,16 +1,12 @@
-dist
 coverage
 node_modules
 
 npm-debug.log
 
-.DS_Store
 .dockerignore
 .gitignore
-.eslintignore
 .huskyrc
 .lintstagedrc
-.eslintrc.json
 commitlint.config.js
 
 Dockerfile
