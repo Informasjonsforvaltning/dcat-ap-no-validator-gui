@@ -14,6 +14,21 @@
       "decision": "ignore",
       "madeAt": 1646898059127,
       "expiresAt": 1649490048308
+    },
+    "1070415|react-svg-loader>react-svg-core>svgo>css-select>nth-check": {
+      "decision": "ignore",
+      "madeAt": 1660225320494,
+      "expiresAt": 1662817298994
+    },
+    "1081761|@fellesdatakatalog/internal-footer>@skatteetaten/frontend-components>moment": {
+      "decision": "ignore",
+      "madeAt": 1660225325733,
+      "expiresAt": 1662817298994
+    },
+    "1081763|@fellesdatakatalog/internal-footer>@skatteetaten/frontend-components>moment": {
+      "decision": "ignore",
+      "madeAt": 1660225329879,
+      "expiresAt": 1662817298994
     }
   },
   "rules": {},
