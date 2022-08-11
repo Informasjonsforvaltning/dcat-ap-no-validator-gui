@@ -1,29 +1,19 @@
 {
   "decisions": {
-    "1067342|commitizen>cz-conventional-changelog>minimist": {
+    "1005417|@fellesdatakatalog/internal-footer>@fellesdatakatalog/skatteetaten-frontend-components>react-i18next>html-parse-stringify2": {
       "decision": "ignore",
-      "madeAt": 1656079186623,
-      "expiresAt": 1658671179112
+      "madeAt": 1641373669692,
+      "expiresAt": 1643965662017
     },
-    "1067342|cz-conventional-changelog>commitizen>minimist": {
+    "1059673|@fellesdatakatalog/internal-footer>@fellesdatakatalog/skatteetaten-frontend-components>axios": {
       "decision": "ignore",
-      "madeAt": 1656079186623,
-      "expiresAt": 1658671179112
+      "madeAt": 1646898056954,
+      "expiresAt": 1649490048308
     },
-    "1070415|react-svg-loader>react-svg-core>svgo>css-select>nth-check": {
+    "1060161|@fellesdatakatalog/internal-footer>@fellesdatakatalog/skatteetaten-frontend-components>react-i18next>html-parse-stringify2": {
       "decision": "ignore",
-      "madeAt": 1659090481696,
-      "expiresAt": 1661682474881
-    },
-    "1081761|@fellesdatakatalog/internal-footer>@skatteetaten/frontend-components>moment": {
-      "decision": "ignore",
-      "madeAt": 1659444478141,
-      "expiresAt": 1662036470912
-    },
-    "1081763|@fellesdatakatalog/internal-footer>@skatteetaten/frontend-components>moment": {
-      "decision": "ignore",
-      "madeAt": 1659444478141,
-      "expiresAt": 1662036470912
+      "madeAt": 1646898059127,
+      "expiresAt": 1649490048308
     }
   },
   "rules": {},
