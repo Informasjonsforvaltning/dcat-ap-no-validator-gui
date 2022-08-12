@@ -57,7 +57,7 @@
   "resolutions": {
     "hosted-git-info": "^4.0.2",
     "glob-parent": "^6.0.0",
-    "css-what": "^5.0.1",
+    "css-what": "^6.1.0",
     "ws": "^7.4.6",
     "ansi-regex": "^5.0.1",
     "nth-check": "^2.0.1",
