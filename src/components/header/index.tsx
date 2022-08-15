@@ -6,7 +6,7 @@ import env from '../../env';
 
 import SC from './styled';
 
-const { FDK_REGISTRATION_BASE_URI, ADMIN_GUI_BASE_URI } = env;
+const { FDK_REGISTRATION_BASE_URI, ADMIN_GUI_BASE_URI, FDK_BASE_URI } = env;
 
 const Header: FC = () => {
   const [isDropdownMenuOpen, setIsDropdownMenuOpen] = useState(false);
@@ -17,7 +17,9 @@ const Header: FC = () => {
   return (
     <SC.Header>
       <SC.Row>
-        <SC.Logo />
+        <SC.Link href={`${FDK_BASE_URI}/publishing`}>
+          <SC.Logo />
+        </SC.Link>
         <SC.NavigationLinks>
           <li>
             <SC.Link href={FDK_REGISTRATION_BASE_URI}>Registrere data</SC.Link>
