@@ -64,7 +64,7 @@ function* validateDataGraphRequested({
     }
   } catch (e: any) {
     if (e.isAxiosError) {
-      const { message, response } = e as AxiosError;
+      const { message, response } = e as AxiosError<{ detail: string }>;
 
       if (response?.status === 500) {
         yield put(
@@ -109,7 +109,7 @@ function* fetchShapesRequested() {
       );
     }
   } catch (e) {
-    const { message, response } = e as AxiosError;
+    const { message, response } = e as AxiosError<{ detail: string }>;
 
     if (response?.status === 500) {
       yield put(
@@ -141,7 +141,7 @@ function* fetchOntologiesRequested() {
       );
     }
   } catch (e) {
-    const { message, response } = e as AxiosError;
+    const { message, response } = e as AxiosError<{ detail: string }>;
 
     if (response?.status === 500) {
       yield put(

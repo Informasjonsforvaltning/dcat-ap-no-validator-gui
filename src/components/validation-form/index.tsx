@@ -167,7 +167,9 @@ const ValidationForm: FC<Props> = ({
     setInputConfigExpand(e.target.checked);
   };
 
-  const handleOnChangeIncludeExpandedTriples: ChangeEventHandler<HTMLInputElement> = e => {
+  const handleOnChangeIncludeExpandedTriples: ChangeEventHandler<
+    HTMLInputElement
+  > = e => {
     setInputConfigIncludeExpandedTriples(e.target.checked);
   };
 

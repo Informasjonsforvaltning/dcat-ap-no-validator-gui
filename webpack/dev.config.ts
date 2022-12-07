@@ -26,10 +26,12 @@ const configuration: Configuration = mergeWithCustomize<Configuration>({
     host: '0.0.0.0',
     port: 8001,
     hot: true,
-    onBeforeSetupMiddleware: devServer =>
-      devServer.app.get('/validator/config.js', (_, res) =>
+    setupMiddlewares: (middlewares, devServer) => {
+      devServer?.app?.get('/validator/config.js', (_, res) =>
         res.status(204).send()
-      ),
+      );
+      return middlewares;
+    },
     historyApiFallback: {
       rewrites: [{ from: /./, to: '/validator/index.html' }]
     }
@@ -63,10 +65,7 @@ const configuration: Configuration = mergeWithCustomize<Configuration>({
             loader: 'babel-loader'
           },
           {
-            loader: 'react-svg-loader',
-            options: {
-              jsx: true
-            }
+            loader: '@svgr/webpack'
           }
         ],
         include: [resolve(__dirname, '..', 'src', 'images')]

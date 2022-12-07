@@ -20,7 +20,7 @@ const initialState = fromJS({
   validationReport: null,
   validationError: null,
   isValidating: false
-});
+}).toMap();
 
 export default function reducer(
   state = initialState,

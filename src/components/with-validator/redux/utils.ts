@@ -79,8 +79,9 @@ const mapToValidationResult = (
   const resultPath =
     store.getObjects(node, sh('resultPath'), defaultGraph()).shift()?.value ||
     '';
-  const value = store.getObjects(node, sh('value'), defaultGraph()).shift()
-    ?.value;
+  const value = store
+    .getObjects(node, sh('value'), defaultGraph())
+    .shift()?.value;
   const sourceShape = store
     .getObjects(node, sh('sourceShape'), defaultGraph())
     .shift()?.id;
