@@ -97,7 +97,7 @@
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.1",
     "@svgr/webpack": "^6.5.1",
     "@testing-library/react": "^12.1.5",
-    "@types/jest": "^27.5.2",
+    "@types/jest": "^29.2.4",
     "@types/n3": "^1.8.0",
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.3",
