@@ -173,7 +173,7 @@ const GraphFieldset: FC<Props> = ({
                 uploaded={!!inputGraphFile && !isDragActive}
                 {...getRootProps({ isDragActive, disabled: isLoading })}
               >
-                <input {...getInputProps()} />
+                <input {...getInputProps()} aria-label='input file' />
                 {isDragActive && (
                   <p>
                     <Translation id='Slipp filen her' />
@@ -250,6 +250,7 @@ const GraphFieldset: FC<Props> = ({
               <SC.LinkInput>
                 <input
                   type='text'
+                  aria-label='input link'
                   ref={linkInputRef}
                   placeholder={field.placeholder}
                   value={inputGraphUrl}
@@ -274,6 +275,7 @@ const GraphFieldset: FC<Props> = ({
               <SC.TextInput>
                 <textarea
                   ref={textInputRef}
+                  aria-label='input text'
                   placeholder={field.placeholder}
                   value={inputGraphText}
                   onChange={handleInputTextChange}
