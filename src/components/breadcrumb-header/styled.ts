@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { theme, Colour } from '@fellesdatakatalog/theme';
 import BreadcrumbsBase from '@fellesdatakatalog/breadcrumbs';
+import LinkBase from '@fellesdatakatalog/link';
 
 const BreadcrumbHeader = styled.div`
   padding: ${theme.spacing('S24')} 0;
@@ -33,8 +34,15 @@ const Breadcrumbs = styled(BreadcrumbsBase)`
   }
 `;
 
+const Link = styled(LinkBase)`
+  &:focus {
+    outline-color: orange;
+  }
+`;
+
 export default {
   BreadcrumbHeader,
   Breadcrumbs,
-  BreadcrumbSeparator
+  BreadcrumbSeparator,
+  Link
 };
