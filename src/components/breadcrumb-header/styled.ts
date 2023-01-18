@@ -35,6 +35,7 @@ const Breadcrumbs = styled(BreadcrumbsBase)`
 `;
 
 const Link = styled(LinkBase)`
+  color: ${theme.colour(Colour.NEUTRAL, 'N60')} !important;
   &:focus {
     outline-color: orange;
   }
