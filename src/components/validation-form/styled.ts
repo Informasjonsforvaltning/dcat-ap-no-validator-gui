@@ -14,7 +14,12 @@ const ValidationInputForm = styled.form`
 `;
 
 const Button = styled(ButtonBase)`
-  min-width: 100px;
+  min-width: 100;
+  &:focus {
+    outline-style: solid;
+    outline-color: orange;
+    outline-width: 3px;
+  }
 `;
 
 const Spinner = styled(CircularProgress)`
