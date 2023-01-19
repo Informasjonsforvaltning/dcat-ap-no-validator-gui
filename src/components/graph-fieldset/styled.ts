@@ -18,7 +18,12 @@ const GraphInputGroup = styled.div<{ $isStandalone?: boolean }>`
   }
 `;
 
-const Button = styled(ButtonBase)``;
+const Button = styled(ButtonBase)`
+  &:focus {
+    outline-color: orange;
+    outline-width: 3px;
+  }
+`;
 
 const Uploaded = styled.div`
   background: ${theme.colour(Colour.GREEN, 'G10')};

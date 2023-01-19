@@ -16,6 +16,9 @@ const RadioButton = styled.div`
     -moz-appearance: none;
     margin-top: 3px;
     cursor: pointer;
+    &:focus {
+      outline-color: orange;
+    }
   }
 
   & > input[type='radio']:after {

@@ -59,6 +59,9 @@ const Link = styled(LinkBase)`
     padding: 0;
     border: none;
   }
+  &:focus {
+    outline-color: orange;
+  }
 `;
 
 const NavigationLinks = styled.ul`

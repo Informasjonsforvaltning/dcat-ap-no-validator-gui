@@ -7,7 +7,13 @@ const ExpansionPanel = styled.div`
   border-radius: 5px;
 `;
 
-const HeadContent = styled.div``;
+const HeadContent = styled.button`
+  background-color: white;
+  border-style: none;
+  &:focus {
+    outline-color: orange;
+  }
+`;
 
 const HeadExpansionIndicator = styled.div`
   display: flex;
