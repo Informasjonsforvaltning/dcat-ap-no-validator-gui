@@ -167,13 +167,13 @@ const GraphFieldset: FC<Props> = ({
             labelPosition={LabelPosition.RIGHT}
             onClick={() => handleOnClickInputType(InputType.FILE)}
           >
-            <SC.InputType>
+            <SC.InputType id='validateFile'>
               <SC.InputTypeTitle>{field.title}</SC.InputTypeTitle>
               <SC.DropZone
                 uploaded={!!inputGraphFile && !isDragActive}
                 {...getRootProps({ isDragActive, disabled: isLoading })}
               >
-                <input {...getInputProps()} />
+                <input {...getInputProps()} aria-labelledby='validateFile' />
                 {isDragActive && (
                   <p>
                     <Translation id='Slipp filen her' />
@@ -245,11 +245,12 @@ const GraphFieldset: FC<Props> = ({
             labelPosition={LabelPosition.RIGHT}
             onClick={() => handleOnClickInputType(InputType.URL)}
           >
-            <SC.InputType>
+            <SC.InputType id='validateLink'>
               <SC.InputTypeTitle>{field.title}</SC.InputTypeTitle>
               <SC.LinkInput>
                 <input
                   type='text'
+                  aria-labelledby='validateLink'
                   ref={linkInputRef}
                   placeholder={field.placeholder}
                   value={inputGraphUrl}
@@ -269,11 +270,12 @@ const GraphFieldset: FC<Props> = ({
             labelPosition={LabelPosition.RIGHT}
             onClick={() => handleOnClickInputType(InputType.TEXT)}
           >
-            <SC.InputType>
+            <SC.InputType id='validateText'>
               <SC.InputTypeTitle>{field.title}</SC.InputTypeTitle>
               <SC.TextInput>
                 <textarea
                   ref={textInputRef}
+                  aria-labelledby='validateText'
                   placeholder={field.placeholder}
                   value={inputGraphText}
                   onChange={handleInputTextChange}
