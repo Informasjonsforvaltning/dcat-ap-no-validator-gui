@@ -19,10 +19,9 @@
   "license": "Apache-2.0",
   "private": true,
   "engines": {
-    "node": ">= 16.18.1"
+    "node": ">= 18.12.1"
   },
   "scripts": {
-    "preinstall": "npx npm-force-resolutions",
     "start": "run-s start:webpack",
     "start:webpack": "cross-env TS_NODE_PROJECT=tsconfig.webpack.json webpack serve --config webpack/dev.config.ts",
     "build:dev": "run-s build:webpack:dev",
