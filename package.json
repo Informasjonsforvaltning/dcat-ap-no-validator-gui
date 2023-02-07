@@ -109,7 +109,7 @@
     "@types/yup": "^0.29.9",
     "@typescript-eslint/eslint-plugin": "^5.46.0",
     "@typescript-eslint/parser": "^5.46.0",
-    "babel-loader": "^8.2.2",
+    "babel-loader": "^9.1.2",
     "babel-plugin-styled-components": "^1.13.2",
     "commitizen": "^4.2.5",
     "cross-env": "^7.0.3",
