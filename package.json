@@ -19,7 +19,7 @@
   "license": "Apache-2.0",
   "private": true,
   "engines": {
-    "node": ">= 18.12.1"
+    "node": ">= 20"
   },
   "scripts": {
     "start": "run-s start:webpack",
@@ -48,10 +48,8 @@
     "commit": "git-cz",
     "prepare": "husky install"
   },
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
-    }
+  "overrides": {
+    "axios": "1.7.9"    
   },
   "dependencies": {
     "@fellesdatakatalog/alert": "^0.3.7",
@@ -63,7 +61,7 @@
     "@fellesdatakatalog/theme": "^0.5.4",
     "@material-ui/core": "^4.12.4",
     "@material-ui/icons": "^4.11.2",
-    "axios": "^1.2.1",
+    "axios": "1.7.9",
     "buffer": "^6.0.3",
     "core-js": "^3.10.1",
     "cuid": "^2.1.8",
@@ -72,7 +70,7 @@
     "immutable": "^4.1.0",
     "n3": "^1.9.0",
     "react": "^17.0.2",
-    "react-cookie": "^4.1.1",
+    "react-cookie": "^7.2.2",
     "react-dom": "^17.0.2",
     "react-dropzone": "^11.3.2",
     "react-redux": "^8.0.5",
@@ -88,12 +86,12 @@
     "yup": "^0.32.9"
   },
   "devDependencies": {
-    "@babel/core": "^7.19.1",
-    "@babel/preset-env": "^7.13.15",
-    "@babel/preset-react": "^7.13.13",
-    "@commitlint/cli": "^13.2.1",
-    "@commitlint/config-conventional": "^13.2.0",
-    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.1",
+    "@babel/core": "^7.26.0",
+    "@babel/preset-env": "^7.26.0",
+    "@babel/preset-react": "^7.26.3",
+    "@commitlint/cli": "^19.6.1",
+    "@commitlint/config-conventional": "^19.6.0",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.15",
     "@svgr/webpack": "^6.5.1",
     "@testing-library/react": "^12.1.5",
     "@types/jest": "^29.4.0",
@@ -105,15 +103,14 @@
     "@types/react-scroll": "^1.8.2",
     "@types/react-select": "^4.0.14",
     "@types/styled-components": "^5.1.9",
-    "@types/webpack": "^5.28.0",
+    "@types/webpack": "^5.28.5",
     "@types/yup": "^0.29.9",
     "@typescript-eslint/eslint-plugin": "^5.46.0",
     "@typescript-eslint/parser": "^5.46.0",
-    "babel-loader": "^9.1.2",
-    "babel-plugin-styled-components": "^1.13.2",
-    "commitizen": "^4.2.5",
-    "cross-env": "^7.0.3",
-    "cz-conventional-changelog": "^3.3.0",
+    "babel-loader": "^9.2.1",
+    "babel-plugin-styled-components": "^2.1.4",
+    "commitizen": "^4.3.1",
+    "cross-env": "^7.0.3",    
     "eslint": "^7.24.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.2.0",
