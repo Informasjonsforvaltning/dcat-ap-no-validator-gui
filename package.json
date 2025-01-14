@@ -67,7 +67,7 @@
     "cuid": "^2.1.8",
     "formik": "^2.2.6",
     "history": "^5.0.0",
-    "immutable": "^4.1.0",
+    "immutable": "^5.0.3",
     "n3": "^1.9.0",
     "react": "^17.0.2",
     "react-cookie": "^7.2.2",
