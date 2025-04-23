@@ -106,7 +106,7 @@
     "@types/webpack": "^5.28.5",
     "@types/yup": "^0.29.9",
     "@typescript-eslint/eslint-plugin": "^5.46.0",
-    "@typescript-eslint/parser": "^5.46.0",
+    "@typescript-eslint/parser": "^8.31.0",
     "babel-loader": "^9.2.1",
     "babel-plugin-styled-components": "^2.1.4",
     "commitizen": "^4.3.1",
